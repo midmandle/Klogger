@@ -30,6 +30,16 @@ public class AppointmentCollection {
 		appointmentBook.add(appointment);
 	}
 	
+	/*public String getAppointmentByName()
+	{
+		return "TODO";
+	}
+	
+	public ArrayList<Appointment> getAppointmentByDate()
+	{
+		
+	}*/
+	
 	public int removeAppointment(Appointment appointment)
 	{
 		if(appointmentBook.contains(appointment))

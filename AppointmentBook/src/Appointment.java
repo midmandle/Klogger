@@ -4,7 +4,6 @@ import java.util.GregorianCalendar;
 public class Appointment {
 
 	private String appointmentName;
-	private String appointmentLocation;
 	private GregorianCalendar appointmentDateTime = new GregorianCalendar();
 	
 	public Appointment(String name)
@@ -32,8 +31,6 @@ public class Appointment {
 	{
 		appointmentName = name;
 		
-		appointmentLocation = location;
-		
 		appointmentDateTime.set(year, month, day);
 	}
 	
@@ -45,5 +42,11 @@ public class Appointment {
 	public String getAppointmentName()
 	{
 		return this.appointmentName;
+	}
+	
+	public GregorianCalendar getDate()
+	{
+		
+		return this.appointmentDateTime;
 	}
 }
