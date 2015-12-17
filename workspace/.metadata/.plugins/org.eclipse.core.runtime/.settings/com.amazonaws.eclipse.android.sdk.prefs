@@ -1,0 +1,3 @@
+com.amazonaws.eclipse.android.sdk.downloadAutomatically=false
+com.amazonaws.eclipse.android.sdk.downloadDirectory=/opt/aws-android-sdk
+eclipse.preferences.version=1
