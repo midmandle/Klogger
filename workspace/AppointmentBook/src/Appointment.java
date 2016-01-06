@@ -1,52 +1,56 @@
 import java.util.GregorianCalendar;
 
-
 public class Appointment {
-
-	private String appointmentName;
-	private GregorianCalendar appointmentDateTime = new GregorianCalendar();
+	GregorianCalendar startDateTime;
+	GregorianCalendar endDateTime;
+	String eventTitle;
 	
-	public Appointment(String name)
+	public Appointment()
 	{
-		appointmentName = name;
-		
-		appointmentDateTime.set(0, 0, 0, 0, 0); //null value appointment.
+		startDateTime = new GregorianCalendar(1970, 1, 1, 0, 0, 0);
+		endDateTime = new GregorianCalendar(1970, 1, 1, 0, 0, 0);
+		eventTitle = "EmptyAppointment";
 	}
 	
-	public Appointment(String name, int day, int month, int year)
+	public Appointment(GregorianCalendar start, GregorianCalendar end, String title)
 	{
-		appointmentName = name;
-		
-		appointmentDateTime.set(year, month, day); //null time
+		startDateTime = start;
+		endDateTime = end;
+		eventTitle = title;
 	}
 	
-	public Appointment(String name, int day, int month, int year, int hour, int minute)
+	public GregorianCalendar getStartDateTime()
 	{
-		appointmentName = name;
-		
-		appointmentDateTime.set(year, month, day, hour, minute);
+		return startDateTime;
 	}
 	
-	public Appointment(String name, String location, int day, int month, int year)
+	public void setStartDateTime(GregorianCalendar dateTime)
 	{
-		appointmentName = name;
-		
-		appointmentDateTime.set(year, month, day);
+		startDateTime = dateTime;
 	}
 	
-	public void setAppointmentName(String name)
+	public GregorianCalendar getEndDateTime()
 	{
-		this.appointmentName = name;
+		return endDateTime;
 	}
 	
-	public String getAppointmentName()
+	public void setEndDateTime(GregorianCalendar dateTime)
 	{
-		return this.appointmentName;
+		endDateTime = dateTime;
 	}
 	
-	public GregorianCalendar getDate()
+	public String getEventTitle()
 	{
-		
-		return this.appointmentDateTime;
+		return eventTitle;
+	}
+	
+	public void setEventTitle(String title)
+	{
+		eventTitle = title;
+	}
+	
+	public String toString()
+	{
+		return eventTitle+" Starts: "+startDateTime+" Finishes: "+endDateTime;
 	}
 }
