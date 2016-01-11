@@ -5,10 +5,12 @@ public class AppointmentBook {
 	int FOUND = 1;
 	
 	ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
+	DatabaseCommunicator dbComms = null;
 	
-	public AppointmentBook()
+	public AppointmentBook(String appointmentBookName)
 	{
-		
+		dbComms = new DatabaseCommunicator();
+		dbComms.setupNewAppointmentDatabase(appointmentBookName);
 	}
 	
 	public void add(Appointment newAppointment)
@@ -51,5 +53,12 @@ public class AppointmentBook {
 		if(find(appointmentToCheck) > 0)
 			return true;
 		return false;
+	}
+	
+	//TODO : AppointmentBook: saveAppointmentsToDatabase.
+
+	private void saveAppointmentsToDatabase()
+	{
+		//FOREACH appointment IN appointmentsList insert into table.
 	}
 }

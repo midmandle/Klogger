@@ -1,10 +1,9 @@
 import java.sql.*;
 
 public class DatabaseCommunicator {
-	
-	private static Connection getDatabaseCommunicator()
+	private Connection dbConnection = null;
+	public DatabaseCommunicator()
 	{
-		Connection dbConnection = null;
 		try
 		{
 			Class.forName("org.sqlite.JDBC");
@@ -16,31 +15,35 @@ public class DatabaseCommunicator {
 		
 		try
 		{
-			String dbURL = "jdbc:sqlite:main.sqlite"; //TODO: Insert URL (jdbc:sqlite:<somename>.sqlite)
+			String dbURL = "jdbc:sqlite:main.sqlite"; //Insert DB URL (jdbc:sqlite:<somename>.sqlite)
 			dbConnection = DriverManager.getConnection(dbURL);
-			return dbConnection;
+			
 		}
 		catch( SQLException e)
 		{
 			System.out.println(e.getMessage());
 		}
-		return dbConnection;
+		
 	}
 	
-	//TODO: SQL: Make request.
-	public static ResultSet MakeRequest(String query) throws SQLException
+	//TODO: SQL: Make request. Requires pre-formed statements (i.e. a pre determined statement for each SQL request).
+	public ResultSet testMakeRequest(String query) throws SQLException
 	{
-		Connection dbConnection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		//String query = "CREATE TABLE testTable(a INTEGER, b INTEGER, PRIMARY KEY (a ASC));";
+		
+		//query = "SELECT * FROM testTable;";
 		
 		try
 		{
-			dbConnection = getDatabaseCommunicator();
 			statement = dbConnection.createStatement();
 			System.out.println(query);
 			resultSet = statement.executeQuery(query);
+			//System.out.println(resultSet.getRow());
+			while(resultSet.next())
+			{
+				System.out.println(resultSet.getInt(1)+" "+resultSet.getInt(2));
+			}
 			return resultSet;
 		}
 		catch (SQLException e)
@@ -60,4 +63,21 @@ public class DatabaseCommunicator {
 		}
 		return resultSet;
 	}
+	
+	public void setupNewAppointmentDatabase(String appointmentBookName)
+	{
+		Statement statement = null;
+		
+		try
+		{
+			statement = dbConnection.createStatement();
+			statement.execute("CREATE TABLE IF NOT EXISTS "+ appointmentBookName +" (dateTimeFrom DATETIME PRIMARY KEY, dateTimeTo DATETIME UNIQUE, description VARCHAR, location VARCHAR);");
+		}
+		catch(SQLException e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
 }

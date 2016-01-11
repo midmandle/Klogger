@@ -1,0 +1,36 @@
+import java.awt.FlowLayout;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.swing.JFrame;
+
+public class Main {
+
+	public static void main(String[] args) {
+		javax.swing.SwingUtilities.invokeLater(new Runnable(){
+			public void run()
+			{
+				MainFrame f = new MainFrame();
+				f.setLayout(new FlowLayout());
+				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				f.setSize(600, 400);
+				f.setVisible(true);
+				
+				//DatabaseCommunicator dbComms = new DatabaseCommunicator();
+				//START OF TEST CODE DO NOT IMPLEMENT
+				try {
+					ResultSet res = null;
+					// WORKS res = DatabaseCommunicator.MakeRequest("INSERT INTO testTable (a, b) VALUES (100, 400);");
+					res = DatabaseCommunicator.testMakeRequest("SELECT * FROM testTable;");
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//END OF TEST CODE DO NOT IMPLEMENT
+			}
+		});
+		
+	}
+
+}
