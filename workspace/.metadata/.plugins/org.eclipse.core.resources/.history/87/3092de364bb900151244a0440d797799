@@ -1,0 +1,44 @@
+import java.awt.FlowLayout;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.GregorianCalendar;
+
+import javax.swing.JFrame;
+
+public class Main {
+
+	public static void main(String[] args) {
+		javax.swing.SwingUtilities.invokeLater(new Runnable(){
+			public void run()
+			{
+				MainFrame f = new MainFrame();
+				f.setLayout(new FlowLayout());
+				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				f.setSize(600, 400);
+				f.setVisible(true);
+				
+				AppointmentBook appointmentBook = new AppointmentBook("Book1");
+				GregorianCalendar dateTimeStart = new GregorianCalendar();
+				dateTimeStart.set(2016, 1, 3);
+				GregorianCalendar dateTimeFinish = new GregorianCalendar();
+				dateTimeFinish.set(2016, 1, 6);
+				String title = "New Years PARTY!!";
+				
+				Appointment appointment1 = new Appointment(dateTimeStart, dateTimeFinish, title);
+				appointmentBook.add(appointment1);
+				
+				appointmentBook.loadAppointmentsFromDatabase();
+				
+				appointmentBook.showAllAppointments();
+				
+				appointmentBook.remove(appointment1);
+				
+				appointmentBook.showAllAppointments();
+				
+				
+			}
+		});
+		
+	}
+
+}

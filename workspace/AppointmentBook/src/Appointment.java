@@ -1,9 +1,9 @@
 import java.util.GregorianCalendar;
 
 public class Appointment {
-	GregorianCalendar startDateTime;
-	GregorianCalendar endDateTime;
-	String eventTitle;
+	private GregorianCalendar startDateTime;
+	private GregorianCalendar endDateTime;
+	private String eventTitle;
 	
 	public Appointment()
 	{

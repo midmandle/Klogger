@@ -1,8 +1,15 @@
 import java.sql.*;
+import java.util.Calendar;
 
 public class DatabaseCommunicator {
 	private Connection dbConnection = null;
+	
 	public DatabaseCommunicator()
+	{
+		setupComms();
+	}
+	
+	private void setupComms()
 	{
 		try
 		{
@@ -23,61 +30,90 @@ public class DatabaseCommunicator {
 		{
 			System.out.println(e.getMessage());
 		}
-		
 	}
 	
-	//TODO: SQL: Make request. Requires pre-formed statements (i.e. a pre determined statement for each SQL request).
-	public ResultSet testMakeRequest(String query) throws SQLException
+	private void MakeRequest(String query) throws SQLException
 	{
-		Statement statement = null;
-		ResultSet resultSet = null;
+		Statement statement = dbConnection.createStatement();
+		statement.execute(query);
 		
-		//query = "SELECT * FROM testTable;";
-		
-		try
-		{
-			statement = dbConnection.createStatement();
-			System.out.println(query);
-			resultSet = statement.executeQuery(query);
-			//System.out.println(resultSet.getRow());
-			while(resultSet.next())
-			{
-				System.out.println(resultSet.getInt(1)+" "+resultSet.getInt(2));
-			}
-			return resultSet;
-		}
-		catch (SQLException e)
-		{
-			System.out.println(e.getMessage());
-		}
-		finally
-		{
-			
-			if(resultSet != null)
-				resultSet.close();
-			if(resultSet != null)
-				statement.close();
-			if(dbConnection != null)
-				dbConnection.close();
-			
-		}
-		return resultSet;
+		statement.close();
 	}
 	
-	public void setupNewAppointmentDatabase(String appointmentBookName)
+	public void AddAppointmentToDatabase(String tableName, Appointment appointment)
 	{
-		Statement statement = null;
+		int startDay = appointment.getStartDateTime().get(Calendar.DAY_OF_MONTH);
+		int startMonth = appointment.getStartDateTime().get(Calendar.MONTH);
+		int startYear = appointment.getStartDateTime().get(Calendar.YEAR);
+		int endDay = appointment.getEndDateTime().get(Calendar.DAY_OF_MONTH);
+		int endMonth = appointment.getEndDateTime().get(Calendar.MONTH);
+		int endYear = appointment.getEndDateTime().get(Calendar.YEAR);
 		
-		try
-		{
-			statement = dbConnection.createStatement();
-			statement.execute("CREATE TABLE IF NOT EXISTS "+ appointmentBookName +" (dateTimeFrom DATETIME PRIMARY KEY, dateTimeTo DATETIME UNIQUE, description VARCHAR, location VARCHAR);");
-		}
-		catch(SQLException e)
-		{
-			System.out.println(e.getMessage());
+		String eventTitle = appointment.getEventTitle();
+		String description = appointment.getEventTitle();
+		String location = "null";
+		String query = String.format("INSERT INTO "+tableName+" (dateTimeFrom, dateTimeTo, eventTitle, description, location) VALUES (\"%d/%d/%d\", \"%d/%d/%d\", \"%s\", \"%s\", \"%s\");", startDay, startMonth, startYear, endDay, endMonth, endYear, eventTitle, description, location);
+		
+		try {
+			MakeRequest(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
+	public void RemoveAppointmentFromDatabase(String tableName, Appointment appointment)
+	{
+		String query = "DELETE FROM Book1 WHERE title == \""+appointment.getEventTitle()+"\";";
+		
+		try {
+			MakeRequest(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
+	public void GetAllAppointmentsFromDatabase(String tableName, Appointment appointment)
+	{
+		//Returns result.
+	}
+	
+	public void GetSecificAppointmentFromDatabase(String tableName, Appointment appointment)
+	{
+		//Returns results;
+	}
+	
+	public boolean CheckIfAppointmentBookExistsOnDatabase(String tableName)
+	{
+		
+		return false;
+	}
+	
+	public void SetupNewAppointmentBookForDatabase(String tableName)
+	{
+		String query = "CREATE TABLE IF NOT EXISTS "+ tableName +"(dateTimeFrom DATE NOT NULL, dateTimeTo DATE, eventTitle VARCHAR NOT NULL, description VARCHAR, location VARCHAR);";
+		
+		try {
+			MakeRequest(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void RemoveAppointmentBookFromDatabase(String tableName)
+	{
+		String query = "DROP TABLE \"main\".\""+tableName+"\";";
+		
+		try {
+			MakeRequest(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
+	//TODO: Need some kind of output formatting function.
 }

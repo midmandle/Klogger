@@ -1,16 +1,21 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class AppointmentBook {
 	int NOTFOUND = 0;
 	int FOUND = 1;
 	
+	String appointmentBookName;
+	
+	DatabaseCommunicator dbComms = new DatabaseCommunicator();
+	
 	ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
-	DatabaseCommunicator dbComms = null;
 	
 	public AppointmentBook(String appointmentBookName)
 	{
-		dbComms = new DatabaseCommunicator();
-		dbComms.setupNewAppointmentDatabase(appointmentBookName);
+		this.appointmentBookName = appointmentBookName;
+		if(!dbComms.CheckIfAppointmentBookExistsOnDatabase(appointmentBookName));
+			dbComms.SetupNewAppointmentBookForDatabase(appointmentBookName);
 	}
 	
 	public void add(Appointment newAppointment)
@@ -18,7 +23,11 @@ public class AppointmentBook {
 		if(isInBook(newAppointment))
 			return; //TODO: Throw exception: "ITEM ALREADY EXISTS"
 		else
+		{
 			appointmentList.add(newAppointment);
+			
+			dbComms.AddAppointmentToDatabase(appointmentBookName, newAppointment);
+		}
 	}
 	
 	public ArrayList<Appointment> getAllAppointments()
@@ -28,14 +37,41 @@ public class AppointmentBook {
 	
 	public void showAllAppointments()
 	{
+		System.out.println(appointmentList.size()+" appointments:");
 		for(int i = 0; i < appointmentList.size(); i++)
-			System.out.println(appointmentList.get(i).toString());
+		{		
+			int startDay = 0;
+			int startMonth = 0;
+			int startYear = 0;
+			
+			int endDay = 0;
+			int endMonth = 0;
+			int endYear = 0;
+			
+			String title = null;
+			
+			startDay = appointmentList.get(i).getStartDateTime().get(Calendar.DAY_OF_MONTH);
+			startMonth = appointmentList.get(i).getStartDateTime().get(Calendar.MONTH);
+			startYear = appointmentList.get(i).getStartDateTime().get(Calendar.YEAR);
+			
+			endDay = appointmentList.get(i).getEndDateTime().get(Calendar.DAY_OF_MONTH);
+			endMonth = appointmentList.get(i).getEndDateTime().get(Calendar.MONTH);
+			endYear = appointmentList.get(i).getEndDateTime().get(Calendar.YEAR);
+			
+			title = appointmentList.get(i).getEventTitle();
+			
+			String output = String.format("%s Starts: %d/%d/%d Ends: %d/%d/%d", title, startDay, startMonth, startYear, endDay, endMonth, endYear);
+			
+			System.out.println(output);
+			
+		}
+			
 	}
 	
 	public int find(Appointment appointmentToFind)
 	{
 		for(int i = 0; i < appointmentList.size(); i++)
-			if(appointmentList.get(i).eventTitle == appointmentToFind.eventTitle)
+			if(appointmentList.get(i).getEventTitle() == appointmentToFind.getEventTitle())
 				return FOUND;
 		return NOTFOUND;
 	}
@@ -55,10 +91,8 @@ public class AppointmentBook {
 		return false;
 	}
 	
-	//TODO : AppointmentBook: saveAppointmentsToDatabase.
-
-	private void saveAppointmentsToDatabase()
+	public void saveAppointmentsToDatabase()
 	{
-		//FOREACH appointment IN appointmentsList insert into table.
+		
 	}
 }

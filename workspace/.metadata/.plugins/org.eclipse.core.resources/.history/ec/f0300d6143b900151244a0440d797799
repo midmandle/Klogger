@@ -1,0 +1,90 @@
+import java.sql.*;
+
+public class DatabaseCommunicator {
+	private Connection dbConnection = null;
+	public DatabaseCommunicator()
+	{
+		setupComms();
+		
+	}
+	
+	private void setupComms()
+	{
+		try
+		{
+			Class.forName("org.sqlite.JDBC");
+		}
+		catch (ClassNotFoundException e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
+		try
+		{
+			String dbURL = "jdbc:sqlite:main.sqlite"; //Insert DB URL (jdbc:sqlite:<somename>.sqlite)
+			dbConnection = DriverManager.getConnection(dbURL);
+			
+		}
+		catch( SQLException e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	//TODO: SQL: Make request. Requires pre-formed statements (i.e. a pre determined statement for each SQL request).
+	public ResultSet MakeRequest(String query) throws SQLException
+	{
+		setupComms();
+		Statement statement = null;
+		ResultSet resultSet = null;
+		
+		//query = "SELECT * FROM testTable;";
+		
+		try
+		{
+			statement = dbConnection.createStatement();
+			System.out.println(query);
+			resultSet = statement.executeQuery(query);
+			//System.out.println(resultSet.getRow());
+			while(resultSet.next())
+			{
+				System.out.println(resultSet.getDate(1));
+			}
+			return resultSet;
+		}
+		catch (SQLException e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			
+			if(resultSet != null)
+				resultSet.close();
+			if(resultSet != null)
+				statement.close();
+			if(dbConnection != null)
+				dbConnection.close();
+			
+		}
+		return resultSet;
+	}
+	
+	public void setupNewAppointmentDatabase(String appointmentBookName)
+	{
+		Statement statement = null;
+		
+		try
+		{
+			statement = dbConnection.createStatement();
+			statement.execute("CREATE TABLE IF NOT EXISTS "+ appointmentBookName +" (dateTimeFrom DATETIME PRIMARY KEY, dateTimeTo DATETIME UNIQUE, description VARCHAR, location VARCHAR);");
+		}
+		catch(SQLException e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	//TODO: SQL: Get each table. Each table is an appointment book. e.g. SELECT * FROM sqlite_master WHERE type == "table";
+
+}

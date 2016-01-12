@@ -1,0 +1,69 @@
+import java.awt.FlowLayout;
+import java.util.GregorianCalendar;
+
+import javax.swing.JFrame;
+
+public class Main {
+
+	public static void main(String[] args) {
+		javax.swing.SwingUtilities.invokeLater(new Runnable(){
+			public void run()
+			{
+				MainFrame f = new MainFrame();
+				f.setLayout(new FlowLayout());
+				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				f.setSize(600, 400);
+				f.setVisible(true);
+				
+				AppointmentBook appointmentBook1 = new AppointmentBook("Book1");
+				
+				GregorianCalendar dateTimeStart = new GregorianCalendar();
+				dateTimeStart.set(2016, 1, 1);
+				GregorianCalendar dateTimeFinish = new GregorianCalendar();
+				dateTimeFinish.set(2016, 1, 2);
+				String title = "Item 1";
+				
+				Appointment appointment1 = new Appointment(dateTimeStart, dateTimeFinish, title);
+				appointmentBook1.add(appointment1);
+				
+				GregorianCalendar dateTimeStart2 = new GregorianCalendar();
+				dateTimeStart.set(2016, 1, 3);
+				GregorianCalendar dateTimeFinish2 = new GregorianCalendar();
+				dateTimeFinish.set(2016, 1, 4);
+				String title2 = "Item 2";
+				
+				Appointment appointment2 = new Appointment(dateTimeStart2, dateTimeFinish2, title2);
+				appointmentBook1.add(appointment2);
+			
+				
+				
+				AppointmentBook appointmentBook2 = new AppointmentBook("Book2");
+				
+				GregorianCalendar dateTimeStart3 = new GregorianCalendar();
+				dateTimeStart.set(2016, 1, 5);
+				GregorianCalendar dateTimeFinish3 = new GregorianCalendar();
+				dateTimeFinish.set(2016, 1, 6);
+				String title3 = "Item 3";
+				
+				Appointment appointment3 = new Appointment(dateTimeStart3, dateTimeFinish3, title3);
+				appointmentBook2.add(appointment3);
+				
+				GregorianCalendar dateTimeStart4 = new GregorianCalendar();
+				dateTimeStart.set(2016, 1, 7);
+				GregorianCalendar dateTimeFinish4 = new GregorianCalendar();
+				dateTimeFinish.set(2016, 1, 8);
+				String title4 = "Item 4";
+				
+				Appointment appointment4 = new Appointment(dateTimeStart4, dateTimeFinish4, title4);
+				appointmentBook2.add(appointment4);
+				
+				appointmentBook1.showAllAppointments();
+				appointmentBook2.showAllAppointments();
+				
+				
+			}
+		});
+		
+	}
+
+}

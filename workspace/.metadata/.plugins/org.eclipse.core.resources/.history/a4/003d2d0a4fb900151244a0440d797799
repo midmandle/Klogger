@@ -1,0 +1,40 @@
+import java.awt.FlowLayout;
+import java.util.GregorianCalendar;
+
+import javax.swing.JFrame;
+
+public class Main {
+
+	public static void main(String[] args) {
+		javax.swing.SwingUtilities.invokeLater(new Runnable(){
+			public void run()
+			{
+				MainFrame f = new MainFrame();
+				f.setLayout(new FlowLayout());
+				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				f.setSize(600, 400);
+				f.setVisible(true);
+				
+				AppointmentBook appointmentBook1 = new AppointmentBook("Book1");
+				AppointmentBook appointmentBook2 = new AppointmentBook("Book2");
+				
+				GregorianCalendar startDate = new GregorianCalendar();
+				GregorianCalendar endDate = new GregorianCalendar();
+				
+				startDate.set(2016, 1, 1);
+				endDate.set(2016, 1, 2);
+				
+				Appointment appointment = new Appointment();
+				appointment.startDateTime = startDate;
+				appointment.endDateTime = endDate;
+				
+				appointmentBook1.showAllAppointments();
+				appointmentBook2.showAllAppointments();
+				
+				
+			}
+		});
+		
+	}
+
+}
