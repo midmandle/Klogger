@@ -191,11 +191,12 @@ public class DatabaseCommunicator {
 					GregorianCalendar date = (GregorianCalendar) results.get(i).get(j);
 					System.out.println(date.get(Calendar.YEAR));
 				}
+					
 			}
 	
 	}
 	
-	public static void GetSpecificAppointmentFromDatabase(String tableName, Appointment appointment)
+	public static void GetSecificAppointmentFromDatabase(String tableName, Appointment appointment)
 	{
 		//Returns results;
 	}

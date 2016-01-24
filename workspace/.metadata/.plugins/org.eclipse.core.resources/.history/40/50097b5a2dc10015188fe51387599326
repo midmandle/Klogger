@@ -191,6 +191,7 @@ public class DatabaseCommunicator {
 					GregorianCalendar date = (GregorianCalendar) results.get(i).get(j);
 					System.out.println(date.get(Calendar.YEAR));
 				}
+					
 			}
 	
 	}

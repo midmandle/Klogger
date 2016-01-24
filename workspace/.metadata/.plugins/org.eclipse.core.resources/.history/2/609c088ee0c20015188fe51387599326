@@ -189,7 +189,7 @@ public class DatabaseCommunicator {
 				if(results.get(i).get(j) instanceof GregorianCalendar)
 				{
 					GregorianCalendar date = (GregorianCalendar) results.get(i).get(j);
-					System.out.println(date.get(Calendar.YEAR));
+					System.out.print(date.get(Calendar.YEAR));
 				}
 			}
 	
