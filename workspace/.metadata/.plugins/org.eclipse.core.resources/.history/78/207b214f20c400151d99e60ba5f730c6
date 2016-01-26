@@ -1,0 +1,54 @@
+import java.awt.FlowLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+
+
+public class MainFrame extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private AppointmentBook appointmentBook = new AppointmentBook("Personal");
+	private JPanel contentPane = new JPanel();
+	
+	public MainFrame()
+	{
+		super("Appointment Book");
+		initialiseUI();
+	}
+	
+	private void initialiseUI()
+	{
+		setLayout(new FlowLayout());
+		
+		createMenuBar();
+		
+		WelcomePanel welcomePanel = new WelcomePanel(contentPane);
+		contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new FlowLayout());
+		
+		contentPane.add(welcomePanel, "Welcome Panel");
+		
+		
+		
+		this.pack();
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(600, 400);
+		this.setVisible(true);
+	}
+	
+	private void createMenuBar()
+	{
+		JMenuBar menu = new JMenuBar();
+		JMenu file = new JMenu("File");
+		
+		menu.add(file);
+		setJMenuBar(menu);
+	}
+}

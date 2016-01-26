@@ -1,0 +1,13 @@
+import javax.swing.JPanel;
+
+
+public class WelcomePanel extends JPanel {
+
+	JPanel panel = new JPanel(); 
+	
+	public WelcomePanel(JPanel contentPane)
+	{
+		panel = contentPane;
+		
+	}
+}

@@ -89,8 +89,13 @@ public class AppointmentBook {
 		return false;
 	}
 	
+	public void SetAppointmentBookName(String name)
+	{
+		appointmentBookName = name;
+	}
+	
 	public void saveAppointmentsToDatabase()
 	{
-		
+		//TODO: saveAppointmentsToDatabase
 	}
 }

@@ -1,0 +1,22 @@
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+
+public class SelectPanel extends JPanel{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public SelectPanel()
+	{
+		super();
+		
+		JLabel pleaseChoose = new JLabel("Please choose your appointment book:");
+		pleaseChoose.setAlignmentX(CENTER_ALIGNMENT);
+		
+		add(pleaseChoose);
+	}
+
+}

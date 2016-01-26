@@ -1,0 +1,28 @@
+import java.awt.FlowLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
+
+
+public class WelcomePanel extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JButton button;
+	
+	public WelcomePanel()
+	{
+		super(new FlowLayout());
+		setName("Welcome Panel");
+		
+		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Welcome Panel"));
+		
+		button = new JButton("Continue");
+		
+		add(button);
+	}
+}

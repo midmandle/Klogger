@@ -1,0 +1,13 @@
+import javax.swing.JPanel;
+
+
+public class SelectPanel extends JPanel{
+	
+	public SelectPanel()
+	{
+		super();
+		
+		JLabel pleaseChoose = new JLabel("Please choose your appointment book:");
+	}
+
+}

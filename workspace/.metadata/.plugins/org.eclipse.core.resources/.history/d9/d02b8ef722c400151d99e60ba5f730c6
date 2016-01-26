@@ -1,0 +1,36 @@
+import java.awt.FlowLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+
+
+public class WelcomePanel extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JButton buttonSelect;
+	private JButton buttonCreateNew;
+	private JLabel welcomeInstructionsLabel;
+	
+	public WelcomePanel()
+	{
+		super();
+		setName("Welcome Panel");
+		
+		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Welcome"));
+		
+		welcomeInstructionsLabel = new JLabel("Please select an existing appointment book or create a new book.");
+		
+		buttonSelect = new JButton("Select");
+		buttonCreateNew = new JButton("Create");
+		
+		add(welcomeInstructionsLabel);
+		add(buttonSelect);
+		add(buttonCreateNew);
+	}
+}

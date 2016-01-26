@@ -1,0 +1,9 @@
+
+public class SelectPanel extends JPanel{
+	
+	public SelectPanel()
+	{
+		super();
+	}
+
+}

@@ -1,0 +1,24 @@
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
+
+
+public class WelcomePanel extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JButton button;
+	
+	public WelcomePanel()
+	{
+		setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+		setName("Welcome");
+		
+		button = new JButton("Continue");
+		
+		add(button);
+	}
+}

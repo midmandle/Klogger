@@ -1,0 +1,22 @@
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+
+public class WelcomePanel extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel panel = new JPanel(); 
+	private JButton button;
+	
+	public WelcomePanel(JPanel contentPane)
+	{
+		panel = contentPane;
+		setOpaque(true);
+		button = new JButton("Continue");
+		
+		panel.add(button);
+	}
+}

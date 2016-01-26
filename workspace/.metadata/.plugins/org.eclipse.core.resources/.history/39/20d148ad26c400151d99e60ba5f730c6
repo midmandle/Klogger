@@ -1,0 +1,8 @@
+
+public class SelectPanel {
+	public SelectPanel()
+	{
+		super();
+	}
+
+}

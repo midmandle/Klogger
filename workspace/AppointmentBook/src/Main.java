@@ -10,10 +10,6 @@ public class Main {
 			public void run()
 			{
 				MainFrame f = new MainFrame();
-				f.setLayout(new FlowLayout());
-				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				f.setSize(600, 400);
-				f.setVisible(true);
 				
 				AppointmentBook appointmentBook1 = new AppointmentBook("Book1"); //CREATE APPOINTMENT BOOK
 				AppointmentBook appointmentBook2 = new AppointmentBook("Book2");

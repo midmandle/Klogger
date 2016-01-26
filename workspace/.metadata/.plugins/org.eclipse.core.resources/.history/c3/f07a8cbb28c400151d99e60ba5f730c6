@@ -1,0 +1,16 @@
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+
+public class CreatePanel extends JPanel{
+
+	public CreatePanel()
+	{
+		super();
+		
+		JLabel pleaseCreate = new JLabel("Please create your appointment book:");
+		pleaseCreate.setAlignmentX(CENTER_ALIGNMENT);
+		
+		add(pleaseCreate);
+	}
+}

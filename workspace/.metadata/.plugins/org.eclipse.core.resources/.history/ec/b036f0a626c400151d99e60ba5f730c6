@@ -1,0 +1,8 @@
+
+public class CreatePanel {
+
+	public CreatePanel()
+	{
+		super();
+	}
+}
