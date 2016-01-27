@@ -43,14 +43,12 @@ public class Main {
 				booksList.add(appointmentBook1);
 				booksList.add(appointmentBook2);
 				
-				for(int i = 0; i < booksList.size(); i++)
-					System.out.println(booksList.get(i).appointmentBookName);
+				
 				
 				//HelperMethods.SaveBooksToCSV("csv.csv", booksList);
 				booksList = DatabaseCommunicator.GenerateAppointmentBooksFromDatabase();
 				
-				for(int i = 0; i < booksList.size(); i++)
-					System.out.println(booksList.get(i).appointmentBookName);
+				
 			}
 		});
 		

@@ -211,10 +211,10 @@ public class DatabaseCommunicator {
 	
 	public static ArrayList<AppointmentBook> GenerateAppointmentBooksFromDatabase()
 	{
-		String query = "SELECT * FROM sqlite_master;";
+		String query1 = "SELECT * FROM sqlite_master;";
 		ArrayList<ArrayList<?>> results = new ArrayList<ArrayList<?>>();
 		ArrayList<AppointmentBook> bookList = new ArrayList<AppointmentBook>();
-		MakeRequest(query, results); 
+		MakeRequest(query1, results); 
 		
 		for(int i = 0; i < results.size(); i++)
 		{
@@ -224,6 +224,8 @@ public class DatabaseCommunicator {
 					bookList.add(new AppointmentBook(results.get(i).get(j).toString()));
 			}
 		}
+		
+		//TODO: For each book, iterate through results and form appointments.
 		
 		return bookList;
 	}

@@ -53,10 +53,26 @@ public class Appointment {
 		eventTitle = title;
 	}
 	
-	public void getEventLocation(String location)
+	public void setEventLocation(String location)
 	{
 		this.location = location;
 	}
+	
+	public String getEventLocation()
+	{
+		return location;
+	}
+	
+	public void setEventDescription(String description)
+	{
+		this.description = description;
+	}
+	
+	public String getEventDescription()
+	{
+		return description;
+	}
+	
 	
 	public String toString()
 	{
