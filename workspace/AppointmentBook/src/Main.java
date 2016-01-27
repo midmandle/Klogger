@@ -1,4 +1,5 @@
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import javax.swing.JFrame;
@@ -29,12 +30,27 @@ public class Main {
 				Appointment appointment2 = new Appointment(startDate2, endDate2, "Appointment2");
 				appointmentBook2.add(appointment2);
 				
+				//System.out.println(appointmentBook1.appointmentList.size());
+				//System.out.println(appointmentBook2.appointmentList.size());
+				
 				
 				//appointmentBook2.showAllAppointments();
 				//appointmentBook1.showAllAppointments();
 				
-				DatabaseCommunicator.GetAllAppointmentsFromDatabase("Book1");
+				//DatabaseCommunicator.GetAllAppointmentsFromDatabase("Book1");
 				
+				ArrayList<AppointmentBook> booksList = new ArrayList<AppointmentBook>();
+				booksList.add(appointmentBook1);
+				booksList.add(appointmentBook2);
+				
+				for(int i = 0; i < booksList.size(); i++)
+					System.out.println(booksList.get(i).appointmentBookName);
+				
+				//HelperMethods.SaveBooksToCSV("csv.csv", booksList);
+				booksList = DatabaseCommunicator.GenerateAppointmentBooksFromDatabase();
+				
+				for(int i = 0; i < booksList.size(); i++)
+					System.out.println(booksList.get(i).appointmentBookName);
 			}
 		});
 		

@@ -4,12 +4,16 @@ public class Appointment {
 	private GregorianCalendar startDateTime;
 	private GregorianCalendar endDateTime;
 	private String eventTitle;
+	private String description;
+	private String location;
 	
 	public Appointment()
 	{
 		startDateTime = new GregorianCalendar(1970, 1, 1, 0, 0, 0);
 		endDateTime = new GregorianCalendar(1970, 1, 1, 0, 0, 0);
 		eventTitle = "EmptyAppointment";
+		description = "NoDescription";
+		location = "NoLocation";
 	}
 	
 	public Appointment(GregorianCalendar start, GregorianCalendar end, String title)
@@ -47,6 +51,11 @@ public class Appointment {
 	public void setEventTitle(String title)
 	{
 		eventTitle = title;
+	}
+	
+	public void getEventLocation(String location)
+	{
+		this.location = location;
 	}
 	
 	public String toString()

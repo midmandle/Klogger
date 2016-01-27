@@ -209,6 +209,25 @@ public class DatabaseCommunicator {
 		return false;
 	}
 	
+	public static ArrayList<AppointmentBook> GenerateAppointmentBooksFromDatabase()
+	{
+		String query = "SELECT * FROM sqlite_master;";
+		ArrayList<ArrayList<?>> results = new ArrayList<ArrayList<?>>();
+		ArrayList<AppointmentBook> bookList = new ArrayList<AppointmentBook>();
+		MakeRequest(query, results); 
+		
+		for(int i = 0; i < results.size(); i++)
+		{
+			for(int j = 0; j < results.get(i).size(); j++)
+			{
+				if(i == 2)
+					bookList.add(new AppointmentBook(results.get(i).get(j).toString()));
+			}
+		}
+		
+		return bookList;
+	}
+	
 	public static void SetupNewAppointmentBookForDatabase(String tableName)
 	{
 		String query = "CREATE TABLE IF NOT EXISTS "+ tableName +"(dateTimeFrom TEXT NOT NULL, dateTimeTo TEXT, eventTitle VARCHAR NOT NULL, description VARCHAR, location VARCHAR);";

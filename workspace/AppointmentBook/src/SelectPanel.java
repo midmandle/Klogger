@@ -1,4 +1,5 @@
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -19,7 +20,13 @@ public class SelectPanel extends JPanel{
 		JLabel pleaseChoose = new JLabel("Please choose your appointment book:");
 		pleaseChoose.setAlignmentX(CENTER_ALIGNMENT);
 		
+		//fetch existing AppointmentBooks and load into ComboBox.
+		
+		JComboBox bookSelectorCombo = new JComboBox();
+		 
+		
 		add(pleaseChoose);
+		add(bookSelectorCombo);
 	}
 
 }
