@@ -47,11 +47,9 @@ public class Main {
 				
 				//HelperMethods.SaveBooksToCSV("csv.csv", booksList);
 				booksList = DatabaseCommunicator.GenerateAppointmentBooksFromDatabase();
-				for(int i = 0; i < booksList.size(); i++)
-				{
+				/*for(int i = 0; i < booksList.size(); i++)
 					for(int j = 0; j < booksList.get(i).appointmentList.size(); j++)
-						System.out.println(booksList.get(i).appointmentList.get(i).getEventTitle());
-				}
+						System.out.println(booksList.get(i).appointmentBookName);*/
 				
 				
 			}

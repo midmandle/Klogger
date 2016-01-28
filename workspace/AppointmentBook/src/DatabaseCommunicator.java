@@ -32,6 +32,7 @@ public class DatabaseCommunicator {
 		}
 		catch(SQLException | ClassNotFoundException e)
 		{
+			System.out.println("MakeRequest(String query)");
 			System.out.println(e.getMessage());
 		}
 	}
@@ -50,6 +51,7 @@ public class DatabaseCommunicator {
 		}
 		catch(SQLException | ClassNotFoundException e)
 		{
+			System.out.println("MakeRequestWithOutput(String query)");
 			System.out.println(e.getMessage());
 		}
 	}
@@ -210,6 +212,7 @@ public class DatabaseCommunicator {
 				{
 					//System.out.println(resultSet.getRow());
 				}
+				
 			}
 			finally
 			{
@@ -222,6 +225,7 @@ public class DatabaseCommunicator {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			System.out.println("GetAllAppointmentsFromDatabase(String tableName)");
 			e.printStackTrace();
 		}
 		
@@ -248,6 +252,7 @@ public class DatabaseCommunicator {
 					if(resultSet.getString(2).compareTo(tableName) == 0)
 						return true;
 				}
+				
 			}
 			finally
 			{
@@ -260,6 +265,7 @@ public class DatabaseCommunicator {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			System.out.println("CheckIfAppointmentBookExistsOnDatabase(String tableName)");
 			e.printStackTrace();
 		}
 		
@@ -272,49 +278,28 @@ public class DatabaseCommunicator {
 		//ArrayList<ArrayList<?>> results = new ArrayList<ArrayList<?>>();
 		ArrayList<AppointmentBook> bookList = new ArrayList<AppointmentBook>();
 		
-		MakeRequestWithOutput(query1);
+		
 		
 		//Get different AppointmentBooks i.e. tableNames
 		try
 		{
-			ResultSetMetaData resMet = resultSet.getMetaData();
-			try 
-			{
-	
-				while(resultSet.next())
-				{
-					//System.out.println(resultSet.getString(2)); //Table index starts at 1.
-					bookList.add(new AppointmentBook(resultSet.getString(2)));
-				}
-			}
-			finally
-			{
-				if(resultSet != null)
-					resultSet.close();
-				if(statement != null)
-					statement.close();
-				if(dbConnection != null)
-					dbConnection.close();
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		for(int j = 0; j < bookList.size(); j++)
-		{
-			String query2 = "SELECT * FROM "+bookList.get(j)+";";
-			MakeRequestWithOutput(query2);
-			
-			//Generate each appointment per book.
 			try
 			{
-				ResultSetMetaData resMet = resultSet.getMetaData();
-				try 
+				MakeRequestWithOutput(query1);
+				while(resultSet.next())
 				{
-		
+					System.out.println(resultSet.getString(2)); //Table index starts at 1.
+					bookList.add(new AppointmentBook(resultSet.getString(2)));
+				}
+				
+				for(int j = 0; j < bookList.size(); j++)
+				{
+					String query2 = "SELECT * FROM "+bookList.get(j).appointmentBookName+";";
+					//System.out.println(query2);
+					MakeRequestWithOutput(query2);
+					
+					//Generate each appointment per book.
+							
 					while(resultSet.next())
 					{
 						Appointment a = new Appointment();
@@ -359,19 +344,21 @@ public class DatabaseCommunicator {
 						
 					}
 				}
-				finally
-				{
-					if(resultSet != null)
-						resultSet.close();
-					if(statement != null)
-						statement.close();
-					if(dbConnection != null)
-						dbConnection.close();
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+			finally
+			{
+				if(resultSet != null)
+					resultSet.close();
+				if(statement != null)
+					statement.close();
+				if(dbConnection != null)
+					dbConnection.close();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("GenerateAppointmentBooksFromDatabase()");
+			e.printStackTrace();
 		}
 		
 		return bookList;

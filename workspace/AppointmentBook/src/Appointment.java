@@ -76,6 +76,6 @@ public class Appointment {
 	
 	public String toString()
 	{
-		return eventTitle+" Starts: "+startDateTime+" Finishes: "+endDateTime;
+		return eventTitle+" Starts: "+startDateTime.DATE+" Finishes: "+endDateTime.DATE;
 	}
 }
