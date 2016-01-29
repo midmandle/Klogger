@@ -1,6 +1,5 @@
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -26,7 +25,7 @@ public class MainFrame extends JFrame {
 	private void initialiseUI()
 	{	
 		createMenuBar();
-		createWelcomePanel();
+		createOpeningPanel();
 		pack();
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,12 +42,14 @@ public class MainFrame extends JFrame {
 		setJMenuBar(menu);
 	}
 	
-	private void createWelcomePanel()
+	private void createOpeningPanel()
 	{
 		
 		
 		WelcomePanel welcomePanel = new WelcomePanel();
 		welcomePanel.setLayout(new BoxLayout(welcomePanel, BoxLayout.PAGE_AXIS));
+		
+		
 		setContentPane(welcomePanel);
 	}
 }

@@ -32,21 +32,36 @@
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" partName="Main.java" path="/home/midmandle/Work/workspace/AppointmentBook/src/Main.java" title="Main.java" tooltip="AppointmentBook/src/Main.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AppointmentBook/src/Main.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="76" selectionOffset="1770" selectionTopPixel="351"/>
+<editorState selectionHorizontalPixel="0" selectionLength="915" selectionOffset="311" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DatabaseCommunicator.java" partName="DatabaseCommunicator.java" path="/home/midmandle/Work/workspace/AppointmentBook/src/DatabaseCommunicator.java" title="DatabaseCommunicator.java" tooltip="AppointmentBook/src/DatabaseCommunicator.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AppointmentBook/src/DatabaseCommunicator.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2181" selectionTopPixel="3655"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainFrame.java" partName="MainFrame.java" path="/home/midmandle/Work/workspace/AppointmentBook/src/MainFrame.java" title="MainFrame.java" tooltip="AppointmentBook/src/MainFrame.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AppointmentBook/src/MainFrame.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="442" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Appointment.java" partName="Appointment.java" path="/home/midmandle/Work/workspace/AppointmentBook/src/Appointment.java" title="Appointment.java" tooltip="AppointmentBook/src/Appointment.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AppointmentBook/src/Appointment.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1519" selectionTopPixel="749"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="WelcomePanel.java" partName="WelcomePanel.java" path="/home/midmandle/Work/workspace/AppointmentBook/src/WelcomePanel.java" title="WelcomePanel.java" tooltip="AppointmentBook/src/WelcomePanel.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AppointmentBook/src/WelcomePanel.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1651" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SelectPanel.java" partName="SelectPanel.java" path="/home/midmandle/Work/workspace/AppointmentBook/src/SelectPanel.java" title="SelectPanel.java" tooltip="AppointmentBook/src/SelectPanel.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AppointmentBook/src/SelectPanel.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="584" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CreatePanel.java" partName="CreatePanel.java" path="/home/midmandle/Work/workspace/AppointmentBook/src/CreatePanel.java" title="CreatePanel.java" tooltip="AppointmentBook/src/CreatePanel.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AppointmentBook/src/CreatePanel.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="356" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CardsPanel.java" partName="CardsPanel.java" path="/home/midmandle/Work/workspace/AppointmentBook/src/CardsPanel.java" title="CardsPanel.java" tooltip="AppointmentBook/src/CardsPanel.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AppointmentBook/src/CardsPanel.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="255" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -129,7 +144,7 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.2917915" ratioLeft="487" ratioRight="1182" relationship="2" relative="topLeft"/>
+<info part="org.eclipse.ui.editorss" ratio="0.13720791" ratioLeft="229" ratioRight="1440" relationship="2" relative="topLeft"/>
 <info folder="true" part="bottomRight" ratio="0.65898615" ratioLeft="429" ratioRight="222" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
@@ -157,164 +172,162 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AppointmentBook/src/DatabaseCommunicator.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AppointmentBook/src/Main.java"/>
-<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=AppointmentBook/\/usr\/lib\/jvm\/java-7-openjdk-amd64\/jre\/lib\/rt.jar&lt;java.util(ArrayList.class"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AppointmentBook/src/Appointment.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AppointmentBook/src/AppointmentBook.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AppointmentBook/src/Appointment.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AppointmentBook/src/Main.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AppointmentBook/src/DatabaseCommunicator.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AppointmentBook/src/MainFrame.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AppointmentBook/src/WelcomePanel.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AppointmentBook/src/SelectPanel.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AppointmentBook/src/CreatePanel.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AppointmentBook/src/CardsPanel.java"/>
 </editors>
-<item historyLabel="ArrayList.class" index="2">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="0">
-<position info="not_deleted" x="5726" y="0"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="0">
-<position info="not_deleted" x="5752" y="34"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="0">
+<item historyLabel="WelcomePanel.java" index="2">
 <position/>
 </item>
-<item historyLabel="Appointment.java" index="3">
-<position info="not_deleted" x="849" y="0"/>
+<item historyLabel="CreatePanel.java" index="4">
+<position info="not_deleted" x="356" y="0"/>
 </item>
-<item historyLabel="Appointment.java" index="3">
-<position info="not_deleted" x="547" y="16"/>
+<item historyLabel="WelcomePanel.java" index="2">
+<position info="not_deleted" x="1705" y="0"/>
 </item>
-<item historyLabel="Appointment.java" index="3">
-<position info="not_deleted" x="611" y="16"/>
-</item>
-<item historyLabel="Appointment.java" index="3">
-<position info="not_deleted" x="718" y="14"/>
-</item>
-<item historyLabel="Appointment.java" index="3">
-<position info="not_deleted" x="778" y="14"/>
-</item>
-<item historyLabel="Appointment.java" index="3">
-<position info="not_deleted" x="870" y="13"/>
-</item>
-<item historyLabel="Appointment.java" index="3">
-<position info="not_deleted" x="928" y="13"/>
-</item>
-<item historyLabel="Appointment.java" index="3">
-<position info="not_deleted" x="1001" y="8"/>
-</item>
-<item historyLabel="AppointmentBook.java" index="4">
-<position info="not_deleted" x="787" y="0"/>
-</item>
-<item historyLabel="AppointmentBook.java" index="4">
-<position info="not_deleted" x="237" y="15"/>
-</item>
-<item historyLabel="Appointment.java" index="3">
-<position info="not_deleted" x="1001" y="8"/>
-</item>
-<item historyLabel="AppointmentBook.java" index="4">
-<position info="not_deleted" x="237" y="15"/>
-</item>
-<item historyLabel="Main.java" index="1">
-<position info="not_deleted" x="113" y="0"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="0">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="0">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="Appointment.java" index="5">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="Main.java" index="6">
-<position info="not_deleted" x="2061" y="0"/>
-</item>
-<item historyLabel="Main.java" index="6">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
-<position info="not_deleted" x="9572" y="0"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
+<item historyLabel="WelcomePanel.java" index="2">
 <position/>
 </item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
+<item historyLabel="WelcomePanel.java" index="2">
+<position info="not_deleted" x="2246" y="0"/>
+</item>
+<item historyLabel="CardsPanel.java" index="5">
+<position info="not_deleted" x="258" y="0"/>
+</item>
+<item historyLabel="SelectPanel.java" index="3">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="CardsPanel.java" index="5">
+<position info="not_deleted" x="258" y="0"/>
+</item>
+<item historyLabel="CardsPanel.java" index="5">
+<position info="not_deleted" x="255" y="0"/>
+</item>
+<item historyLabel="WelcomePanel.java" index="2">
+<position info="not_deleted" x="2246" y="0"/>
+</item>
+<item historyLabel="SelectPanel.java" index="3">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="CardsPanel.java" index="5">
+<position info="not_deleted" x="260" y="0"/>
+</item>
+<item historyLabel="WelcomePanel.java" index="2">
+<position info="not_deleted" x="1615" y="0"/>
+</item>
+<item historyLabel="CardsPanel.java" index="5">
+<position info="not_deleted" x="224" y="2"/>
+</item>
+<item historyLabel="WelcomePanel.java" index="2">
+<position info="not_deleted" x="1615" y="0"/>
+</item>
+<item historyLabel="WelcomePanel.java" index="2">
+<position info="not_deleted" x="2249" y="0"/>
+</item>
+<item historyLabel="CardsPanel.java" index="5">
 <position/>
 </item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
-<position info="not_deleted" x="9228" y="0"/>
+<item historyLabel="WelcomePanel.java" index="2">
+<position info="not_deleted" x="2246" y="0"/>
 </item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
-<position info="not_deleted" x="930" y="0"/>
-</item>
-<item historyLabel="Main.java" index="6">
-<position info="not_deleted" x="1830" y="0"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
-<position info="not_deleted" x="930" y="0"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
-<position info="not_deleted" x="930" y="0"/>
-</item>
-<item historyLabel="Main.java" index="6">
+<item historyLabel="SelectPanel.java" index="3">
 <position/>
 </item>
-<item historyLabel="Appointment.java" index="5">
-<position info="not_deleted" x="1519" y="0"/>
+<item historyLabel="WelcomePanel.java" index="2">
+<position info="not_deleted" x="2246" y="0"/>
 </item>
-<item historyLabel="Main.java" index="6">
-<position info="not_deleted" x="1851" y="0"/>
+<item historyLabel="WelcomePanel.java" index="2">
+<position info="not_deleted" x="2218" y="0"/>
 </item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
-<position info="not_deleted" x="9223" y="0"/>
+<item historyLabel="CreatePanel.java" index="4">
+<position info="not_deleted" x="356" y="0"/>
 </item>
-<item historyLabel="Main.java" index="6">
-<position info="not_deleted" x="2030" y="0"/>
-</item>
-<item historyLabel="Main.java" index="6">
-<position info="not_deleted" x="1934" y="0"/>
-</item>
-<item historyLabel="Main.java" index="6">
-<position info="not_deleted" x="1957" y="0"/>
-</item>
-<item historyLabel="Main.java" index="6">
-<position info="not_deleted" x="2027" y="0"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
-<position info="not_deleted" x="7746" y="0"/>
-</item>
-<item historyLabel="Main.java" index="6">
-<position info="not_deleted" x="2030" y="0"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
-<position info="not_deleted" x="7746" y="0"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
-<position info="not_deleted" x="1329" y="0"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
-<position info="not_deleted" x="1392" y="0"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
-<position info="not_deleted" x="9223" y="0"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
-<position info="not_deleted" x="7706" y="0"/>
-</item>
-<item historyLabel="Main.java" index="6">
-<position info="not_deleted" x="1770" y="76"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
-<position info="not_deleted" x="9321" y="23"/>
-</item>
-<item historyLabel="DatabaseCommunicator.java" index="7">
+<item historyLabel="CardsPanel.java" index="5">
 <position/>
 </item>
-<item active="true" historyLabel="DatabaseCommunicator.java" index="7">
-<position info="not_deleted" x="9321" y="23"/>
+<item historyLabel="WelcomePanel.java" index="2">
+<position info="not_deleted" x="2220" y="0"/>
+</item>
+<item historyLabel="CardsPanel.java" index="5">
+<position info="not_deleted" x="255" y="0"/>
+</item>
+<item historyLabel="WelcomePanel.java" index="2">
+<position info="not_deleted" x="1651" y="0"/>
+</item>
+<item historyLabel="SelectPanel.java" index="3">
+<position/>
+</item>
+<item historyLabel="SelectPanel.java" index="3">
+<position info="not_deleted" x="579" y="0"/>
+</item>
+<item historyLabel="SelectPanel.java" index="3">
+<position/>
+</item>
+<item historyLabel="SelectPanel.java" index="3">
+<position/>
+</item>
+<item historyLabel="SelectPanel.java" index="3">
+<position/>
+</item>
+<item historyLabel="SelectPanel.java" index="3">
+<position/>
+</item>
+<item historyLabel="SelectPanel.java" index="3">
+<position/>
+</item>
+<item historyLabel="SelectPanel.java" index="3">
+<position/>
+</item>
+<item historyLabel="SelectPanel.java" index="3">
+<position/>
+</item>
+<item historyLabel="SelectPanel.java" index="3">
+<position/>
+</item>
+<item historyLabel="SelectPanel.java" index="3">
+<position/>
+</item>
+<item historyLabel="SelectPanel.java" index="3">
+<position info="not_deleted" x="589" y="0"/>
+</item>
+<item historyLabel="WelcomePanel.java" index="2">
+<position info="not_deleted" x="1651" y="0"/>
+</item>
+<item historyLabel="MainFrame.java" index="1">
+<position info="not_deleted" x="960" y="0"/>
+</item>
+<item historyLabel="MainFrame.java" index="1">
+<position/>
+</item>
+<item historyLabel="MainFrame.java" index="1">
+<position/>
+</item>
+<item historyLabel="MainFrame.java" index="1">
+<position info="not_deleted" x="367" y="0"/>
+</item>
+<item historyLabel="Main.java" index="0">
+<position info="not_deleted" x="311" y="915"/>
+</item>
+<item historyLabel="MainFrame.java" index="1">
+<position info="not_deleted" x="367" y="0"/>
+</item>
+<item historyLabel="MainFrame.java" index="1">
+<position/>
+</item>
+<item historyLabel="MainFrame.java" index="1">
+<position info="not_deleted" x="437" y="0"/>
+</item>
+<item historyLabel="SelectPanel.java" index="3">
+<position/>
+</item>
+<item historyLabel="MainFrame.java" index="1">
+<position info="not_deleted" x="442" y="0"/>
+</item>
+<item active="true" historyLabel="SelectPanel.java" index="3">
+<position/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -333,6 +346,27 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CardsPanel.java" tooltip="AppointmentBook/src/CardsPanel.java">
+<persistable path="/AppointmentBook/src/CardsPanel.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CreatePanel.java" tooltip="AppointmentBook/src/CreatePanel.java">
+<persistable path="/AppointmentBook/src/CreatePanel.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SelectPanel.java" tooltip="AppointmentBook/src/SelectPanel.java">
+<persistable path="/AppointmentBook/src/SelectPanel.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="WelcomePanel.java" tooltip="AppointmentBook/src/WelcomePanel.java">
+<persistable path="/AppointmentBook/src/WelcomePanel.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainFrame.java" tooltip="AppointmentBook/src/MainFrame.java">
+<persistable path="/AppointmentBook/src/MainFrame.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="HelperMethods.java" tooltip="AppointmentBook/src/HelperMethods.java">
+<persistable path="/AppointmentBook/src/HelperMethods.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AppointmentBook.java" tooltip="AppointmentBook/src/AppointmentBook.java">
+<persistable path="/AppointmentBook/src/AppointmentBook.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Appointment.java" tooltip="AppointmentBook/src/Appointment.java">
 <persistable path="/AppointmentBook/src/Appointment.java"/>
 </file>
@@ -347,15 +381,6 @@
 </file>
 <file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="ArrayList.class" tooltip="java.util.ArrayList">
 <persistable org.eclipse.jdt.ui.ClassFileIdentifier="=AppointmentBook/\/usr\/lib\/jvm\/java-7-openjdk-amd64\/jre\/lib\/rt.jar&lt;java.util(ArrayList.class"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GenericDatabaseOutput.java" tooltip="AppointmentBook/src/GenericDatabaseOutput.java">
-<persistable path="/AppointmentBook/src/GenericDatabaseOutput.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AppointmentBook.java" tooltip="AppointmentBook/src/AppointmentBook.java">
-<persistable path="/AppointmentBook/src/AppointmentBook.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainFrame.java" tooltip="AppointmentBook/src/MainFrame.java">
-<persistable path="/AppointmentBook/src/MainFrame.java"/>
 </file>
 </mruList>
 </workbench>

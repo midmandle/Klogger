@@ -54,7 +54,7 @@ public class HelperMethods {
 			{
 				String[] books = line.split(splitOn);
 				
-				appointmentBooks.add(new AppointmentBook(books[0]));
+				//appointmentBooks.add(books[0]);
 			}
 		}
 		catch(FileNotFoundException e)

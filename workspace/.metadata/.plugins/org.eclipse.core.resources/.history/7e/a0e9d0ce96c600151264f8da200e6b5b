@@ -43,36 +43,22 @@ public class WelcomePanel extends JPanel {
 		
 		
 		
-		final CardsPanel cardsPanel = new CardsPanel();
-		
-		cardsPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-
-		SelectPanel selectPanel = new SelectPanel();
-		selectPanel.setLayout(new BoxLayout(selectPanel, BoxLayout.PAGE_AXIS));
-		
-		final CreatePanel createPanel = new CreatePanel();
-		createPanel.setLayout(new BoxLayout(createPanel, BoxLayout.PAGE_AXIS));
-		
-		cardsPanel.setLayout(new CardLayout());
-		cardsPanel.add(selectPanel, "Select Panel");
-		cardsPanel.add(createPanel, "Create Panel");
+		CardsPanel cardsPanel = new CardsPanel();
 		
 		buttonPanel.add(buttonSelect);
 		buttonPanel.add(buttonCreateNew);
 		
-		buttonSelect.addActionListener(new ActionListener(){
+		buttonCreateNew.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-            	CardLayout cl = (CardLayout)cardsPanel.getLayout();
-            	cl.show(cardsPanel, "Select Panel");
+            	//Switch to createPanel
             }
         });
 		
 		buttonCreateNew.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-            	CardLayout cl = (CardLayout)cardsPanel.getLayout();
-            	cl.show(cardsPanel, "Create Panel");
+            	//Switch to selectPanel
             }
         });
 		

@@ -22,8 +22,9 @@ public class SelectPanel extends JPanel{
 		
 		//fetch existing AppointmentBooks and load into ComboBox.
 		
-		JComboBox<String> bookSelectorCombo = new JComboBox<String>();
-
+		JComboBox bookSelectorCombo = new JComboBox();
+		 
+		
 		add(pleaseChoose);
 		add(bookSelectorCombo);
 	}

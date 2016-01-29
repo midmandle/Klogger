@@ -1,0 +1,29 @@
+import java.awt.CardLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+
+
+public class CardsPanel extends JPanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public CardsPanel()
+	{
+		setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+		SelectPanel selectPanel = new SelectPanel();
+		selectPanel.setLayout(new BoxLayout(selectPanel, BoxLayout.PAGE_AXIS));
+		
+		CreatePanel createPanel = new CreatePanel();
+		createPanel.setLayout(new BoxLayout(createPanel, BoxLayout.PAGE_AXIS));
+		
+		setLayout(new CardLayout());
+		add(selectPanel, "Select Panel");
+		add(createPanel, "CreatePanel");
+	}
+}

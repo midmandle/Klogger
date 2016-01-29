@@ -60,11 +60,10 @@ public class WelcomePanel extends JPanel {
 		buttonPanel.add(buttonSelect);
 		buttonPanel.add(buttonCreateNew);
 		
-		buttonSelect.addActionListener(new ActionListener(){
+		buttonCreateNew.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-            	CardLayout cl = (CardLayout)cardsPanel.getLayout();
-            	cl.show(cardsPanel, "Select Panel");
+            	//Switch to createPanel
             }
         });
 		
