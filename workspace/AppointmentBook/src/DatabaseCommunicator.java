@@ -3,6 +3,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.FormatterClosedException;
 import java.util.GregorianCalendar;
 
 public class DatabaseCommunicator {
@@ -197,20 +198,35 @@ public class DatabaseCommunicator {
 		
 	}
 	
-	public static void GetAllAppointmentsFromDatabase(String tableName)//, Appointment appointment)
+	public static ArrayList<Appointment> GetAllAppointmentsFromDatabase(String BookName)//, Appointment appointment)
 	{
-		String query = "SELECT * FROM "+tableName+";";
-		
+		String query = "SELECT * FROM "+BookName+";";
+		ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
 		MakeRequestWithOutput(query);
 		try
 		{
 			ResultSetMetaData resMet = resultSet.getMetaData();
 			try 
 			{
-	
+				
 				while(resultSet.next())
 				{
-					//System.out.println(resultSet.getRow());
+					Appointment a = new Appointment();
+					
+					GregorianCalendar tempDateTime = new GregorianCalendar();
+					
+					FormattedDateToGregorian(resultSet.getString(1), tempDateTime);
+					a.setStartDateTime(tempDateTime);
+					
+					FormattedDateToGregorian(resultSet.getString(2), tempDateTime);
+					a.setEndDateTime(tempDateTime);
+					
+					a.setEventTitle(resultSet.getString(3));
+					
+					a.setEventDescription(resultSet.getString(4));
+					
+					a.setEventLocation(resultSet.getString(5));
+					appointmentList.add(a);
 				}
 				
 			}
@@ -228,18 +244,19 @@ public class DatabaseCommunicator {
 			System.out.println("GetAllAppointmentsFromDatabase(String tableName)");
 			e.printStackTrace();
 		}
+		return appointmentList;
+	
+	}
+	
+	public static void GetSpecificAppointmentFromDatabase(String BookName, Appointment appointment)
+	{
+		String startDate = dateFormatter(appointment.getStartDateTime());
+		String endDate = dateFormatter(appointment.getEndDateTime());
 		
-	
-	}
-	
-	public static void GetSpecificAppointmentFromDatabase(String tableName, Appointment appointment)
-	{
-		//Returns results;
-	}
-	
-	public static boolean CheckIfAppointmentBookExistsOnDatabase(String tableName)
-	{
-		String query = "SELECT * FROM sqlite_master;";
+		String eventTitle = appointment.getEventTitle();
+		
+		String query = String.format("SELECT * FROM %s WHERE dateTimeFrom = \"%s\" AND dateTimeTo = \"%s\" AND eventTitle = \"%s\";", BookName, startDate, endDate, eventTitle);
+		System.out.println(query);
 		MakeRequestWithOutput(query);
 		try
 		{
@@ -249,8 +266,43 @@ public class DatabaseCommunicator {
 	
 				while(resultSet.next())
 				{
-					if(resultSet.getString(2).compareTo(tableName) == 0)
-						return true;
+					System.out.println("Item exists.");
+				}
+				
+			}
+			finally
+			{
+				if(resultSet != null)
+					resultSet.close();
+				if(statement != null)
+					statement.close();
+				if(dbConnection != null)
+					dbConnection.close();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("CheckIfAppointmentBookExistsOnDatabase(String tableName)");
+			e.printStackTrace();
+		}
+	}
+	
+	public static boolean CheckIfAppointmentBookExistsOnDatabase(String BookName)
+	{
+		String query = "SELECT * FROM sqlite_master;";
+		MakeRequestWithOutput(query);
+		boolean ret = false;
+		try
+		{
+			ResultSetMetaData resMet = resultSet.getMetaData();
+			try 
+			{
+	
+				while(resultSet.next())
+				{
+					System.out.println("Input: "+BookName+ " CHECK: "+resultSet.getString(2));
+					if(resultSet.getString(2).contentEquals(BookName))
+						ret = true;
+					System.out.println(ret);
 				}
 				
 			}
@@ -269,99 +321,7 @@ public class DatabaseCommunicator {
 			e.printStackTrace();
 		}
 		
-		return false;
-	}
-	
-	public static ArrayList<AppointmentBook> GenerateAppointmentBooksFromDatabase()
-	{
-		String query1 = "SELECT * FROM sqlite_master;";
-		//ArrayList<ArrayList<?>> results = new ArrayList<ArrayList<?>>();
-		ArrayList<AppointmentBook> bookList = new ArrayList<AppointmentBook>();
-		
-		
-		
-		//Get different AppointmentBooks i.e. tableNames
-		try
-		{
-			try
-			{
-				MakeRequestWithOutput(query1);
-				while(resultSet.next())
-				{
-					System.out.println(resultSet.getString(2)); //Table index starts at 1.
-					bookList.add(new AppointmentBook(resultSet.getString(2)));
-				}
-				
-				for(int j = 0; j < bookList.size(); j++)
-				{
-					String query2 = "SELECT * FROM "+bookList.get(j).appointmentBookName+";";
-					//System.out.println(query2);
-					MakeRequestWithOutput(query2);
-					
-					//Generate each appointment per book.
-							
-					while(resultSet.next())
-					{
-						Appointment a = new Appointment();
-						for(int i = 1; i <= 5; i++)
-						{
-							switch(i)
-							{
-								case 1:
-								{
-									GregorianCalendar calDateTimeFromDB = new GregorianCalendar();
-									FormattedDateToGregorian(resultSet.getString(i), calDateTimeFromDB);
-									a.setStartDateTime(calDateTimeFromDB);
-									break;
-								}
-								case 2:
-								{
-									GregorianCalendar calDateTimeFromDB = new GregorianCalendar();
-									FormattedDateToGregorian(resultSet.getString(i), calDateTimeFromDB);
-									a.setEndDateTime(calDateTimeFromDB);
-									break;
-								}
-								case 3:
-								{
-									a.setEventTitle(resultSet.getString(i));
-									break;
-								}
-								case 4:
-								{
-									a.setEventDescription(resultSet.getString(i));
-									break;
-								}
-								case 5:
-								{
-									a.setEventLocation(resultSet.getString(i));
-									break;
-								}
-								default:
-									break;
-							}
-						}
-						bookList.get(j).appointmentList.add(a);
-						
-					}
-				}
-			}
-			finally
-			{
-				if(resultSet != null)
-					resultSet.close();
-				if(statement != null)
-					statement.close();
-				if(dbConnection != null)
-					dbConnection.close();
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("GenerateAppointmentBooksFromDatabase()");
-			e.printStackTrace();
-		}
-		
-		return bookList;
+		return ret;
 	}
 	
 	public static void SetupNewAppointmentBookForDatabase(String tableName)

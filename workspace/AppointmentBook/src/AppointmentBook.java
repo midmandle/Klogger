@@ -12,8 +12,19 @@ public class AppointmentBook {
 	public AppointmentBook(String appointmentBookName)
 	{
 		this.appointmentBookName = appointmentBookName;
-		if(!DatabaseCommunicator.CheckIfAppointmentBookExistsOnDatabase(appointmentBookName));
+		boolean exists = DatabaseCommunicator.CheckIfAppointmentBookExistsOnDatabase(appointmentBookName);
+		
+		if(exists)
+		{
+			IntialiseAppointmentBookFromDatabase();
+		}
+		else
+		{
+			System.out.println("Ping");
 			DatabaseCommunicator.SetupNewAppointmentBookForDatabase(appointmentBookName);
+		}
+			
+	
 	}
 	
 	public void add(Appointment newAppointment)
@@ -26,6 +37,11 @@ public class AppointmentBook {
 			
 			DatabaseCommunicator.AddAppointmentToDatabase(appointmentBookName, newAppointment);
 		}
+	}
+	
+	private void IntialiseAppointmentBookFromDatabase()
+	{
+		appointmentList = DatabaseCommunicator.GetAllAppointmentsFromDatabase(appointmentBookName);
 	}
 	
 	public ArrayList<Appointment> getAllAppointments()
@@ -96,6 +112,9 @@ public class AppointmentBook {
 	
 	public void saveAppointmentsToDatabase()
 	{
-		//TODO: saveAppointmentsToDatabase
+		for(int i = 0; i < appointmentList.size(); i++)
+		{
+			DatabaseCommunicator.AddAppointmentToDatabase(appointmentBookName, appointmentList.get(i));
+		}
 	}
 }
