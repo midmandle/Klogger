@@ -12,7 +12,7 @@ public class Main {
 			{
 				MainFrame f = new MainFrame();
 				
-				AppointmentBook appointmentBook1 = new AppointmentBook("Book1"); //CREATE APPOINTMENT BOOK
+				/*AppointmentBook appointmentBook1 = new AppointmentBook("Book1"); //CREATE APPOINTMENT BOOK
 				AppointmentBook appointmentBook2 = new AppointmentBook("Book2");
 				
 				GregorianCalendar startDate = new GregorianCalendar(2016, 1, 1); //CREATE NECESSARY DATES
@@ -32,7 +32,7 @@ public class Main {
 				
 				AppointmentBook appointmentBook3 = new AppointmentBook("Book3");
 				appointmentBook3.appointmentList = DatabaseCommunicator.GetAllAppointmentsFromDatabase("Book1");
-				appointmentBook3.saveAppointmentsToDatabase();
+				appointmentBook3.saveAppointmentsToDatabase();*/
 				
 			}
 		});

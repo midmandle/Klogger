@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -10,7 +12,8 @@ public class SelectPanel extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	JComboBox<String> bookSelectorCombo = new JComboBox<String>();
+	
 	public SelectPanel()
 	{
 		super();
@@ -22,10 +25,16 @@ public class SelectPanel extends JPanel{
 		
 		//fetch existing AppointmentBooks and load into ComboBox.
 		
-		JComboBox<String> bookSelectorCombo = new JComboBox<String>();
+		
 
 		add(pleaseChoose);
 		add(bookSelectorCombo);
+	}
+	
+	public void populateCombo(ArrayList<AppointmentBook> booksList)
+	{
+		for(int i = 0; i < booksList.size(); i++)
+			bookSelectorCombo.addItem(booksList.get(i).appointmentBookName);
 	}
 
 }

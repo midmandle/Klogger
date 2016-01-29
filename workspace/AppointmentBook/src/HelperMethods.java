@@ -82,4 +82,14 @@ public class HelperMethods {
 	
 	//Fetch current appointmentBooks from XML
 	
+	
+	//Fetch current Books from Database;
+	public static void InitialiseBooksFromDatabase(ArrayList<AppointmentBook> booksList)
+	{
+		DatabaseCommunicator.GetAllAppointmentBooks(booksList);
+		for(int i = 0; i < booksList.size(); i++)
+		{
+			booksList.get(i).intialiseAppointmentBookFromDatabase();
+		}
+	}
 }

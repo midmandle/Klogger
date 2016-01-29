@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -24,7 +25,7 @@ public class WelcomePanel extends JPanel {
 	private JLabel welcomeInstructionsLabel;
 	private JPanel buttonPanel;
 	
-	public WelcomePanel()
+	public WelcomePanel(final ArrayList<AppointmentBook> booksList)
 	{
 		super();
 		setName("Welcome Panel");
@@ -43,14 +44,15 @@ public class WelcomePanel extends JPanel {
 		
 		
 		
-		final CardsPanel cardsPanel = new CardsPanel();
+		final JPanel cardsPanel = new JPanel();
 		
 		cardsPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-		SelectPanel selectPanel = new SelectPanel();
+		final SelectPanel selectPanel = new SelectPanel();
 		selectPanel.setLayout(new BoxLayout(selectPanel, BoxLayout.PAGE_AXIS));
+		selectPanel.populateCombo(booksList);
 		
-		final CreatePanel createPanel = new CreatePanel();
+		final CreatePanel createPanel = new CreatePanel(booksList);
 		createPanel.setLayout(new BoxLayout(createPanel, BoxLayout.PAGE_AXIS));
 		
 		cardsPanel.setLayout(new CardLayout());

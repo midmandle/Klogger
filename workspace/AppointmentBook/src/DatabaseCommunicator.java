@@ -340,6 +340,36 @@ public class DatabaseCommunicator {
 		
 	}
 
+	public static void GetAllAppointmentBooks(ArrayList<AppointmentBook> booksList)
+	{
+		String query = "SELECT * FROM sqlite_master;";
+		MakeRequestWithOutput(query);
+		
+		try
+		{
+			ResultSetMetaData resMet = resultSet.getMetaData();
+			try 
+			{
 	
-	//TODO: Need some kind of output formatting function.
+				while(resultSet.next())
+				{
+					booksList.add(new AppointmentBook(resultSet.getString(2)));
+				}
+				
+			}
+			finally
+			{
+				if(resultSet != null)
+					resultSet.close();
+				if(statement != null)
+					//statement.close();
+				if(dbConnection != null)
+					dbConnection.close();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("GetAllAppointmentBooks(ArrayList<AppointmentBook> booksList)");
+			e.printStackTrace();
+		}
+	}
 }

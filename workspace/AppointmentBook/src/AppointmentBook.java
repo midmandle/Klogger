@@ -16,7 +16,7 @@ public class AppointmentBook {
 		
 		if(exists)
 		{
-			IntialiseAppointmentBookFromDatabase();
+			intialiseAppointmentBookFromDatabase();
 		}
 		else
 		{
@@ -39,7 +39,7 @@ public class AppointmentBook {
 		}
 	}
 	
-	private void IntialiseAppointmentBookFromDatabase()
+	public void intialiseAppointmentBookFromDatabase()
 	{
 		appointmentList = DatabaseCommunicator.GetAllAppointmentsFromDatabase(appointmentBookName);
 	}

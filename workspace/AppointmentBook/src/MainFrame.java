@@ -16,11 +16,15 @@ public class MainFrame extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	ArrayList<AppointmentBook> booksList = new ArrayList<AppointmentBook>();
+	
 	
 	public MainFrame()
 	{
 		super("Appointment Book");
+		HelperMethods.InitialiseBooksFromDatabase(booksList);
 		initialiseUI();
+		
 	}
 	
 	private void initialiseUI()
@@ -45,9 +49,7 @@ public class MainFrame extends JFrame {
 	
 	private void createWelcomePanel()
 	{
-		
-		
-		WelcomePanel welcomePanel = new WelcomePanel();
+		WelcomePanel welcomePanel = new WelcomePanel(booksList);
 		welcomePanel.setLayout(new BoxLayout(welcomePanel, BoxLayout.PAGE_AXIS));
 		setContentPane(welcomePanel);
 	}
