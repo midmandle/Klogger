@@ -325,8 +325,7 @@ public class DatabaseCommunicator {
 	
 	public static void SetupNewAppointmentBookForDatabase(String tableName)
 	{
-		//SQLi possible here :/. Dont have time to fix now.
-		String query = "CREATE TABLE IF NOT EXISTS \""+ tableName +"\"(dateTimeFrom TEXT NOT NULL, dateTimeTo TEXT, eventTitle VARCHAR NOT NULL, description VARCHAR, location VARCHAR);";
+		String query = "CREATE TABLE IF NOT EXISTS "+ tableName +"(dateTimeFrom TEXT NOT NULL, dateTimeTo TEXT, eventTitle VARCHAR NOT NULL, description VARCHAR, location VARCHAR);";
 		
 		MakeRequest(query);
 		
@@ -340,7 +339,7 @@ public class DatabaseCommunicator {
 		
 	}
 
-	public static void GetAllAppointmentBooks(ArrayList<String> bookNames)
+	public static void GetAllAppointmentBooks(ArrayList<AppointmentBook> booksList)
 	{
 		String query = "SELECT * FROM sqlite_master;";
 		MakeRequestWithOutput(query);
@@ -353,14 +352,15 @@ public class DatabaseCommunicator {
 	
 				while(resultSet.next())
 				{
-					bookNames.add(resultSet.getString(2));
+					booksList.add(new AppointmentBook(resultSet.getString("tbl_name")));
+					//booksList.add(new AppointmentBook(resultSet.getString(2)));
 				}
 				
 			}
 			finally
 			{
 				if(statement != null)
-					statement.close();
+					//statement.close();
 				if(resultSet != null)
 					resultSet.close();
 				if(dbConnection != null)

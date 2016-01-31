@@ -325,7 +325,7 @@ public class DatabaseCommunicator {
 	
 	public static void SetupNewAppointmentBookForDatabase(String tableName)
 	{
-		//SQLi possible here :/. Dont have time to fix now.
+		//SQLi possible here :/
 		String query = "CREATE TABLE IF NOT EXISTS \""+ tableName +"\"(dateTimeFrom TEXT NOT NULL, dateTimeTo TEXT, eventTitle VARCHAR NOT NULL, description VARCHAR, location VARCHAR);";
 		
 		MakeRequest(query);

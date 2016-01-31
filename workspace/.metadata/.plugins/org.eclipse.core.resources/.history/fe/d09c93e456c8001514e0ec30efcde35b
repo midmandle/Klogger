@@ -86,13 +86,7 @@ public class HelperMethods {
 	//Fetch current Books from Database;
 	public static void InitialiseBooksFromDatabase(ArrayList<AppointmentBook> booksList)
 	{
-		ArrayList<String> bookNames = new ArrayList<String>();
-		DatabaseCommunicator.GetAllAppointmentBooks(bookNames);
-		
-		for(int i = 0; i < bookNames.size(); i++)
-		{
-			booksList.add(new AppointmentBook(bookNames.get(i)));
-		}
+		DatabaseCommunicator.GetAllAppointmentBooks(booksList);
 		
 		for(int i = 0; i < booksList.size(); i++)
 		{
