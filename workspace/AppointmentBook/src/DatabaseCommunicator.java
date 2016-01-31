@@ -293,7 +293,6 @@ public class DatabaseCommunicator {
 		boolean ret = false;
 		try
 		{
-			ResultSetMetaData resMet = resultSet.getMetaData();
 			try 
 			{
 	
@@ -302,7 +301,7 @@ public class DatabaseCommunicator {
 					System.out.println("Input: "+BookName+ " CHECK: "+resultSet.getString(2));
 					if(resultSet.getString(2).contentEquals(BookName))
 						ret = true;
-					System.out.println(ret);
+					//System.out.println(ret);
 				}
 				
 			}
@@ -353,16 +352,17 @@ public class DatabaseCommunicator {
 	
 				while(resultSet.next())
 				{
-					booksList.add(new AppointmentBook(resultSet.getString(2)));
+					booksList.add(new AppointmentBook(resultSet.getString("tbl_name")));
+					//booksList.add(new AppointmentBook(resultSet.getString(2)));
 				}
 				
 			}
 			finally
 			{
-				if(resultSet != null)
-					resultSet.close();
 				if(statement != null)
 					//statement.close();
+				if(resultSet != null)
+					resultSet.close();
 				if(dbConnection != null)
 					dbConnection.close();
 			}

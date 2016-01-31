@@ -1,0 +1,23 @@
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+
+public class CreatePanel extends JPanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public CreatePanel(ArrayList<AppointmentBook> booksList)
+	{
+		super();
+		
+		
+		
+		add(pleaseCreate);
+	}
+}

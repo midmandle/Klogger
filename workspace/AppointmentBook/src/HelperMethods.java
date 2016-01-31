@@ -87,6 +87,7 @@ public class HelperMethods {
 	public static void InitialiseBooksFromDatabase(ArrayList<AppointmentBook> booksList)
 	{
 		DatabaseCommunicator.GetAllAppointmentBooks(booksList);
+		
 		for(int i = 0; i < booksList.size(); i++)
 		{
 			booksList.get(i).intialiseAppointmentBookFromDatabase();

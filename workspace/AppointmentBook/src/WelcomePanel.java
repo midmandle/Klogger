@@ -52,7 +52,7 @@ public class WelcomePanel extends JPanel {
 		selectPanel.setLayout(new BoxLayout(selectPanel, BoxLayout.PAGE_AXIS));
 		selectPanel.populateCombo(booksList);
 		
-		final CreatePanel createPanel = new CreatePanel(booksList);
+		CreatePanel createPanel = new CreatePanel(booksList);
 		createPanel.setLayout(new BoxLayout(createPanel, BoxLayout.PAGE_AXIS));
 		
 		cardsPanel.setLayout(new CardLayout());
@@ -65,6 +65,7 @@ public class WelcomePanel extends JPanel {
 		buttonSelect.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+            	selectPanel.populateCombo(booksList);
             	CardLayout cl = (CardLayout)cardsPanel.getLayout();
             	cl.show(cardsPanel, "Select Panel");
             }
