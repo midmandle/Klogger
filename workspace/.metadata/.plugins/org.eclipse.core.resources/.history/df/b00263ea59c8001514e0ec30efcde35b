@@ -1,0 +1,22 @@
+import java.util.ArrayList;
+
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+
+
+public class TabPane extends JPanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public TabPane(ArrayList<AppointmentBook> booksList)
+	{
+		JTabbedPane jtp = new JTabbedPane();
+		
+		WelcomePanel welcomePanel = new WelcomePanel(booksList);
+		welcomePanel.setLayout(new BoxLayout(welcomePanel, BoxLayout.PAGE_AXIS));
+	}
+}

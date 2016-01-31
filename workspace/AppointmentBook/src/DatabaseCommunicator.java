@@ -2,8 +2,6 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.FormatterClosedException;
 import java.util.GregorianCalendar;
 
 public class DatabaseCommunicator {
@@ -164,7 +162,6 @@ public class DatabaseCommunicator {
 			java.util.Date dateTime = sdf.parse(formatted);
 			output.setTime(dateTime);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -240,7 +237,6 @@ public class DatabaseCommunicator {
 					dbConnection.close();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.println("GetAllAppointmentsFromDatabase(String tableName)");
 			e.printStackTrace();
 		}
@@ -280,7 +276,6 @@ public class DatabaseCommunicator {
 					dbConnection.close();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.println("CheckIfAppointmentBookExistsOnDatabase(String tableName)");
 			e.printStackTrace();
 		}
@@ -315,7 +310,6 @@ public class DatabaseCommunicator {
 					dbConnection.close();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.println("CheckIfAppointmentBookExistsOnDatabase(String tableName)");
 			e.printStackTrace();
 		}
@@ -367,7 +361,6 @@ public class DatabaseCommunicator {
 					dbConnection.close();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.println("GetAllAppointmentBooks(ArrayList<AppointmentBook> booksList)");
 			e.printStackTrace();
 		}

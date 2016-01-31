@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 
 public class MainFrame extends JFrame {
@@ -30,8 +31,14 @@ public class MainFrame extends JFrame {
 	private void initialiseUI()
 	{	
 		createMenuBar();
-		createWelcomePanel();
-		pack();
+		
+		JTabbedPane jtp = new JTabbedPane();
+		
+		WelcomePanel welcomePanel = new WelcomePanel(booksList);
+		welcomePanel.setLayout(new BoxLayout(welcomePanel, BoxLayout.PAGE_AXIS));
+		jtp.addTab("Welcome", welcomePanel);
+		
+		setContentPane(jtp);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(600, 400);
@@ -45,12 +52,5 @@ public class MainFrame extends JFrame {
 		
 		menu.add(file);
 		setJMenuBar(menu);
-	}
-	
-	private void createWelcomePanel()
-	{
-		WelcomePanel welcomePanel = new WelcomePanel(booksList);
-		welcomePanel.setLayout(new BoxLayout(welcomePanel, BoxLayout.PAGE_AXIS));
-		setContentPane(welcomePanel);
 	}
 }

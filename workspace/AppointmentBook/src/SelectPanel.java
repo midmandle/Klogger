@@ -1,3 +1,6 @@
+import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -26,6 +29,13 @@ public class SelectPanel extends JPanel{
 		
 		JButton  buttonChooseBook = new JButton("Open");
 		buttonChooseBook.setAlignmentX(CENTER_ALIGNMENT);
+		
+		buttonChooseBook.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	//TODO: Open CalendarPane for selected AppointmentBook
+            }
+        });
 		
 		//Damn errors...
 		add(pleaseChoose);
