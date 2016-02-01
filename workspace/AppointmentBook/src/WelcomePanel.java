@@ -47,9 +47,9 @@ public class WelcomePanel extends JPanel {
 		
 		cardsPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-		final SelectPanel selectPanel = new SelectPanel();
+		final SelectPanel selectPanel = new SelectPanel(booksList);
 		selectPanel.setLayout(new BoxLayout(selectPanel, BoxLayout.PAGE_AXIS));
-		selectPanel.populateCombo(booksList);
+		selectPanel.populateCombo();
 		
 		CreatePanel createPanel = new CreatePanel(booksList);
 		createPanel.setLayout(new BoxLayout(createPanel, BoxLayout.PAGE_AXIS));
@@ -64,7 +64,7 @@ public class WelcomePanel extends JPanel {
 		buttonSelect.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-            	selectPanel.populateCombo(booksList);
+            	selectPanel.populateCombo();
             	CardLayout cl = (CardLayout)cardsPanel.getLayout();
             	cl.show(cardsPanel, "Select Panel");
             }

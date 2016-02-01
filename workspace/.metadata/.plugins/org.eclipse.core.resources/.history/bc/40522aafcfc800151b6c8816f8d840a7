@@ -1,0 +1,20 @@
+import javax.swing.JPanel;
+
+
+public class CalendarPane extends JPanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public CalendarPane()
+	{
+		
+	}
+
+	public void closeTab()
+	{
+		
+	}
+}

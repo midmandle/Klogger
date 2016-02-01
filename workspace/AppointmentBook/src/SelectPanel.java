@@ -1,4 +1,3 @@
-import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -8,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 
 public class SelectPanel extends JPanel{
@@ -17,10 +17,12 @@ public class SelectPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	JComboBox<String> bookSelectorCombo = new JComboBox<String>();
+	ArrayList<AppointmentBook> booksList;
 	
-	public SelectPanel()
+	public SelectPanel(final ArrayList<AppointmentBook> booksList)
 	{
 		super();
+		this.booksList = booksList;
 		
 		setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		
@@ -34,6 +36,10 @@ public class SelectPanel extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
             	//TODO: Open CalendarPane for selected AppointmentBook
+            	JTabbedPane jtp = (JTabbedPane) getParent().getParent().getParent();
+            	CalendarPane calPane = new CalendarPane(booksList.get(bookSelectorCombo.getSelectedIndex()));
+            	jtp.addTab((String) bookSelectorCombo.getSelectedItem(), calPane);
+            	
             }
         });
 		
@@ -43,7 +49,7 @@ public class SelectPanel extends JPanel{
 		add(buttonChooseBook);
 	}
 	
-	public void populateCombo(ArrayList<AppointmentBook> booksList)
+	public void populateCombo()
 	{
 		bookSelectorCombo.removeAllItems();
 		for(int i = 0; i < booksList.size(); i++)
