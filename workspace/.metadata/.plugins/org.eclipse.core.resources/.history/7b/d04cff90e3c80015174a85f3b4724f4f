@@ -34,14 +34,14 @@ public class CalendarPane extends JPanel{
 		buttonAddAppointment.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-            	CreateAppointmentPopup.display(thisBook);
+            	//Do popup form for adding new appointment.
             }
         });
 		
 		buttonViewDate.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-            	ViewDatePopup.display(thisBook);
+            	//Do popup for viewing Date
             }
         });
 		
@@ -65,9 +65,6 @@ public class CalendarPane extends JPanel{
 
 	public void closeTab()
 	{
-		//Do stuff to close tab
-		JTabbedPane jtp = (JTabbedPane)getParent();
-		int i = jtp.getSelectedIndex();
-		jtp.remove(i);
+		//Do stuff to close tab 
 	}
 }

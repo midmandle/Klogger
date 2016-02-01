@@ -66,8 +66,6 @@ public class CalendarPane extends JPanel{
 	public void closeTab()
 	{
 		//Do stuff to close tab
-		JTabbedPane jtp = (JTabbedPane)getParent();
-		int i = jtp.getSelectedIndex();
-		jtp.remove(i);
+		int i = pane.indexOfTabComponent(ButtonTabComponent.this);
 	}
 }
