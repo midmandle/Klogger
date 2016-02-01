@@ -34,6 +34,11 @@
 	</section>
 	<section name="RenameInformationPopup">
 	</section>
+	<section name="org.eclipse.ltk.ui.refactoring.settings">
+		<item value="1" key="updateSimilarElementsMatchStrategy"/>
+		<item value="false" key="updateTextualMatches"/>
+		<item value="false" key="updateSimilarElements"/>
+	</section>
 	<section name="ClasspathContainerSelectionPage">
 		<item value="0" key="index"/>
 	</section>
