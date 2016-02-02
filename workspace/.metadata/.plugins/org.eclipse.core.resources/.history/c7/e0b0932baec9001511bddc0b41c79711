@@ -48,7 +48,6 @@ public class CalendarPane extends JPanel{
 	public void drawCalendar()
 	{
 		JTable table = new JTable(5, 7);
-		
 		table.setRowHeight(50);
 		int k = 0;
 		for(int i = 0; i < 5; i++)
@@ -57,7 +56,7 @@ public class CalendarPane extends JPanel{
 				k++;
 				table.setValueAt(k, i, j);
 				if(k == todayDate.get(Calendar.DATE));
-					
+					table.getComponent(k).setBackground(Color.blue);
 			}
 				
 		add(table);

@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
@@ -11,7 +10,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 
 import com.toedter.calendar.JCalendar;
 
@@ -24,46 +22,10 @@ public class CalendarPane extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
 	AppointmentBook thisBook;
-	//JCalendar jcal;
-	GregorianCalendar todayDate = new GregorianCalendar();
+	JCalendar jcal;
 	
 	
-	public CalendarPane(AppointmentBook thisBook)
-	{
-		drawCalendar();
-		
-		JButton buttonExitCalendarPane = new JButton("Close");
-		buttonExitCalendarPane.setAlignmentX(CENTER_ALIGNMENT);
-		
-		buttonExitCalendarPane.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	closeTab();
-            }
-        });
-		
-		add(buttonExitCalendarPane);
-	}
-	
-	public void drawCalendar()
-	{
-		JTable table = new JTable(5, 7);
-		
-		table.setRowHeight(50);
-		int k = 0;
-		for(int i = 0; i < 5; i++)
-			for(int j = 0; j < 7; j++)
-			{
-				k++;
-				table.setValueAt(k, i, j);
-				if(k == todayDate.get(Calendar.DATE));
-					
-			}
-				
-		add(table);
-	}
-	
-	/*public CalendarPane(AppointmentBook book)
+	public CalendarPane(AppointmentBook book)
 	{
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		thisBook = book;
@@ -107,7 +69,7 @@ public class CalendarPane extends JPanel{
 		add(buttonPanel);
 		add(buttonExitCalendarPane);
 		paintCalendar();
-	}*/
+	}
 
 	public void closeTab()
 	{
@@ -117,7 +79,7 @@ public class CalendarPane extends JPanel{
 		jtp.remove(i);
 	}
 	
-	/*public void paintCalendar()
+	public void paintCalendar()
 	{
 		jcal.getDayChooser().getDayPanel().getComponent(7).setBackground(Color.GREEN);
 		
@@ -129,13 +91,14 @@ public class CalendarPane extends JPanel{
 		{
 			if(i%2 == 0)
 			{
-				System.out.println(jcal.getDayChooser().getDay(i));
 				jcal.getDayChooser().getDayPanel().getComponent(i).setBackground(Color.GREEN);
+				System.out.println(jcal.getDayChooser().getComponent(i).getName()+" Green");
 			}
 			else
 			{
 				jcal.getDayChooser().getDayPanel().getComponent(i).setBackground(Color.BLUE);
+				System.out.println(jcal.getDayChooser().getDayPanel().getComponent(i).getName()+" Blue");
 			}
 		}
-	}*/
+	}
 }

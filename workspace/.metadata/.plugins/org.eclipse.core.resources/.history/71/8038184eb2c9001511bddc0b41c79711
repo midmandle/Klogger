@@ -1,0 +1,11 @@
+
+public class CalendarTable {
+	
+	public CalendarTable(int month, int year, AppointmentBook thisBook)
+	{
+		determineDaysInMonth(month);
+		determineStartDay(month, year);
+		ArrayList<Appointment> thisMonthsAppointments = findAppointmentsForMonth(thisBook);
+		drawTable();
+	}
+}

@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
@@ -31,35 +30,12 @@ public class CalendarPane extends JPanel{
 	public CalendarPane(AppointmentBook thisBook)
 	{
 		drawCalendar();
-		
-		JButton buttonExitCalendarPane = new JButton("Close");
-		buttonExitCalendarPane.setAlignmentX(CENTER_ALIGNMENT);
-		
-		buttonExitCalendarPane.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	closeTab();
-            }
-        });
-		
-		add(buttonExitCalendarPane);
 	}
 	
 	public void drawCalendar()
 	{
-		JTable table = new JTable(5, 7);
+		JTable table = new JTable(4, 7);
 		
-		table.setRowHeight(50);
-		int k = 0;
-		for(int i = 0; i < 5; i++)
-			for(int j = 0; j < 7; j++)
-			{
-				k++;
-				table.setValueAt(k, i, j);
-				if(k == todayDate.get(Calendar.DATE));
-					
-			}
-				
 		add(table);
 	}
 	
@@ -107,7 +83,7 @@ public class CalendarPane extends JPanel{
 		add(buttonPanel);
 		add(buttonExitCalendarPane);
 		paintCalendar();
-	}*/
+	}
 
 	public void closeTab()
 	{
@@ -117,7 +93,7 @@ public class CalendarPane extends JPanel{
 		jtp.remove(i);
 	}
 	
-	/*public void paintCalendar()
+	public void paintCalendar()
 	{
 		jcal.getDayChooser().getDayPanel().getComponent(7).setBackground(Color.GREEN);
 		
