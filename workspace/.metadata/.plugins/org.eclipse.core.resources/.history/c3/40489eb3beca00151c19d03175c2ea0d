@@ -1,3 +1,4 @@
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -89,7 +90,6 @@ public class MonthViewPanel extends JPanel{
 		    public void propertyChange(PropertyChangeEvent e) {
 		        year = jyc.getValue(); 
 		        updateCalendar();
-		        add(calendarOptions);
 		    }
 		});
 		

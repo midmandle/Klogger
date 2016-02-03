@@ -1,7 +1,6 @@
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -34,7 +33,7 @@ public class MonthViewPanel extends JPanel{
 		this.thisBook = thisBook;
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
-		final JYearChooser jyc = new JYearChooser();
+		JYearChooser jyc = new JYearChooser();
 		
 		//MonthForward
 		JButton monthForward = new JButton(">>");
@@ -82,16 +81,6 @@ public class MonthViewPanel extends JPanel{
             	add(calendarOptions);
             }
         });
-		
-		jyc.addPropertyChangeListener("year", new PropertyChangeListener() {
-
-		    @Override
-		    public void propertyChange(PropertyChangeEvent e) {
-		        year = jyc.getValue(); 
-		        updateCalendar();
-		        add(calendarOptions);
-		    }
-		});
 		
 		//END
 		
@@ -154,7 +143,7 @@ public class MonthViewPanel extends JPanel{
 			}
 			case 9:
 			{
-				monthLabel = new JLabel("Oct");
+				monthLabel = new JLabel("OCt");
 				break;
 			}
 			case 10:

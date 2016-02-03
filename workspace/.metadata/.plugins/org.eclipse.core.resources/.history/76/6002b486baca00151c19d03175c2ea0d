@@ -1,0 +1,59 @@
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import com.toedter.calendar.JYearChooser;
+
+
+public class MonthViewPanel extends JPanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	GregorianCalendar todayDate = new GregorianCalendar();
+	int year = todayDate.get(Calendar.YEAR);
+	int month = todayDate.get(Calendar.MONTH);
+	CalendarTable calT;
+	AppointmentBook thisBook
+	
+	public MonthViewPanel(AppointmentBook thisBook)
+	{
+		this.thisBook = thisBook;
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		
+		JYearChooser jyc = new JYearChooser();
+		
+		//MonthForward
+		JButton monthForward = new JButton(">>");
+		monthForward.setAlignmentX(RIGHT_ALIGNMENT);
+		//END
+		
+		//MonthBackwards
+		JButton monthBackwards = new JButton("<<");
+		monthBackwards.setAlignmentX(LEFT_ALIGNMENT);
+		//END
+		
+		//CalendarOptions
+		JPanel calendarOptions = new JPanel();
+		calendarOptions.add(monthBackwards);
+		calendarOptions.add(jyc);
+		calendarOptions.add(monthForward);
+		//END
+		
+		updateCalendar();
+		add(new JScrollPane(calT.jtbl));
+		
+		add(calendarOptions);
+	}
+	
+	private void updateCalendar()
+	{
+		calT = new CalendarTable(month, year, thisBook, (JPanel) getParent());
+	}
+}

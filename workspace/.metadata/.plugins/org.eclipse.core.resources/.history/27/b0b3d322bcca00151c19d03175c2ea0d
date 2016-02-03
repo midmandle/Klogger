@@ -1,0 +1,86 @@
+import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import com.toedter.calendar.JYearChooser;
+
+
+public class MonthViewPanel extends JPanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	GregorianCalendar todayDate = new GregorianCalendar();
+	int year = todayDate.get(Calendar.YEAR);
+	int month = todayDate.get(Calendar.MONTH);
+	CalendarTable calT;
+	AppointmentBook thisBook;
+	JPanel parent;
+	
+	public MonthViewPanel(AppointmentBook thisBook, JPanel parent)
+	{
+		this.parent = parent;
+		this.thisBook = thisBook;
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		
+		JYearChooser jyc = new JYearChooser();
+		
+		//MonthForward
+		JButton monthForward = new JButton(">>");
+		monthForward.setAlignmentX(RIGHT_ALIGNMENT);
+		monthForward.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	if(month == 12)
+            		month = 0;
+            	else
+            		month++;
+            	
+            	updateCalendar();
+            }
+        });
+		//END
+		
+		//MonthBackwards
+		JButton monthBackwards = new JButton("<<");
+		monthBackwards.setAlignmentX(LEFT_ALIGNMENT);
+		monthBackwards.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	if(month == 0)
+            		month = 12;
+            	else
+            		month--;
+            	
+            	updateCalendar();
+            }
+        });
+		//END
+		
+		//CalendarOptions
+		JPanel calendarOptions = new JPanel();
+		calendarOptions.add(monthBackwards);
+		calendarOptions.add(jyc);
+		calendarOptions.add(monthForward);
+		//END
+		
+		updateCalendar();	
+		add(calendarOptions);
+	}
+	
+	private void updateCalendar()
+	{
+		calT = new CalendarTable(month, year, thisBook, parent);
+		add(new JScrollPane(calT.jtbl));
+		this.repaint();
+	}
+}

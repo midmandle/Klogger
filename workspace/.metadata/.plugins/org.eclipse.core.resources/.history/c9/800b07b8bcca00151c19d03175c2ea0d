@@ -1,13 +1,11 @@
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -34,7 +32,7 @@ public class MonthViewPanel extends JPanel{
 		this.thisBook = thisBook;
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
-		final JYearChooser jyc = new JYearChooser();
+		JYearChooser jyc = new JYearChooser();
 		
 		//MonthForward
 		JButton monthForward = new JButton(">>");
@@ -48,7 +46,7 @@ public class MonthViewPanel extends JPanel{
 		//END
 		
 		//CalendarOptions
-		final JPanel calendarOptions = new JPanel();
+		JPanel calendarOptions = new JPanel();
 		calendarOptions.add(monthBackwards);
 		calendarOptions.add(jyc);
 		calendarOptions.add(monthForward);
@@ -66,7 +64,6 @@ public class MonthViewPanel extends JPanel{
             		month--;
             	
             	updateCalendar();
-            	add(calendarOptions);
             }
         });
 		
@@ -79,19 +76,8 @@ public class MonthViewPanel extends JPanel{
             		month++;
             	
             	updateCalendar();
-            	add(calendarOptions);
             }
         });
-		
-		jyc.addPropertyChangeListener("year", new PropertyChangeListener() {
-
-		    @Override
-		    public void propertyChange(PropertyChangeEvent e) {
-		        year = jyc.getValue(); 
-		        updateCalendar();
-		        add(calendarOptions);
-		    }
-		});
 		
 		//END
 		
@@ -104,77 +90,6 @@ public class MonthViewPanel extends JPanel{
 		removeAll();
 		calT = new CalendarTable(month, year, thisBook, parent);
 		add(new JScrollPane(calT.jtbl));
-		JLabel monthLabel;
-		switch(month)
-		{
-			case 0:
-			{
-				monthLabel = new JLabel("Jan");
-				break;
-			}
-			case 1:
-			{
-				monthLabel = new JLabel("Feb");
-				break;
-			}
-			case 2:
-			{
-				monthLabel = new JLabel("Mar");
-				break;
-			}
-			case 3:
-			{
-				monthLabel = new JLabel("April");
-				break;
-			}
-			case 4:
-			{
-				monthLabel = new JLabel("May");
-				break;
-			}
-			case 5:
-			{
-				monthLabel = new JLabel("June");
-				break;
-			}
-			case 6:
-			{
-				monthLabel = new JLabel("July");
-				break;
-			}
-			case 7:
-			{
-				monthLabel = new JLabel("Aug");
-				break;
-			}
-			case 8:
-			{
-				monthLabel = new JLabel("Sep");
-				break;
-			}
-			case 9:
-			{
-				monthLabel = new JLabel("Oct");
-				break;
-			}
-			case 10:
-			{
-				monthLabel = new JLabel("Nov");
-				break;
-			}
-			case 11:
-			{
-				monthLabel = new JLabel("Dec");
-				break;
-			}
-			default:
-			{
-				monthLabel = new JLabel("Jan");
-				break;
-			}
-		}
-		monthLabel.setAlignmentX(CENTER_ALIGNMENT);
-		add(monthLabel);
 		this.revalidate();
 	}
 }

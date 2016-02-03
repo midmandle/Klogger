@@ -34,7 +34,7 @@ public class CalendarPane extends JPanel{
 		
 		final JPanel cardsPanel = new JPanel();
 		
-		MonthViewPanel calendarView = new MonthViewPanel(thisBook, cardsPanel);
+		MonthViewPanel calendarView = new MonthViewPanel();
 		
 		//TODO: Add month selector and year selector to calendarView.
 		
@@ -44,6 +44,10 @@ public class CalendarPane extends JPanel{
 		cardsPanel.setLayout(new CardLayout());
 		cardsPanel.add(calendarView, "Calendar View");
 		cardsPanel.add(addAppointmentView, "Add Appointment View");
+		
+		
+		CalendarTable calT = new CalendarTable(month, year, thisBook, cardsPanel);
+		calendarView.add(new JScrollPane(calT.jtbl));
 		
 		
 		JButton buttonExitCalendarPane = new JButton("Close");
