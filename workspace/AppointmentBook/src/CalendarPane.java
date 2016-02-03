@@ -10,6 +10,7 @@ import java.util.GregorianCalendar;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
@@ -30,6 +31,7 @@ public class CalendarPane extends JPanel{
 	
 	public CalendarPane(AppointmentBook thisBook)
 	{
+		this.thisBook = thisBook;
 		drawCalendar();
 		
 		JButton buttonExitCalendarPane = new JButton("Close");
@@ -47,20 +49,8 @@ public class CalendarPane extends JPanel{
 	
 	public void drawCalendar()
 	{
-		JTable table = new JTable(5, 7);
-		
-		table.setRowHeight(50);
-		int k = 0;
-		for(int i = 0; i < 5; i++)
-			for(int j = 0; j < 7; j++)
-			{
-				k++;
-				table.setValueAt(k, i, j);
-				if(k == todayDate.get(Calendar.DATE));
-					
-			}
-				
-		add(table);
+		CalendarTable calT = new CalendarTable(1, 2016, thisBook);
+		add(new JScrollPane(calT.jtbl));
 	}
 	
 	/*public CalendarPane(AppointmentBook book)
