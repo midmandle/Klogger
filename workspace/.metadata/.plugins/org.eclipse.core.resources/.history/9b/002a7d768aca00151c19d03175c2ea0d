@@ -1,0 +1,26 @@
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import com.toedter.calendar.JCalendar;
+
+
+public class CreateAppointmentPopup {
+
+	public static void display(AppointmentBook appointmentBook)
+	{
+		JFrame popupFrame = new JFrame();
+		
+		Object[] options = {"Edit", "Add", "Cancel"};
+		int result = (String)JOptionPane.showInputDialog(popupFrame, "What would you like to do?", "Edit/Add", JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
+		
+		if(result == JOptionPane.OK_OPTION)
+		{
+			
+		}
+		else
+		{
+			System.out.println("Cancelled");
+		}
+	}
+}

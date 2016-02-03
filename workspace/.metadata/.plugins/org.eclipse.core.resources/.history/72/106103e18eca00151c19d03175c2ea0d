@@ -1,0 +1,17 @@
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+
+
+public class AddAppointmentPanel extends JPanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public AddAppointmentPanel()
+	{
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		
+	}
+}

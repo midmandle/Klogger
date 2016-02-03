@@ -1,3 +1,4 @@
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -25,14 +26,32 @@ public class CalendarPane extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
 	AppointmentBook thisBook;
-	//JCalendar jcal;
 	GregorianCalendar todayDate = new GregorianCalendar();
+	int year = todayDate.get(Calendar.YEAR);
+	int month = todayDate.get(Calendar.MONTH);
 	
-	
-	public CalendarPane(AppointmentBook thisBook)
+	public CalendarPane(final AppointmentBook thisBook)
 	{
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.thisBook = thisBook;
-		drawCalendar();
+		
+		final JPanel cardsPanel = new JPanel();
+		
+		MonthViewPanel calendarView = new MonthViewPanel();
+		
+		//TODO: Add month selector and year selector to calendarView.
+		
+		AddAppointmentPanel addAppointmentView = new AddAppointmentPanel(thisBook);
+		
+		
+		cardsPanel.setLayout(new CardLayout());
+		cardsPanel.add(calendarView, "Calendar View");
+		cardsPanel.add(addAppointmentView, "Add Appointment View");
+		
+		
+		CalendarTable calT = new CalendarTable(month, year, thisBook, cardsPanel);
+		calendarView.add(new JScrollPane(calT.jtbl));
+		
 		
 		JButton buttonExitCalendarPane = new JButton("Close");
 		buttonExitCalendarPane.setAlignmentX(CENTER_ALIGNMENT);
@@ -43,15 +62,10 @@ public class CalendarPane extends JPanel{
             	closeTab();
             }
         });
-		
+		add(cardsPanel);
 		add(buttonExitCalendarPane);
 	}
 	
-	public void drawCalendar()
-	{
-		CalendarTable calT = new CalendarTable(1, 2016, thisBook);
-		add(new JScrollPane(calT.jtbl));
-	}
 	
 	/*public CalendarPane(AppointmentBook book)
 	{

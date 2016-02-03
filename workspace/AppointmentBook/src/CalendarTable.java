@@ -1,20 +1,29 @@
+import java.awt.CardLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+;
 
 
 public class CalendarTable {
 	
-	private DefaultTableModel calendarModel;
+	private myTableModel calendarModel;
 	JTable jtbl;
 	int month, year;
-	public CalendarTable(int month, int year, AppointmentBook thisBook)
+	AppointmentBook thisBook;
+	JPanel parent;
+	
+	public CalendarTable(int month, int year, AppointmentBook thisBook, JPanel parent)
 	{
 		this.month = month;
 		this.year = year;
+		this.thisBook = thisBook;
+		this.parent = parent;
 		int daysInMonth = determineDaysInMonth();
 		
 		ArrayList<Appointment> thisMonthsAppointments = findAppointmentsForMonth(thisBook);
@@ -102,10 +111,11 @@ public class CalendarTable {
 	{
 		String[] columnNames = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 		
-		calendarModel = new DefaultTableModel(columnNames, 6);
+		calendarModel = new myTableModel(columnNames, 6);
 		jtbl = new JTable(calendarModel);
-		
 		calendarModel.setRowCount(7);
+		jtbl.setRowHeight(60);
+		
 		
 		int startpoint = 0;
 		if(!(determineStartDay().equalsIgnoreCase("Monday")))
@@ -155,6 +165,10 @@ public class CalendarTable {
 		
 		int k = 0;
 		
+		for(int i = 0; i < 7; i++)
+			for(int j = 0; j <= 6; j++)
+				jtbl.setValueAt( null, i, j);
+		
 		for(int i = startpoint; i < 7; i++)
 		{
 			k++;
@@ -174,6 +188,28 @@ public class CalendarTable {
 			if(k > daysInMonth)
 				break;
 		}
+		
+		jtbl.addMouseListener(new MouseAdapter() {
+		  public void mouseClicked(MouseEvent e) {
+		    if (e.getClickCount() == 2) {
+		      JTable target = (JTable)e.getSource();
+		      int row = target.getSelectedRow();
+		      int column = target.getSelectedColumn();
+		      Object dayVal = (Object) jtbl.getValueAt(row, column);
+		      if(dayVal == null)
+		    	  return;
+		      else
+		      {
+		    	  CardLayout cl = (CardLayout)parent.getLayout();
+		    	  cl.show(parent, "Add Appointment View");
+		      }
+		    }	
+		  }
+		});
+		
+
+		
+			
 		
 	}
 }

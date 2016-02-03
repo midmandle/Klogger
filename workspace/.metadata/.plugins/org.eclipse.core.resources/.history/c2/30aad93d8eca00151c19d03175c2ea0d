@@ -1,0 +1,11 @@
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+
+
+public class AddAppointmentPanel extends JPanel{
+
+	public AddAppointmentPanel()
+	{
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+	}
+}

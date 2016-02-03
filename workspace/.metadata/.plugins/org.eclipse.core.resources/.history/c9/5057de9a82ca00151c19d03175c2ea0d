@@ -1,0 +1,14 @@
+import javax.swing.table.DefaultTableModel;
+
+
+public class myTableModel extends DefaultTableModel {
+
+    public myTableModel(Object[][] data, String[] columnNames) {
+        super(data, columnNames);
+    }
+
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false;
+    }
+}

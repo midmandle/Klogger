@@ -1,0 +1,8 @@
+
+public class MonthViewPanel extends JFrame{
+
+	public MonthViewPanel()
+	{
+		
+	}
+}
