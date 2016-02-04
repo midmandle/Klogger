@@ -39,9 +39,6 @@ public class AppointmentBook {
 		}
 		else
 		{
-			if(checkForTimeClash(newAppointment) < 0)
-				return TIME_CLASH;
-			
 			appointmentList.add(newAppointment);
 			
 			DatabaseCommunicator.AddAppointmentToDatabase(appointmentBookName, newAppointment);

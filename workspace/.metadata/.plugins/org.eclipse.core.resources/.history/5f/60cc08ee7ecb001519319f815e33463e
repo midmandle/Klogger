@@ -230,19 +230,7 @@ public class AddEditAppointmentPanel extends JPanel{
         		int ret = thisBook.add(tempAppointment);
         		if(ret != 0)
         		{
-        			if(ret == 1)
-        			{
-        				System.out.println("ALREADY EXISTS");
-        				//DO popup indicating item already exists are you sure you want to edit.
-        			}
-        			else if(ret == -1)
-        			{
-        				System.out.println("TIME_CLASH");
-        				//Popup time clash with another item.
-        			}
-        			else
-        				System.out.println("OTHER??");
-        			
+        			//TODO: Indicate item already exists.
         		}
         		else
         		{

@@ -238,7 +238,7 @@ public class AddEditAppointmentPanel extends JPanel{
         			else if(ret == -1)
         			{
         				System.out.println("TIME_CLASH");
-        				//Popup time clash with another item.
+        				//Time clash with another item.
         			}
         			else
         				System.out.println("OTHER??");

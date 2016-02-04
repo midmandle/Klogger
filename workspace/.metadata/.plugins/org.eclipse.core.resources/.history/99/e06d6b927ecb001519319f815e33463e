@@ -1,12 +1,9 @@
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 public class AppointmentBook {
 	int NOTFOUND = 0;
 	int FOUND = 1;
-	int NO_TIME_CLASH = 0;
-	int TIME_CLASH = -1;
 	
 	String appointmentBookName;
 	
@@ -39,9 +36,6 @@ public class AppointmentBook {
 		}
 		else
 		{
-			if(checkForTimeClash(newAppointment) < 0)
-				return TIME_CLASH;
-			
 			appointmentList.add(newAppointment);
 			
 			DatabaseCommunicator.AddAppointmentToDatabase(appointmentBookName, newAppointment);
