@@ -32,10 +32,10 @@ public class SelectPanel extends JPanel{
 		JLabel pleaseChoose = new JLabel("Please choose your appointment book:");
 		pleaseChoose.setAlignmentX(CENTER_ALIGNMENT);
 		
-		JButton  buttonOpenBook = new JButton("Open");
-		buttonOpenBook.setAlignmentX(CENTER_ALIGNMENT);
+		JButton  buttonChooseBook = new JButton("Open");
+		buttonChooseBook.setAlignmentX(CENTER_ALIGNMENT);
 		
-		buttonOpenBook.addActionListener(new ActionListener(){
+		buttonChooseBook.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
             	//Open CalendarPane for selected AppointmentBook
@@ -49,7 +49,7 @@ public class SelectPanel extends JPanel{
 		//Damn errors...
 		add(pleaseChoose);
 		add(bookSelectorCombo);
-		add(buttonOpenBook);
+		add(buttonChooseBook);
 	}
 	
 	public void populateCombo()

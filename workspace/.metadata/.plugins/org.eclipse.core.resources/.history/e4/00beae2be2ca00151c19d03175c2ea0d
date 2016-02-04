@@ -24,9 +24,14 @@ public class MonthViewPanel extends JPanel{
 	GregorianCalendar todayDate = new GregorianCalendar();
 	int year = todayDate.get(Calendar.YEAR);
 	int month = todayDate.get(Calendar.MONTH);
-	CalendarTable calT;
+	public CalendarTable calT;
 	AppointmentBook thisBook;
 	JPanel parent;
+	
+	final JPanel calendarOptions;
+	final JYearChooser jyc = new JYearChooser();
+	JButton monthForward;
+	JButton monthBackwards;
 	
 	public MonthViewPanel(AppointmentBook thisBook, JPanel parent)
 	{
@@ -35,25 +40,7 @@ public class MonthViewPanel extends JPanel{
 		this.thisBook = thisBook;
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
-		final JYearChooser jyc = new JYearChooser();
 		
-		//MonthForward
-		JButton monthForward = new JButton(">>");
-		monthForward.setAlignmentX(RIGHT_ALIGNMENT);
-		
-		//END
-		
-		//MonthBackwards
-		JButton monthBackwards = new JButton("<<");
-		monthBackwards.setAlignmentX(LEFT_ALIGNMENT);
-		//END
-		
-		//CalendarOptions
-		final JPanel calendarOptions = new JPanel();
-		calendarOptions.add(monthBackwards);
-		calendarOptions.add(jyc);
-		calendarOptions.add(monthForward);
-		//END
 		
 		
 		//ACTION LISTENERS
@@ -80,7 +67,7 @@ public class MonthViewPanel extends JPanel{
             		month++;
             	
             	updateCalendar();
-            	add(calendarOptions);
+            	
             }
         });
 		
@@ -90,14 +77,14 @@ public class MonthViewPanel extends JPanel{
 		    public void propertyChange(PropertyChangeEvent e) {
 		        year = jyc.getValue(); 
 		        updateCalendar();
-		        add(calendarOptions);
+		       
 		    }
 		});
 		
 		//END
 		
 		updateCalendar();	
-		add(calendarOptions);
+		
 	}
 	
 	private void updateCalendar()
@@ -176,6 +163,26 @@ public class MonthViewPanel extends JPanel{
 		}
 		monthLabel.setAlignmentX(CENTER_ALIGNMENT);
 		add(monthLabel);
+		
+		
+		//MonthForward
+		monthForward = new JButton(">>");
+		monthForward.setAlignmentX(RIGHT_ALIGNMENT);
+		
+		//END
+		
+		//MonthBackwards
+		monthBackwards = new JButton("<<");
+		monthBackwards.setAlignmentX(LEFT_ALIGNMENT);
+		//END
+		
+		//CalendarOptions
+		final JPanel calendarOptions = new JPanel();
+		calendarOptions.add(monthBackwards);
+		calendarOptions.add(jyc);
+		calendarOptions.add(monthForward);
+		//END
+		add(calendarOptions);
 		this.revalidate();
 	}
 }

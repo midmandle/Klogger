@@ -42,7 +42,7 @@ public class CalendarPane extends JPanel{
 		
 		cardsPanel.setLayout(new CardLayout());
 		cardsPanel.add(calendarView, "Calendar View");
-		cardsPanel.add(addEditAppointmentView, "Add Appointment View");
+		//cardsPanel.add(addEditAppointmentView, "Add Appointment View");
 		
 		JButton buttonExitCalendarPane = new JButton("Close");
 		buttonExitCalendarPane.setAlignmentX(CENTER_ALIGNMENT);

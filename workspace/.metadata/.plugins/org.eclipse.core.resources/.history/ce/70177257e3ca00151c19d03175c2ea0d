@@ -46,7 +46,7 @@ public class AddEditAppointmentPanel extends JPanel{
 
 	  	bgC = this.getBackground();
 		
-		//updateUI(); Call removed as it interferes with cardsLayout.
+		//updateUI(); CAll removed as it interferes with cardsLayout.
 	}
 	
 	public void updateUI()
