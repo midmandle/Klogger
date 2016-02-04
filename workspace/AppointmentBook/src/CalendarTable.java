@@ -1,4 +1,5 @@
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.GregorianCalendar;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
-;
+
 
 
 public class CalendarTable {
@@ -17,6 +18,7 @@ public class CalendarTable {
 	int month, year;
 	AppointmentBook thisBook;
 	JPanel parent;
+	ArrayList<Appointment> thisMonthsAppointments;
 	
 	public CalendarTable(int month, int year, AppointmentBook thisBook, JPanel parent)
 	{
@@ -26,7 +28,7 @@ public class CalendarTable {
 		this.parent = parent;
 		int daysInMonth = determineDaysInMonth();
 		
-		ArrayList<Appointment> thisMonthsAppointments = findAppointmentsForMonth(thisBook);
+		thisMonthsAppointments = findAppointmentsForMonth(thisBook);
 		drawTable(daysInMonth);//, thisMonthsAppointments);
 	}
 	
@@ -83,7 +85,7 @@ public class CalendarTable {
 			}
 		}
 		
-		System.out.println(startDay);
+		//System.out.println(startDay);
 		return startDay;
 	}
 	
@@ -113,6 +115,7 @@ public class CalendarTable {
 		
 		calendarModel = new myTableModel(columnNames, 6);
 		jtbl = new JTable(calendarModel);
+		jtbl.setName("jtbl");
 		calendarModel.setRowCount(7);
 		jtbl.setRowHeight(60);
 		
@@ -167,12 +170,20 @@ public class CalendarTable {
 		
 		for(int i = 0; i < 7; i++)
 			for(int j = 0; j <= 6; j++)
-				jtbl.setValueAt( null, i, j);
+				jtbl.setValueAt(null, i, j);
 		
 		for(int i = startpoint; i < 7; i++)
 		{
 			k++;
-			jtbl.setValueAt(k, 0, i);
+			
+			if(hasAppointment(k))
+			{
+				jtbl.setValueAt(k+"*",  0, i);
+			}
+			else
+				jtbl.setValueAt(k, 0, i);
+			
+			
 		}
 		
 		for(int i = 1; i < 7; i++)
@@ -182,8 +193,12 @@ public class CalendarTable {
 				k++;
 				if(k > daysInMonth)
 					break;
-				
-				jtbl.setValueAt(k,  i, j);
+				if(hasAppointment(k))
+				{
+					jtbl.setValueAt(k+"*",  i, j);
+				}
+				else
+					jtbl.setValueAt(k,  i, j);
 			}
 			if(k > daysInMonth)
 				break;
@@ -192,14 +207,39 @@ public class CalendarTable {
 		jtbl.addMouseListener(new MouseAdapter() {
 		  public void mouseClicked(MouseEvent e) {
 		    if (e.getClickCount() == 2) {
+		    	
+		    	//Java swing magickry to pass back the date selected value.
+		    	Component[] components = parent.getComponents();
+				AddEditAppointmentPanel aeavp = null;
+			  	for(int i = 0; i < components.length; i++)
+			  	{
+			  		//System.out.println(components[i].getName());
+			  		if(components[i].getName().contentEquals("AddEditAppointmentPanel"))
+			  			aeavp = (AddEditAppointmentPanel) components[i];
+			  		
+			  	}
+		    	
 		      JTable target = (JTable)e.getSource();
 		      int row = target.getSelectedRow();
 		      int column = target.getSelectedColumn();
-		      Object dayVal = (Object) jtbl.getValueAt(row, column);
-		      if(dayVal == null)
+		      String dayVal = String.valueOf(jtbl.getValueAt(row, column));
+		      dayVal = dayVal.replace("*", "");
+		      //System.out.println(dayVal);
+		      if(dayVal == "null")
 		    	  return;
 		      else
 		      {
+		    	  
+		    	  aeavp.dayVal = Integer.valueOf(dayVal);
+		    	  
+		    	  aeavp.month = month;
+		    	  
+		    	  aeavp.year = year;
+		    	  
+		    	  aeavp.removeAll();
+		    	  aeavp.updateUI();
+		    	  
+		    	  aeavp.repaint();
 		    	  CardLayout cl = (CardLayout)parent.getLayout();
 		    	  cl.show(parent, "Add Appointment View");
 		      }
@@ -211,5 +251,17 @@ public class CalendarTable {
 		
 			
 		
+	}
+	
+	private boolean hasAppointment(int k)
+	{
+		
+		for(int i = 0; i < thisMonthsAppointments.size(); i++)
+		{
+			int startDay = thisMonthsAppointments.get(i).getStartDateTime().get(Calendar.DATE);
+			if(k == startDay)
+				return true;
+		}
+		return false;
 	}
 }

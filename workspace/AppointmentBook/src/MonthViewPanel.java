@@ -24,12 +24,13 @@ public class MonthViewPanel extends JPanel{
 	GregorianCalendar todayDate = new GregorianCalendar();
 	int year = todayDate.get(Calendar.YEAR);
 	int month = todayDate.get(Calendar.MONTH);
-	CalendarTable calT;
+	public CalendarTable calT;
 	AppointmentBook thisBook;
 	JPanel parent;
 	
 	public MonthViewPanel(AppointmentBook thisBook, JPanel parent)
 	{
+		setName("MonthlyViewPanel");
 		this.parent = parent;
 		this.thisBook = thisBook;
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -175,6 +176,7 @@ public class MonthViewPanel extends JPanel{
 		}
 		monthLabel.setAlignmentX(CENTER_ALIGNMENT);
 		add(monthLabel);
+		//add(calendarOptions);
 		this.revalidate();
 	}
 }

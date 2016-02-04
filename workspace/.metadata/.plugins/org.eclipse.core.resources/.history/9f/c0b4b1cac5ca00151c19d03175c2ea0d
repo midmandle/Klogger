@@ -1,0 +1,106 @@
+import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
+
+import com.toedter.calendar.JDateChooser;
+
+
+public class AddAppointmentPanel extends JPanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public AddAppointmentPanel(AppointmentBook thisBook)
+	{
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		
+		
+		//InfoLabel
+		JLabel infoLabel = new JLabel("Please enter the details of the appointment.");
+		infoLabel.setAlignmentX(CENTER_ALIGNMENT);
+		//END
+		
+		
+		//ReturnToCalendarViewButton
+		JButton returnToCalendarViewButton = new JButton("Back");
+		returnToCalendarViewButton.setAlignmentX(CENTER_ALIGNMENT);
+		returnToCalendarViewButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	CardLayout cl = (CardLayout)getParent().getLayout();
+		    	  cl.show(getParent(), "Calendar View");
+            }
+        });
+		//END
+		
+		/*JDateChooser jdcStart = new JDateChooser();
+		jdcStart.setMaximumSize(new Dimension(150,20));*/
+		
+		JLabel appointmentTitleLabel = new JLabel("Appointment Title:");
+		appointmentTitleLabel.setAlignmentX(LEFT_ALIGNMENT);
+		
+		JTextField titleText = new JTextField();
+		titleText.setAlignmentX(LEFT_ALIGNMENT);
+		titleText.setMaximumSize(new Dimension(150, 20));
+		
+		JLabel startDateTimeLabel = new JLabel("Start:");
+		startDateTimeLabel.setAlignmentX(LEFT_ALIGNMENT);
+		
+		JSpinner startTimeSpinner = new JSpinner( new SpinnerDateModel() );
+		startTimeSpinner.setMaximumSize(new Dimension(150, 20));
+		startTimeSpinner.setAlignmentX(LEFT_ALIGNMENT);
+		
+		JLabel endDateTimeLabel = new JLabel("End:");
+		endDateTimeLabel.setAlignmentX(LEFT_ALIGNMENT);
+		
+		JSpinner endTimeSpinner = new JSpinner( new SpinnerDateModel() );
+		endTimeSpinner.setMaximumSize(new Dimension(150, 20));
+		endTimeSpinner.setAlignmentX(LEFT_ALIGNMENT);
+		
+		JLabel appointmentDescriptionLabel = new JLabel("Appointment Title:");
+		appointmentDescriptionLabel.setAlignmentX(LEFT_ALIGNMENT);
+		
+		JTextField descriptionText = new JTextField();
+		descriptionText.setAlignmentX(LEFT_ALIGNMENT);
+		descriptionText.setMaximumSize(new Dimension(150, 20));
+		
+		/*
+		Date startTimeDate = (Date) startTimeSpinner.getValue();
+		Calendar tmpGreg = Calendar.getInstance();
+		tmpGreg.setTime(startTimeDate);
+		System.out.println(tmpGreg.get(Calendar.HOUR_OF_DAY)+":"+tmpGreg.get(Calendar.MINUTE));*/
+		
+		/*JDateChooser jdcEnd = new JDateChooser();
+		jdcEnd.setMaximumSize(new Dimension(150,20));*/
+		
+		JPanel appointmentDetailsPanel = new JPanel();
+		appointmentDetailsPanel.setAlignmentX(CENTER_ALIGNMENT);
+		appointmentDetailsPanel.setLayout(new BoxLayout(appointmentDetailsPanel, BoxLayout.PAGE_AXIS));
+		
+		add(infoLabel);
+		//add(jdcStart);
+		appointmentDetailsPanel.add(appointmentTitleLabel);
+		appointmentDetailsPanel.add(titleText);
+		appointmentDetailsPanel.add(startDateTimeLabel);
+		appointmentDetailsPanel.add(startTimeSpinner);
+		appointmentDetailsPanel.add(endDateTimeLabel);
+		appointmentDetailsPanel.add(endTimeSpinner);
+		//add(jdcEnd);
+		add(appointmentDetailsPanel);
+		add(returnToCalendarViewButton);
+	}
+}

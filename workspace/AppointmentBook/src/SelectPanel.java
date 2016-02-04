@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ public class SelectPanel extends JPanel{
 		super();
 		this.booksList = booksList;
 		
+		bookSelectorCombo.setMaximumSize(new Dimension(150, 20));
+		
 		setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		
 		JLabel pleaseChoose = new JLabel("Please choose your appointment book:");
@@ -35,7 +38,7 @@ public class SelectPanel extends JPanel{
 		buttonChooseBook.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-            	//TODO: Open CalendarPane for selected AppointmentBook
+            	//Open CalendarPane for selected AppointmentBook
             	JTabbedPane jtp = (JTabbedPane) getParent().getParent().getParent();
             	CalendarPane calPane = new CalendarPane(booksList.get(bookSelectorCombo.getSelectedIndex()));
             	jtp.addTab((String) bookSelectorCombo.getSelectedItem(), calPane);

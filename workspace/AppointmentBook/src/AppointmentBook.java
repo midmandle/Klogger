@@ -27,15 +27,19 @@ public class AppointmentBook {
 	
 	}
 	
-	public void add(Appointment newAppointment)
+	public int add(Appointment newAppointment)
 	{
 		if(isInBook(newAppointment))
-			return; //TODO: Throw exception: "ITEM ALREADY EXISTS"
+		{
+			System.out.println("ALREADY EXISTS");
+			return FOUND;//TODO: Throw exception: "ITEM ALREADY EXISTS"
+		}
 		else
 		{
 			appointmentList.add(newAppointment);
 			
 			DatabaseCommunicator.AddAppointmentToDatabase(appointmentBookName, newAppointment);
+			return NOTFOUND;
 		}
 	}
 	
@@ -85,7 +89,7 @@ public class AppointmentBook {
 	public int find(Appointment appointmentToFind)
 	{
 		for(int i = 0; i < appointmentList.size(); i++)
-			if(appointmentList.get(i).getEventTitle() == appointmentToFind.getEventTitle())
+			if(appointmentList.get(i).getEventTitle().equals(appointmentToFind.getEventTitle())) //TODO: Needs to be more effective.
 				return FOUND;
 		return NOTFOUND;
 	}

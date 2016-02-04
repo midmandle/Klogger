@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ public class CreatePanel extends JPanel{
 	public CreatePanel(final ArrayList<AppointmentBook> booksList)
 	{
 		super();
+		
+		textFieldBookName.setMaximumSize(new Dimension(150, 20));
 		
 		JLabel pleaseCreate = new JLabel("Please create your appointment book:");
 		pleaseCreate.setAlignmentX(CENTER_ALIGNMENT);
