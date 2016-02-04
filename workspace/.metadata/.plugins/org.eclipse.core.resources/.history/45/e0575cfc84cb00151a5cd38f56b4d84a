@@ -55,6 +55,96 @@ public class DatabaseCommunicator {
 		}
 	}
 	
+	/*@SuppressWarnings("unchecked")
+	private static void MakeRequest(String query, ArrayList<ArrayList<?>> output)
+	{
+		try
+		{
+			try
+			{
+				Class.forName("org.sqlite.JDBC");
+				String dbURL = "jdbc:sqlite:main.sqlite"; //Insert DB URL (jdbc:sqlite:<somename>.sqlite)
+				dbConnection = DriverManager.getConnection(dbURL);
+				statement = dbConnection.createStatement();
+				
+				resultSet = statement.executeQuery(query);
+				ResultSetMetaData resMet = resultSet.getMetaData();
+				int numberOfColumns = resMet.getColumnCount();
+				
+				for(int i = 1; i <= numberOfColumns; i++)
+				{
+					int t = resMet.getColumnType(i);
+					
+					switch(t)
+					{
+						case Types.VARCHAR:
+						{
+							if(resMet.getColumnName(i).startsWith("date"))
+							{
+								output.add(new ArrayList<GregorianCalendar>());
+							}
+							else
+								output.add(new ArrayList<String>());
+						}
+						default:
+							output.add(new ArrayList<Object>());
+					}
+				}
+				
+				while(resultSet.next())
+				{
+					for(int i = 1; i <= numberOfColumns; i++) 
+					{
+						int t = resMet.getColumnType(i);
+						
+						switch(t)
+						{
+							case Types.VARCHAR:
+							{
+								if(resMet.getColumnName(i).startsWith("date")) //Its a date.
+								{
+									//retrieve dateTime string and parse to GregorianCal.
+									GregorianCalendar calDateTimeFromDB = new GregorianCalendar();
+									FormattedDateToGregorian(resultSet.getString(i), calDateTimeFromDB);
+									
+									ArrayList<GregorianCalendar> tempCalList = (ArrayList<GregorianCalendar>) output.get(i);
+									tempCalList.add(calDateTimeFromDB);
+									output.set(i, tempCalList);
+								}
+								else //Its a regular varchar
+								{
+									ArrayList<String> tempStringList = (ArrayList<String>) output.get(i);
+									tempStringList.add(resultSet.getString(i));
+									output.set(i, tempStringList); //ERROR
+								}
+								break;
+							}
+							default:
+							{
+								//System.out.println("Unexpected type.");
+								break;
+							}
+						}
+					}
+				}
+				
+			}
+			finally
+			{
+				if(resultSet != null)
+					resultSet.close();
+				if(statement != null)
+					statement.close();
+				if(dbConnection != null)
+					dbConnection.close();
+			}
+		}
+		catch(SQLException | ClassNotFoundException e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}*/
+	
 	private static String dateFormatter(GregorianCalendar cal)
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

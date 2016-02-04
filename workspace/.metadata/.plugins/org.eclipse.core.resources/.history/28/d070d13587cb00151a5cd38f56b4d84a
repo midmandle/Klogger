@@ -83,19 +83,6 @@ public class HelperMethods {
 				GregorianCalendar gregStart = (GregorianCalendar) cal;
 				cal.setTime(dFinish);
 				GregorianCalendar gregFinish = (GregorianCalendar) cal;
-				
-				appointmentAdder.setEventTitle(appointment[0]);
-				appointmentAdder.setStartDateTime(gregStart);
-				appointmentAdder.setEndDateTime(gregFinish);
-				if(appointment.length > 3)
-				{
-					appointmentAdder.setEventDescription(appointment[3]);
-					if(appointment.length > 4)
-						appointmentAdder.setEventLocation(appointment[4]);
-				}
-				
-				
-				appointmentBook.add(appointmentAdder);
 			}
 		}
 		catch(FileNotFoundException e)

@@ -4,13 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 
 public class HelperMethods {
@@ -28,9 +22,9 @@ public class HelperMethods {
 			{
 				writer.append(appointmentBook.appointmentList.get(i).getEventTitle());
 				writer.append(',');
-				writer.append((CharSequence) appointmentBook.appointmentList.get(i).getStartDateTime().getTime().toString());
+				writer.append(appointmentBook.appointmentList.get(i).getStartDateTime().getTime().toString());
 				writer.append(',');
-				writer.append((CharSequence) appointmentBook.appointmentList.get(i).getEndDateTime().getTime().toString());
+				writer.append(appointmentBook.appointmentList.get(i).getEndDateTime().getTime().toString());
 				writer.append(',');
 				writer.append(appointmentBook.appointmentList.get(i).getEventDescription());
 				writer.append(',');
@@ -66,36 +60,7 @@ public class HelperMethods {
 			while((line = br.readLine()) != null)
 			{
 				String[] appointment = line.split(splitOn);
-				Appointment appointmentAdder = new Appointment();
 				
-				DateFormat df = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy");
-				Date dStart = null;
-				Date dFinish = null;
-				try {
-					dStart = df.parse(appointment[1]);
-					dFinish = df.parse(appointment[2]);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Calendar cal = Calendar.getInstance();
-				cal.setTime(dStart);
-				GregorianCalendar gregStart = (GregorianCalendar) cal;
-				cal.setTime(dFinish);
-				GregorianCalendar gregFinish = (GregorianCalendar) cal;
-				
-				appointmentAdder.setEventTitle(appointment[0]);
-				appointmentAdder.setStartDateTime(gregStart);
-				appointmentAdder.setEndDateTime(gregFinish);
-				if(appointment.length > 3)
-				{
-					appointmentAdder.setEventDescription(appointment[3]);
-					if(appointment.length > 4)
-						appointmentAdder.setEventLocation(appointment[4]);
-				}
-				
-				
-				appointmentBook.add(appointmentAdder);
 			}
 		}
 		catch(FileNotFoundException e)

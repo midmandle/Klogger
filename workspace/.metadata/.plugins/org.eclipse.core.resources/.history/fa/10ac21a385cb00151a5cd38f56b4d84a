@@ -21,7 +21,7 @@ public class MainFrame extends JFrame {
 		HelperMethods.InitialiseBooksFromDatabase(booksList);
 		initialiseUI();
 		HelperMethods.SaveBooksToCSV("csv.csv", booksList.get(0));
-		HelperMethods.FetchBooksFromCSV("csv.csv", booksList.get(0));
+		HelperMethods.FetchBooksFromCSV("csv.csv", booksList.get(0))
 		
 	}
 	

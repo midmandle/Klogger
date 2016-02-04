@@ -8,7 +8,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -68,34 +67,15 @@ public class HelperMethods {
 				String[] appointment = line.split(splitOn);
 				Appointment appointmentAdder = new Appointment();
 				
-				DateFormat df = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy");
-				Date dStart = null;
-				Date dFinish = null;
+				DateFormat df = new SimpleDateFormat("E M dd hh:mm:ss zzz yyyy");
+				Date d = null;
 				try {
-					dStart = df.parse(appointment[1]);
-					dFinish = df.parse(appointment[2]);
+					d = df.parse(appointment[1]);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Calendar cal = Calendar.getInstance();
-				cal.setTime(dStart);
-				GregorianCalendar gregStart = (GregorianCalendar) cal;
-				cal.setTime(dFinish);
-				GregorianCalendar gregFinish = (GregorianCalendar) cal;
-				
-				appointmentAdder.setEventTitle(appointment[0]);
-				appointmentAdder.setStartDateTime(gregStart);
-				appointmentAdder.setEndDateTime(gregFinish);
-				if(appointment.length > 3)
-				{
-					appointmentAdder.setEventDescription(appointment[3]);
-					if(appointment.length > 4)
-						appointmentAdder.setEventLocation(appointment[4]);
-				}
-				
-				
-				appointmentBook.add(appointmentAdder);
+				System.out.println(d.getTime());
 			}
 		}
 		catch(FileNotFoundException e)
