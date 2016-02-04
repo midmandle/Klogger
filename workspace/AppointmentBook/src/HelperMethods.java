@@ -60,6 +60,8 @@ public class HelperMethods {
 		String line = "";
 		String splitOn = ",";
 		
+		appointmentBook.appointmentList = null;
+		
 		try
 		{
 			br = new BufferedReader(new FileReader(file));

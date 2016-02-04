@@ -8,12 +8,15 @@ public class AppointmentBook {
 	int NO_TIME_CLASH = 0;
 	int TIME_CLASH = -1;
 	
+	boolean fromFile = false;
+	
 	String appointmentBookName;
 	
 	ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
 	
 	public AppointmentBook(String appointmentBookName)
 	{
+		fromFile = false;
 		this.appointmentBookName = appointmentBookName;
 		boolean exists = DatabaseCommunicator.CheckIfAppointmentBookExistsOnDatabase(appointmentBookName);
 		
@@ -26,8 +29,12 @@ public class AppointmentBook {
 			System.out.println("Ping");
 			DatabaseCommunicator.SetupNewAppointmentBookForDatabase(appointmentBookName);
 		}
-			
+	}
 	
+	public AppointmentBook(String appointmentBookName, boolean fromFile)
+	{
+		this.fromFile = fromFile;
+		this.appointmentBookName = appointmentBookName;
 	}
 	
 	public int add(Appointment newAppointment)
@@ -44,14 +51,14 @@ public class AppointmentBook {
 			
 			appointmentList.add(newAppointment);
 			
-			DatabaseCommunicator.AddAppointmentToDatabase(appointmentBookName, newAppointment);
+			if(fromFile == false)DatabaseCommunicator.AddAppointmentToDatabase(appointmentBookName, newAppointment);
 			return NOTFOUND;
 		}
 	}
 	
 	public void intialiseAppointmentBookFromDatabase()
 	{
-		appointmentList = DatabaseCommunicator.GetAllAppointmentsFromDatabase(appointmentBookName);
+		if(fromFile == false)appointmentList = DatabaseCommunicator.GetAllAppointmentsFromDatabase(appointmentBookName);
 	}
 	
 	public ArrayList<Appointment> getAllAppointments()
@@ -116,7 +123,7 @@ public class AppointmentBook {
 		if(isInBook(appointmentToRemove))
 		{
 			appointmentList.remove(appointmentToRemove);
-			DatabaseCommunicator.RemoveAppointmentFromDatabase(appointmentBookName, appointmentToRemove);
+			if(fromFile == false)DatabaseCommunicator.RemoveAppointmentFromDatabase(appointmentBookName, appointmentToRemove);
 		}
 		else
 			return;//TODO: Throw exception: "ITEM DOESNT EXIST"
@@ -161,7 +168,7 @@ public class AppointmentBook {
 	{
 		for(int i = 0; i < appointmentList.size(); i++)
 		{
-			DatabaseCommunicator.AddAppointmentToDatabase(appointmentBookName, appointmentList.get(i));
+			if(fromFile == false)DatabaseCommunicator.AddAppointmentToDatabase(appointmentBookName, appointmentList.get(i));
 		}
 	}
 	
