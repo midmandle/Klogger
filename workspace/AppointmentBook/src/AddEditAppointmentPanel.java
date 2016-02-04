@@ -49,8 +49,6 @@ public class AddEditAppointmentPanel extends JPanel{
 		this.parent = parent;
 	  	this.thisBook = thisBook;
 
-	  	
-		
 		//updateUI(); Call removed as it interferes with cardsLayout.
 	}
 	
@@ -68,6 +66,10 @@ public class AddEditAppointmentPanel extends JPanel{
 		returnToCalendarViewButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+            	CalendarPane calPane = (CalendarPane) parent.getParent().getComponent(1);
+            	JPanel outerContainer = (JPanel) calPane.getComponent(0);
+            	MonthViewPanel mvp = (MonthViewPanel) outerContainer.getComponent(0);
+                mvp.updateCalendar();
             	CardLayout cl = (CardLayout)getParent().getLayout();
 		    	  cl.show(getParent(), "Calendar View");
             }
@@ -90,7 +92,7 @@ public class AddEditAppointmentPanel extends JPanel{
 		startDateTimeLabel.setAlignmentX(LEFT_ALIGNMENT);
 		
 		final JSpinner startTimeSpinner = new JSpinner( new SpinnerDateModel());
-		System.out.println(selectedDate);
+		//System.out.println(selectedDate);
 		startTimeSpinner.setValue(selectedDate);
 		startTimeSpinner.setMaximumSize(new Dimension(150, 20));
 		startTimeSpinner.setAlignmentX(LEFT_ALIGNMENT);
@@ -99,7 +101,7 @@ public class AddEditAppointmentPanel extends JPanel{
 		endDateTimeLabel.setAlignmentX(LEFT_ALIGNMENT);
 		
 		final JSpinner endTimeSpinner = new JSpinner( new SpinnerDateModel() );
-		endTimeSpinner.setValue(selectedDate);
+		endTimeSpinner.setEditor(new JSpinner.DateEditor(endTimeSpinner, "HH.mm"));
 		endTimeSpinner.setMaximumSize(new Dimension(150, 20));
 		endTimeSpinner.setAlignmentX(LEFT_ALIGNMENT);
 		
@@ -125,14 +127,29 @@ public class AddEditAppointmentPanel extends JPanel{
             	
             	Date startTimeDate = (Date) startTimeSpinner.getValue();
             	Date endTimeDate = (Date) endTimeSpinner.getValue();
+            	Date tmpTimeDate = (Date) startTimeSpinner.getValue();
             	String eventTitle = titleText.getText();
             	String eventDescription = descriptionText.getText();
             	String eventLocation = locationText.getText();
             	
         		Calendar tmpStart = Calendar.getInstance();
         		Calendar tmpEnd = Calendar.getInstance();
+        		Calendar tmp = Calendar.getInstance();
         		tmpStart.setTime(startTimeDate);
         		tmpEnd.setTime(endTimeDate);
+        		tmp.setTime(tmpTimeDate);
+        		
+        		tmp.set(Calendar.HOUR_OF_DAY, tmpEnd.get(Calendar.HOUR_OF_DAY));
+        		tmp.set(Calendar.MINUTE, tmpEnd.get(Calendar.MINUTE));
+        		System.out.println(tmpEnd.getTime());
+        		tmpEnd = tmp;
+        		//System.out.println(tmpEnd.getTime());
+        		if(tmpStart.after(tmpEnd))
+        		{
+        			//System.out.println(tmpEnd.getTime());
+        			System.out.println("Cant end before it began!");
+        			return;
+        		}
   
         		Appointment tempAppointment = new Appointment((GregorianCalendar)tmpStart, (GregorianCalendar) tmpEnd, eventTitle);
         		if(eventDescription != null)
@@ -213,8 +230,31 @@ public class AddEditAppointmentPanel extends JPanel{
             }
         });
 		
+		JButton deleteAppointment = new JButton("Delete");
+		deleteAppointment.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+            	if(thisBook.appointmentList.size() == 0)
+            		return;
+            	
+            	//System.out.println(jcb.getItemAt(jcb.getSelectedIndex()));
+            	Appointment tmpAppointment = thisBook.findAndReturn(jcb.getItemAt(jcb.getSelectedIndex()));
+            	if(tmpAppointment == null)
+            	{
+            		System.out.println("INVALID NAME. DB OUT OF SYNC!!!");
+            		return; //Invalid appointment name. SHOULDNT HAPPEN
+            	}
+            	thisBook.remove(tmpAppointment);
+        		updateAppointmentsJlb(jcb);
+        		
+            }
+        });
+		
+		
 		viewEditAppointmentPanel.add(jcb);
 		viewEditAppointmentPanel.add(editAppointment);
+		viewEditAppointmentPanel.add(deleteAppointment);
 		
 		//ViewEditAppointmentPanel END
 		

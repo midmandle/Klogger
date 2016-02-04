@@ -27,6 +27,8 @@ public class MonthViewPanel extends JPanel{
 	CalendarTable calT;
 	AppointmentBook thisBook;
 	JPanel parent;
+	JPanel calendarOptions = null;
+	
 	
 	public MonthViewPanel(AppointmentBook thisBook, JPanel parent)
 	{
@@ -49,7 +51,7 @@ public class MonthViewPanel extends JPanel{
 		//END
 		
 		//CalendarOptions
-		final JPanel calendarOptions = new JPanel();
+		calendarOptions = new JPanel();
 		calendarOptions.add(monthBackwards);
 		calendarOptions.add(jyc);
 		calendarOptions.add(monthForward);
@@ -67,7 +69,7 @@ public class MonthViewPanel extends JPanel{
             		month--;
             	
             	updateCalendar();
-            	add(calendarOptions);
+            	//add(calendarOptions);
             }
         });
 		
@@ -80,7 +82,7 @@ public class MonthViewPanel extends JPanel{
             		month++;
             	
             	updateCalendar();
-            	add(calendarOptions);
+            	//add(calendarOptions);
             }
         });
 		
@@ -90,17 +92,17 @@ public class MonthViewPanel extends JPanel{
 		    public void propertyChange(PropertyChangeEvent e) {
 		        year = jyc.getValue(); 
 		        updateCalendar();
-		        add(calendarOptions);
+		        //add(calendarOptions);
 		    }
 		});
 		
 		//END
 		
 		updateCalendar();	
-		add(calendarOptions);
+		//add(calendarOptions);
 	}
 	
-	private void updateCalendar()
+	public void updateCalendar()
 	{
 		removeAll();
 		calT = new CalendarTable(month, year, thisBook, parent);
@@ -176,6 +178,7 @@ public class MonthViewPanel extends JPanel{
 		}
 		monthLabel.setAlignmentX(CENTER_ALIGNMENT);
 		add(monthLabel);
+		add(calendarOptions);
 		this.revalidate();
 	}
 }

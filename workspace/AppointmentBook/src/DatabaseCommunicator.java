@@ -189,7 +189,7 @@ public class DatabaseCommunicator {
 	
 	public static void RemoveAppointmentFromDatabase(String tableName, Appointment appointment)
 	{
-		String query = "DELETE FROM Book1 WHERE title == \""+appointment.getEventTitle()+"\";";
+		String query = "DELETE FROM Book1 WHERE eventTitle == \""+appointment.getEventTitle()+"\";";
 		
 		MakeRequest(query);
 		
@@ -202,7 +202,6 @@ public class DatabaseCommunicator {
 		MakeRequestWithOutput(query);
 		try
 		{
-			ResultSetMetaData resMet = resultSet.getMetaData();
 			try 
 			{
 				
@@ -256,7 +255,6 @@ public class DatabaseCommunicator {
 		MakeRequestWithOutput(query);
 		try
 		{
-			ResultSetMetaData resMet = resultSet.getMetaData();
 			try 
 			{
 	
@@ -341,7 +339,6 @@ public class DatabaseCommunicator {
 		
 		try
 		{
-			ResultSetMetaData resMet = resultSet.getMetaData();
 			try 
 			{
 	

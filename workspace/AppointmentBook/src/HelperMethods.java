@@ -99,4 +99,10 @@ public class HelperMethods {
 			booksList.get(i).intialiseAppointmentBookFromDatabase();
 		}
 	}
+	
+	public boolean checkForTimeClash(ArrayList<AppointmentBook> bookList, Appointment appointmentToCheck)
+	{
+		//TODO: Check if appointmentToCheck falls between the times/dates of any of the other appointments.
+		return false;
+	}
 }

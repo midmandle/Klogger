@@ -89,15 +89,29 @@ public class AppointmentBook {
 	public int find(Appointment appointmentToFind)
 	{
 		for(int i = 0; i < appointmentList.size(); i++)
-			if(appointmentList.get(i).getEventTitle().equals(appointmentToFind.getEventTitle())) //TODO: Needs to be more effective.
+			if(appointmentList.get(i).toString().contentEquals(appointmentToFind.toString())) //TODO: Needs to be more effective.
 				return FOUND;
 		return NOTFOUND;
+	}
+	
+	public Appointment findAndReturn(String appointmentName)
+	{
+		for(int i = 0; i < appointmentList.size(); i++)
+			if(appointmentList.get(i).toString().contentEquals(appointmentName)) //TODO: Needs to be more effective.
+			{
+				System.out.println("CHECK");
+				return appointmentList.get(i);
+			}
+		return null;
 	}
 	
 	public void remove(Appointment appointmentToRemove)
 	{
 		if(isInBook(appointmentToRemove))
+		{
 			appointmentList.remove(appointmentToRemove);
+			DatabaseCommunicator.RemoveAppointmentFromDatabase(appointmentBookName, appointmentToRemove);
+		}
 		else
 			return;//TODO: Throw exception: "ITEM DOESNT EXIST"
 	}
@@ -105,7 +119,10 @@ public class AppointmentBook {
 	public boolean isInBook(Appointment appointmentToCheck)
 	{
 		if(find(appointmentToCheck) > 0)
+		{
+			System.out.println("CHECK");
 			return true;
+		}
 		return false;
 	}
 	
@@ -121,4 +138,6 @@ public class AppointmentBook {
 			DatabaseCommunicator.AddAppointmentToDatabase(appointmentBookName, appointmentList.get(i));
 		}
 	}
+	
+	
 }
