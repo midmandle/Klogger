@@ -33,7 +33,7 @@ public class MainFrame extends JFrame {
 		setContentPane(jtp);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(600, 400);
+		this.setSize(1000, 600);
 		this.setVisible(true);
 	}
 	

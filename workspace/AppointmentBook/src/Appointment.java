@@ -1,5 +1,7 @@
 import java.util.GregorianCalendar;
 
+import javax.naming.event.EventDirContext;
+
 public class Appointment {
 	private GregorianCalendar startDateTime;
 	private GregorianCalendar endDateTime;
@@ -76,6 +78,6 @@ public class Appointment {
 	
 	public String toString()
 	{
-		return eventTitle+" Starts: "+startDateTime.DATE+" Finishes: "+endDateTime.DATE;
+		return eventTitle+" Starts: "+startDateTime.getTime()+" Finishes: "+endDateTime.getTime()+" Description: "+description+" Location: "+location;
 	}
 }

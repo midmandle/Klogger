@@ -2,18 +2,23 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.SpinnerDateModel;
 
 import com.toedter.calendar.JDateChooser;
@@ -34,7 +39,7 @@ public class AddEditAppointmentPanel extends JPanel{
   	JButton returnToCalendarViewButton;
   	Date selectedDate = new Date();
   	final AppointmentBook thisBook;
-  	Color bgC;
+  	
   	
 	public AddEditAppointmentPanel(final AppointmentBook thisBook, final JPanel parent)
 	{
@@ -44,15 +49,13 @@ public class AddEditAppointmentPanel extends JPanel{
 		this.parent = parent;
 	  	this.thisBook = thisBook;
 
-	  	bgC = this.getBackground();
+	  	
 		
 		//updateUI(); Call removed as it interferes with cardsLayout.
 	}
 	
 	public void updateUI()
 	{
-		setBackground(bgC);
-		setForeground(bgC);
 		selectedDate = new GregorianCalendar(year, month, dayVal).getTime();
 		
 		//InfoLabel
@@ -70,6 +73,12 @@ public class AddEditAppointmentPanel extends JPanel{
             }
         });
 		
+		
+		final JComboBox<String> jcb = new JComboBox<String>();
+		jcb.setAlignmentX(CENTER_ALIGNMENT);
+		updateAppointmentsJlb(jcb);
+		
+		//AppointmentDetailsPanel START
 		JLabel appointmentTitleLabel = new JLabel("Appointment Title:");
 		appointmentTitleLabel.setAlignmentX(LEFT_ALIGNMENT);
 		
@@ -136,11 +145,15 @@ public class AddEditAppointmentPanel extends JPanel{
         		{
         			//TODO: Indicate item already exists.
         		}
+        		else
+        		{
+        			updateAppointmentsJlb(jcb);
+        		}
             }
         });
 		
 		JPanel appointmentDetailsPanel = new JPanel();
-		appointmentDetailsPanel.setAlignmentX(CENTER_ALIGNMENT);
+		appointmentDetailsPanel.setAlignmentX(LEFT_ALIGNMENT);
 		appointmentDetailsPanel.setLayout(new BoxLayout(appointmentDetailsPanel, BoxLayout.PAGE_AXIS));
 		appointmentDetailsPanel.add(appointmentTitleLabel);
 		appointmentDetailsPanel.add(titleText);
@@ -153,9 +166,88 @@ public class AddEditAppointmentPanel extends JPanel{
 		appointmentDetailsPanel.add(appointmentLocationLabel);
 		appointmentDetailsPanel.add(locationText);
 		appointmentDetailsPanel.add(addAppointmentButton);
+		//AppointmentDetailsPanel END
+		
+		//ViewEditAppointmentPanel START
+		
+		JPanel viewEditAppointmentPanel = new JPanel();
+		viewEditAppointmentPanel.setLayout(new BoxLayout(viewEditAppointmentPanel, BoxLayout.PAGE_AXIS));
+		viewEditAppointmentPanel.setAlignmentX(RIGHT_ALIGNMENT);
+		
+		
+		JButton editAppointment = new JButton("Edit");
+		editAppointment.setAlignmentX(CENTER_ALIGNMENT);
+		editAppointment.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+            	Date startTimeDate = (Date) startTimeSpinner.getValue();
+            	Date endTimeDate = (Date) endTimeSpinner.getValue();
+            	String eventTitle = titleText.getText();
+            	String eventDescription = descriptionText.getText();
+            	String eventLocation = locationText.getText();
+            	
+        		Calendar tmpStart = Calendar.getInstance();
+        		Calendar tmpEnd = Calendar.getInstance();
+        		tmpStart.setTime(startTimeDate);
+        		tmpEnd.setTime(endTimeDate);
+  
+        		Appointment tempAppointment = new Appointment((GregorianCalendar)tmpStart, (GregorianCalendar) tmpEnd, eventTitle);
+        		if(eventDescription != null)
+        			tempAppointment.setEventDescription(eventDescription);
+        		if(eventLocation != null)
+        			tempAppointment.setEventLocation(eventLocation);
+        		//System.out.println(tmpGreg.get(Calendar.HOUR_OF_DAY)+":"+tmpGreg.get(Calendar.MINUTE));
+        		int ret = thisBook.add(tempAppointment);
+        		if(ret != 0)
+        		{
+        			//TODO: Indicate item already exists.
+        		}
+        		else
+        		{
+	        		thisBook.remove(thisBook.appointmentList.get(jcb.getSelectedIndex()));
+	        		updateAppointmentsJlb(jcb);
+        		}
+        		
+        		
+            }
+        });
+		
+		viewEditAppointmentPanel.add(jcb);
+		viewEditAppointmentPanel.add(editAppointment);
+		
+		//ViewEditAppointmentPanel END
+		
+		//OuterContainer START
+		
+		JPanel outerContainerPanel = new JPanel(new FlowLayout());
+		outerContainerPanel.add(appointmentDetailsPanel);
+		outerContainerPanel.add(viewEditAppointmentPanel);
+		
+		//OuterContainer END
 		
 		add(infoLabel);
-		add(appointmentDetailsPanel);
+		add(outerContainerPanel);
 		add(returnToCalendarViewButton);
+	}
+	
+	private void updateAppointmentsJlb(JComboBox<String> jcb)
+	{	
+		jcb.removeAllItems();
+		
+		if(thisBook == null)
+			return;
+		else
+		{
+			for(int i = 0; i < thisBook.appointmentList.size(); i++)
+			{
+				if((thisBook.appointmentList.get(i).getStartDateTime().get(Calendar.YEAR) == this.year))
+					if((thisBook.appointmentList.get(i).getStartDateTime().get(Calendar.MONTH) == this.month))
+						if((thisBook.appointmentList.get(i).getStartDateTime().get(Calendar.DATE) == dayVal))
+							jcb.addItem(thisBook.appointmentList.get(i).toString());
+			}
+			
+		}
+		jcb.revalidate();
 	}
 }
