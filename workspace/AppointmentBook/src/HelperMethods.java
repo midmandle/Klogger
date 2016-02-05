@@ -1,4 +1,3 @@
-import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,10 +19,8 @@ import java.util.Iterator;
 import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.data.ParserException;
-import net.fortuna.ical4j.model.ComponentList;
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.Property;
-import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.TimeZone;
 import net.fortuna.ical4j.model.TimeZoneRegistry;
 import net.fortuna.ical4j.model.TimeZoneRegistryFactory;
@@ -36,11 +33,21 @@ import net.fortuna.ical4j.model.property.Uid;
 import net.fortuna.ical4j.model.property.Version;
 import net.fortuna.ical4j.util.UidGenerator;
 
-
+/**
+ * Static class implementing various methods which dont fit anywhere else in the code structure at present. If there was further development of any
+ * of these methods I would move them into their own class.
+ * @author 14061121
+ *
+ */
 public class HelperMethods {
 	
 	//Save current appointmentBooks as CSV
 	
+	/**
+	 * Saves the currently tracked AppointmentBook object's Appointments to CSV file.
+	 * @param location the desired location of the CSV save file.
+	 * @param appointmentBook the AppointmentBook object whose contents will be saved.
+	 */
 	public static void SaveBooksToCSV(String location, AppointmentBook appointmentBook)
 	{
 		try
@@ -72,11 +79,14 @@ public class HelperMethods {
 		}
 	}
 	
-	//Save current appointmentBooks as XML
 	
 	
 	//Fetch current appointmentBooks from CSV
-	
+	/**
+	 * Loads values from a CSV file into their own AppointmentBook to be tracked by the application.
+	 * @param location the location of the CSV file to load from.
+	 * @param booksList the ArrayList of AppointmentBook objects to add the newly generated AppointmentBook to.
+	 */
 	public static void FetchBooksFromCSV(String location, ArrayList<AppointmentBook> booksList)
 	{
 		File file = new File(location);
@@ -155,10 +165,12 @@ public class HelperMethods {
 		}
 	}
 	
-	//Fetch current appointmentBooks from XML
-	
 	
 	//Fetch current Books from Database;
+	/**
+	 * Method to initialise any AppointmentBook object held in the DB into the application.
+	 * @param booksList the ArrayList of AppointmentBook object to add the newly initialised AppointmentBook objects into.
+	 */
 	public static void InitialiseBooksFromDatabase(ArrayList<AppointmentBook> booksList)
 	{
 		ArrayList<String> bookNames = new ArrayList<String>();
@@ -176,6 +188,10 @@ public class HelperMethods {
 	}
 	
 	//Whatever the current state of the AppointmentBook selected from the comboBox on the Welcome tab it will be saved in that form to the DB.
+	/**
+	 * Whatever the current state of the AppointmentBook selected from the comboBox on the Welcome tab it will be saved in that form to the DB.
+	 * @param book the AppointmentBook object to save to the DB.
+	 */
 	public static void ForceSaveToDB(AppointmentBook book)
 	{
 		DatabaseCommunicator.RemoveAppointmentBookFromDatabase(book.appointmentBookName);
@@ -183,6 +199,11 @@ public class HelperMethods {
 		book.saveAppointmentsToDatabase();
 	}
 	
+	/**
+	 * Method to export the selected AppointmentBook to an ICS file. Uses ical4j library.
+	 * @param book the AppointmentBook to export.
+	 * @param location the desired location of the ICS file.
+	 */
 	public static void ExportAsICS(AppointmentBook book, String location)
 	{
 		net.fortuna.ical4j.model.Calendar calendar = new net.fortuna.ical4j.model.Calendar();
@@ -230,6 +251,11 @@ public class HelperMethods {
 		
 	}
 	
+	/**
+	 * Method to import the selected ICS file into the AppointmentBook ArrayList. Uses ical4j library.
+	 * @param booksList the ArrayList of AppointmentBook objects to add the newly generated AppointmentBook to.
+	 * @param location the location of the ICS file to import.
+	 */
 	public static void ImportAsICS(ArrayList<AppointmentBook> booksList, String location)
 	{
 		String filename;

@@ -10,16 +10,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-
+/**
+ * SelectPanel adds the GUI and functionality to access currently tracked AppointmentBook objects.
+ * @author 14061121
+ *
+ */
 public class SelectPanel extends JPanel{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	JComboBox<String> bookSelectorCombo = new JComboBox<String>();
 	ArrayList<AppointmentBook> booksList;
 	
+	/**
+	 * Constructor to set up the interface and implement the ActionListener which listens for the "Open" button.
+	 * On actionPerformed the contents of a JComboBox are retrieved and used to open up the relevant AppointmentBook in a new Tab.
+	 * @param booksList the globally accessible ArrayList of AppointmentBook objects currently being tracked.
+	 */
 	public SelectPanel(final ArrayList<AppointmentBook> booksList)
 	{
 		super();
@@ -53,6 +59,9 @@ public class SelectPanel extends JPanel{
 		add(buttonOpenBook);
 	}
 	
+	/**
+	 * Method to refresh/populate the contents of the JComboBox.
+	 */
 	public void populateCombo()
 	{
 		bookSelectorCombo.removeAllItems();

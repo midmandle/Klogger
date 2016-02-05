@@ -1,33 +1,25 @@
 import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 
-import com.toedter.calendar.JCalendar;
-
-
+/**
+ * CalendarPane is the class which forms the outer container for the components required to manipulate a specific AppointmentBook.
+ * @author 14061121
+ *
+ */
 public class CalendarPane extends JPanel{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	AppointmentBook thisBook;
 	
-	
+	/**
+	 * Constructor which specifies the JPanel layout (CardLayout) and implementing a "Close" button to leave the current JTab.
+	 * @param thisBook the AppointmentBook relevant to this component.
+	 */
 	public CalendarPane(final AppointmentBook thisBook)
 	{
 		setName("CalendarPane");
@@ -42,7 +34,7 @@ public class CalendarPane extends JPanel{
 		//addEditAppointmentView.setName("AddEditView");
 
 		cardsPanel.setLayout(new CardLayout());
-		cardsPanel.add(monthView, "Calendar View");
+		cardsPanel.add(monthView, "MonthView");
 		cardsPanel.add(addEditAppointmentView, "Add Appointment View");
 		
 		JButton buttonExitCalendarPane = new JButton("Close");
@@ -58,9 +50,9 @@ public class CalendarPane extends JPanel{
 		add(buttonExitCalendarPane);
 	}
 	
-	
-	
-
+	/**
+	 * Method to implement the functionality of the button that closes the current tab.
+	 */
 	public void closeTab()
 	{
 		//Do stuff to close this tab

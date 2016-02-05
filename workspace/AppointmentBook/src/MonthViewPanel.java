@@ -13,12 +13,13 @@ import javax.swing.JScrollPane;
 
 import com.toedter.calendar.JYearChooser;
 
-
+/**
+ * MonthViewPanel class implements the 'grid style' monthly calendar layout which allows the user to manually search through the AppointmentBook content.
+ * @author 14061121
+ *
+ */
 public class MonthViewPanel extends JPanel{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	GregorianCalendar todayDate = new GregorianCalendar();
@@ -29,7 +30,11 @@ public class MonthViewPanel extends JPanel{
 	JPanel parent;
 	JPanel calendarOptions = null;
 	
-	
+	/**
+	 * Constructor adds the necessary functionality to switch between months and years in the calendar 'grid style' view.
+	 * @param thisBook the relevant AppointmetnBook.
+	 * @param parent Component referencing the parent of this MonthViewPanel object. Used to provide access to sibling components. Probably needs revising. Very inefficient.
+	 */
 	public MonthViewPanel(AppointmentBook thisBook, JPanel parent)
 	{
 		setName("MonthlyViewPanel");
@@ -102,6 +107,9 @@ public class MonthViewPanel extends JPanel{
 		//add(calendarOptions);
 	}
 	
+	/**
+	 * updateCalendar() provides a 'refresh' mechanism for the calendar to update itself at relevant points.
+	 */
 	public void updateCalendar()
 	{
 		removeAll();

@@ -1,0 +1,61 @@
+import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+
+/**
+ * CalendarPane is the class which forms the outer container for the components required to manipulate a specific AppointmentBook.
+ * @author 14061121
+ *
+ */
+public class CalendarPane extends JPanel{
+	private static final long serialVersionUID = 1L;
+	
+	AppointmentBook thisBook;
+	
+	
+	public CalendarPane(final AppointmentBook thisBook)
+	{
+		setName("CalendarPane");
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		this.thisBook = thisBook;
+		
+		final JPanel cardsPanel = new JPanel();
+	 
+		MonthViewPanel monthView = new MonthViewPanel(thisBook, cardsPanel);
+		monthView.setName("MonthView");
+		AddEditAppointmentPanel addEditAppointmentView = new AddEditAppointmentPanel(thisBook, this);
+		//addEditAppointmentView.setName("AddEditView");
+
+		cardsPanel.setLayout(new CardLayout());
+		cardsPanel.add(monthView, "Calendar View");
+		cardsPanel.add(addEditAppointmentView, "Add Appointment View");
+		
+		JButton buttonExitCalendarPane = new JButton("Close");
+		buttonExitCalendarPane.setAlignmentX(CENTER_ALIGNMENT);
+		
+		buttonExitCalendarPane.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	closeTab();
+            }
+        });
+		add(cardsPanel);
+		add(buttonExitCalendarPane);
+	}
+	
+	
+	
+
+	public void closeTab()
+	{
+		//Do stuff to close this tab
+		JTabbedPane jtp = (JTabbedPane)getParent();
+		int i = jtp.getSelectedIndex();
+		jtp.remove(i);
+	}
+	
+}

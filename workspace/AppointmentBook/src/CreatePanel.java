@@ -8,17 +8,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
+/**
+ * CreatePanel is a panel which facilitates the creation of new AppointmentBook objects and adding them to the GUI global booksList.
+ * @author 14061121
+ *
+ */
 public class CreatePanel extends JPanel{
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	
 	JTextField textFieldBookName = new JTextField();
 	JButton buttonAddNewBook = new JButton("Add");
 
+	/**
+	 * Constructor which adds various labels and formatting to the JPanel object. Also implements a JTextfield and an JButton which accesses the textfield and creates
+	 * a new AppointmentBook with the String contents. 
+	 * @param booksList
+	 */
 	public CreatePanel(final ArrayList<AppointmentBook> booksList)
 	{
 		super();

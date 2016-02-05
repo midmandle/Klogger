@@ -1,11 +1,8 @@
 import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -14,22 +11,20 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 import javax.swing.SpinnerDateModel;
 
-import com.toedter.calendar.JDateChooser;
-
-
+/**
+ * Class implementing the Add/Edit/View panel which opens when a cell is clicked on the calendar grid.
+ * 
+ * @author 14061121
+ *
+ */
 public class AddEditAppointmentPanel extends JPanel{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	int dayVal = 0;
   	int month = 0;
@@ -41,7 +36,11 @@ public class AddEditAppointmentPanel extends JPanel{
   	Date selectedDate = new Date();
   	final AppointmentBook thisBook;
   	
-  	
+  	/**
+  	 * Constructor sets up basic attributes of teh class and defines the layout.
+  	 * @param thisBook the relevant AppointmentBook
+  	 * @param parent the parent of this object. Facilitates manipulation of components not elsewhere in the component tree. Inefficient. Needs revision.
+  	 */
 	public AddEditAppointmentPanel(final AppointmentBook thisBook, final JPanel parent)
 	{
 		setName("AddEditAppointmentPanel");
@@ -53,6 +52,9 @@ public class AddEditAppointmentPanel extends JPanel{
 		//updateUI(); Call removed as it interferes with cardsLayout.
 	}
 	
+	/**
+	 * Method to add the bulk of the functionality and components of the panel.
+	 */
 	public void updateUI()
 	{
 		selectedDate = new GregorianCalendar(year, month, dayVal).getTime();
@@ -143,7 +145,7 @@ public class AddEditAppointmentPanel extends JPanel{
         		
         		tmp.set(Calendar.HOUR_OF_DAY, tmpEnd.get(Calendar.HOUR_OF_DAY));
         		tmp.set(Calendar.MINUTE, tmpEnd.get(Calendar.MINUTE));
-        		System.out.println(tmpEnd.getTime());
+        		//System.out.println(tmpEnd.getTime());
         		tmpEnd = tmp;
         		//System.out.println(tmpEnd.getTime());
         		if(tmpStart.after(tmpEnd))
@@ -292,6 +294,10 @@ public class AddEditAppointmentPanel extends JPanel{
 		add(returnToCalendarViewButton);
 	}
 	
+	/**
+	 * Method to provide 'refresh' functionality to the JComboBox.
+	 * @param jcb the JComboBox which will be refreshed.
+	 */
 	private void updateAppointmentsJcb(JComboBox<String> jcb)
 	{	
 		jcb.removeAllItems();

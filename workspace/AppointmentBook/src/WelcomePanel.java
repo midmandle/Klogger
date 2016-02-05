@@ -12,7 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-
+/**
+ * WelcomePanel sets up the first content pane used for the GUI. Uses a tabulated design.
+ * @author 14061121
+ *
+ */
 public class WelcomePanel extends JPanel {
 
 	/**
@@ -25,6 +29,12 @@ public class WelcomePanel extends JPanel {
 	private JLabel welcomeInstructionsLabel;
 	private JPanel buttonPanel;
 	
+	/**
+	 * Constructor which handles the content pane setup. Adds functionality to move between cards in the CardLayout as well as implements a 
+	 * button to allow for the deletion of no longer useful AppointmentBook objects from the AppointmenBook ArrayList booksList. The CardLayout implemented here allows
+	 * for transition between the CreatePanel and the SelectPanel.
+	 * @param booksList the ArrayList of AppointmentBook objects required to initialise the GUI.
+	 */
 	public WelcomePanel(final ArrayList<AppointmentBook> booksList)
 	{
 		super();

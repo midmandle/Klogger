@@ -4,11 +4,20 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+/**
+ * A static class to handle the additional functionality offered by storing the AppointmentBook objects in a database.
+ * @author 14061121
+ *
+ */
 public class DatabaseCommunicator {
 	private static Connection dbConnection = null;
 	private static Statement statement = null;
 	private static ResultSet resultSet = null;
 	
+	/**
+	 * Method to make an SQL query which doesn't return any content from the Database (e.g. INSERT, DROP, CREATE).
+	 * @param query the SQL query to execute.
+	 */
 	private static void MakeRequest(String query)
 	{
 		try
@@ -35,7 +44,10 @@ public class DatabaseCommunicator {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+	/**
+	 * Method to make an SQL query which does return  content from the Database (e.g. SELECT).
+	 * @param query the SQL query to execute.
+	 */
 	private static void MakeRequestWithOutput(String query)
 	{
 		try
@@ -55,6 +67,11 @@ public class DatabaseCommunicator {
 		}
 	}
 	
+	/**
+	 * A method to format the GregorianCalendar format used by the application to a form suitable for the DB.
+	 * @param cal the GregorianCalendar object to format.
+	 * @return a formatted string usable by the DB to represent date/time.
+	 */
 	private static String dateFormatter(GregorianCalendar cal)
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -64,6 +81,11 @@ public class DatabaseCommunicator {
 		return output;
 	}
 	
+	/**
+	 * A method to convert the date/time formatted string used by the DB into a GregorianCalendar object.
+	 * @param formatted the formatted string from the DB.
+	 * @param output the GregorianCalendar object to be used to represent date/time in the application.
+	 */
 	private static void FormattedDateToGregorian(String formatted, GregorianCalendar output)
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -76,6 +98,13 @@ public class DatabaseCommunicator {
 		}
 	}
 	
+	/**
+	 * Method to add a new entry into the DB representing an Appointment for a given AppointmentBook. Each AppointmentBook has its own table in the DB.
+	 * Each appointment is then stored in it's respective AppointmentBook. THIS METHOD IS BUGGY: it seems that the function doesn't successfully add
+	 * Appointments to tables which have punctuation in (e.g '.' or ',' such as [Test.ics] table names). Needs further development to isolate the problem.
+	 * @param tableName the name of the table representing the relevant AppointmentBook.
+	 * @param appointment the Appointment object to be stored in the DB.
+	 */
 	public static void AddAppointmentToDatabase(String tableName, Appointment appointment)
 	{
 		/*int startDay = appointment.getStartDateTime().get(Calendar.DAY_OF_MONTH);
@@ -97,6 +126,12 @@ public class DatabaseCommunicator {
 		
 	}
 	
+	/**
+	 * Method to remove a given Appointment record from an AppointmentBook table. THIS METHOD IS BUGGY: I'm not certain if finding the relevant Appointment record should
+	 * be done just using the Appointment objects eventTitle field. What if there is a repeated event with the same name but different times???
+	 * @param tableName the AppointmentBook's name representing the table in question.
+	 * @param appointment the Appointment object to remove.
+	 */
 	public static void RemoveAppointmentFromDatabase(String tableName, Appointment appointment)
 	{
 		String query = "DELETE FROM "+tableName+" WHERE eventTitle == \""+appointment.getEventTitle()+"\";";
@@ -105,6 +140,11 @@ public class DatabaseCommunicator {
 		
 	}
 	
+	/**
+	 * Method to fetch all Appointment records stored in the DB for a given AppointmentBook.
+	 * @param BookName the AppointmentBook to get all the stored Appointment records for.
+	 * @return an ArrayList of Appointment objects.
+	 */
 	public static ArrayList<Appointment> GetAllAppointmentsFromDatabase(String BookName)//, Appointment appointment)
 	{
 		String query = "SELECT * FROM "+BookName+";";
@@ -153,6 +193,11 @@ public class DatabaseCommunicator {
 	
 	}
 	
+	/**
+	 * Method to return a specific Appointment record stored in the DB.
+	 * @param BookName the name of the AppointmentBook table to search in.
+	 * @param appointment the Appointment object to find records for.
+	 */
 	public static void GetSpecificAppointmentFromDatabase(String BookName, Appointment appointment)
 	{
 		String startDate = dateFormatter(appointment.getStartDateTime());
@@ -189,6 +234,11 @@ public class DatabaseCommunicator {
 		}
 	}
 	
+	/**
+	 * Method to return a boolean value determining if an AppointmentBook is already represented on the DB by its appointmentBookName.
+	 * @param BookName the appointmentBookName to search for.
+	 * @return true is the AppointmentBook object is represented on the DB, otherwise false.
+	 */
 	public static boolean CheckIfAppointmentBookExistsOnDatabase(String BookName)
 	{
 		String query = "SELECT * FROM sqlite_master;";
@@ -201,7 +251,7 @@ public class DatabaseCommunicator {
 	
 				while(resultSet.next())
 				{
-					System.out.println("Input: "+BookName+ " CHECK: "+resultSet.getString(2));
+					//System.out.println("Input: "+BookName+ " CHECK: "+resultSet.getString(2));
 					if(resultSet.getString(2).contentEquals(BookName))
 						ret = true;
 					//System.out.println(ret);
@@ -225,6 +275,10 @@ public class DatabaseCommunicator {
 		return ret;
 	}
 	
+	/**
+	 * Method to create a new table for an AppointmentBook using its appointmentBookName string to label it.
+	 * @param tableName the desired name of the AppointmentBook.
+	 */
 	public static void SetupNewAppointmentBookForDatabase(String tableName)
 	{
 		//SQLi possible here :/. Dont have time to fix now.
@@ -234,6 +288,10 @@ public class DatabaseCommunicator {
 		
 	}
 	
+	/**
+	 * Method to remove a given AppointmentBook table from the DB.
+	 * @param tableName the appointmentBookName used to represent the table.
+	 */
 	public static void RemoveAppointmentBookFromDatabase(String tableName)
 	{
 		String query = "DROP TABLE \"main\".\""+tableName+"\";";
@@ -242,6 +300,10 @@ public class DatabaseCommunicator {
 		
 	}
 
+	/**
+	 * Method to return all AppointmentBooks currently represented by tables in the DB.
+	 * @param bookNames the ArrayList to return the results of the query in.
+	 */
 	public static void GetAllAppointmentBooks(ArrayList<String> bookNames)
 	{
 		String query = "SELECT * FROM sqlite_master;";

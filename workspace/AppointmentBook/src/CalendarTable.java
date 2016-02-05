@@ -10,7 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 
 
-
+/**
+ * Class to provide the bulk of the functionality of the 'grid style' calendar.
+ * @author 14061121
+ *
+ */
 public class CalendarTable {
 	
 	private myTableModel calendarModel;
@@ -20,6 +24,13 @@ public class CalendarTable {
 	JPanel parent;
 	ArrayList<Appointment> thisMonthsAppointments;
 	
+	/**
+	 * Standard constructor. Gets the details of the month to be viewed in the calendar.
+	 * @param month the month to be viewed.
+	 * @param year the year to be viewed.
+	 * @param thisBook the AppointmentBook for which the calendar pertains to.
+	 * @param parent the parent of the CalendarTable object. Used to access components in other areas of the component tree. Inefficient and needs re-thinking. Works for now.
+	 */
 	public CalendarTable(int month, int year, AppointmentBook thisBook, JPanel parent)
 	{
 		this.month = month;
@@ -32,6 +43,10 @@ public class CalendarTable {
 		drawTable(daysInMonth);//, thisMonthsAppointments);
 	}
 	
+	/**
+	 * Method to determine the number of days in the month to be viewed.
+	 * @return integer representing the number of days in the month to be viewed.
+	 */
 	private int determineDaysInMonth()
 	{
 		GregorianCalendar tmpCal = new GregorianCalendar(year, month, 1);
@@ -39,6 +54,10 @@ public class CalendarTable {
 		return noOfDays;
 	}
 	
+	/**
+	 * Method to determine the day of the week which the month starts on.
+	 * @return returns a string representation of the day of the week the month starts on.
+	 */
 	private String determineStartDay()
 	{
 		String startDay = "";
@@ -89,6 +108,11 @@ public class CalendarTable {
 		return startDay;
 	}
 	
+	/**
+	 * Determines if there are Appointment objects which start in the month to be viewed in the calendar.
+	 * @param thisBook the AppointmentBook which holds the relevant Appointment objects.
+	 * @return an ArrayList of Appointment objects which start in the month to be viewed.
+	 */
 	private ArrayList<Appointment> findAppointmentsForMonth(AppointmentBook thisBook)
 	{
 		ArrayList<Appointment> thisMonthsAppointments = new ArrayList<Appointment>();
@@ -109,6 +133,10 @@ public class CalendarTable {
 		return thisMonthsAppointments;
 	}
 	
+	/**
+	 * Method to draw the JTable to the required size for the viewed month. Implements a MouseListener to act on any cells clicked in the grid and open the relevant day to view.
+	 * @param daysInMonth the number of days in the month to be viewed.
+	 */
 	private void drawTable(int daysInMonth)//, ArrayList<Appointment> thisMonthsAppointments)
 	{
 		String[] columnNames = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -208,7 +236,7 @@ public class CalendarTable {
 		  public void mouseClicked(MouseEvent e) {
 		    if (e.getClickCount() == 2) {
 		    	
-		    	//Java swing magickry to pass back the date selected value.
+		    	//Java swing magickry to pass back the date selected value to the next view.
 		    	Component[] components = parent.getComponents();
 				AddEditAppointmentPanel aeavp = null;
 			  	for(int i = 0; i < components.length; i++)
@@ -253,6 +281,11 @@ public class CalendarTable {
 		
 	}
 	
+	/**
+	 * Method to check if a given day in the grid has any Appointment objects starting on it.
+	 * @param k the day in the grid
+	 * @return returns true if the day in the grid has an Appointment object associated with it.
+	 */
 	private boolean hasAppointment(int k)
 	{
 		

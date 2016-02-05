@@ -1,3 +1,5 @@
+import java.util.GregorianCalendar;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -5,29 +7,29 @@ public class Main {
 			public void run()
 			{
 				MainFrame f = new MainFrame();
+
+				//!!!!___TESTING CODE. DO NOT RUN UNLESS YOU HAVE MODIFIED THE RELEVANT AREAS IN AppointmentBook CLASS.___!!!//
+				/*
+				Appointment a1 = new Appointment(new GregorianCalendar(2015, 8+1, 14, 10,30), new GregorianCalendar(2015, 10, 14,11,30), "Dentist");
+				Appointment a2 = new Appointment(new GregorianCalendar(2015, 8+1, 20,9,00), new GregorianCalendar(2015, 10, 20,10,10), "OOWP Lecture");
+				Appointment a3 = new Appointment(new GregorianCalendar(2015, 8+1, 21,14,00), new GregorianCalendar(2015, 10, 21,16,00), "Tutorial");
+				AppointmentBook appBook = new AppointmentBook("Test");
 				
-				/*AppointmentBook appointmentBook1 = new AppointmentBook("Book1"); //CREATE APPOINTMENT BOOK
-				AppointmentBook appointmentBook2 = new AppointmentBook("Book2");
+				appBook.add(a1);
 				
-				GregorianCalendar startDate = new GregorianCalendar(2016, 1, 1); //CREATE NECESSARY DATES
-				GregorianCalendar endDate = new GregorianCalendar(2016, 1, 2);
+				appBook.add(a2);
+		
+				appBook.add(a3);
 				
-				Appointment appointment = new Appointment(startDate, endDate, "Appointment1"); //ADD TO APPOINTMENT BOOK
-				appointmentBook1.add(appointment);
+				appBook.showAllAppointments();
 				
-				//------------------THE ABOVE NEEDS TO BE DONE IN THIS ORDER------------------------------------------------
+				appBook.remove(a1);
 				
-				//ppointmentBook1.showAllAppointments();
+				appBook.showAllAppointments();
 				
-				GregorianCalendar startDate2 = new GregorianCalendar(2016, 1, 3);
-				GregorianCalendar endDate2 = new GregorianCalendar(2016, 1, 4);
-				Appointment appointment2 = new Appointment(startDate2, endDate2, "Appointment2");
-				appointmentBook2.add(appointment2);
-				
-				AppointmentBook appointmentBook3 = new AppointmentBook("Book3");
-				appointmentBook3.appointmentList = DatabaseCommunicator.GetAllAppointmentsFromDatabase("Book1");
-				appointmentBook3.saveAppointmentsToDatabase();*/
-				
+				System.out.println("Find Test: "+ appBook.isInBook(a2));
+				System.out.println("Find Test: "+ appBook.isInBook(a1));
+				*/
 			}
 		});
 		

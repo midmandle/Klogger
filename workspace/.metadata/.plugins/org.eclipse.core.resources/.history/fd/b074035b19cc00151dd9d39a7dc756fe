@@ -1,0 +1,17 @@
+import javax.swing.table.DefaultTableModel;
+
+
+public class myTableModel extends DefaultTableModel {
+
+
+	private static final long serialVersionUID = 1L;
+
+	public myTableModel(String[] columnNames, int i) {
+        super(columnNames, i);
+    }
+
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false;
+    }
+}
