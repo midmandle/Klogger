@@ -78,6 +78,6 @@ public class Appointment {
 	
 	public String toString()
 	{
-		return eventTitle+" Starts: "+startDateTime.getTime()+" Finishes: "+endDateTime.getTime()+" Description: "+description+" Location: "+location;
+		return eventTitle+" Starts: "+startDateTime.getTime()+" Finishes: "+endDateTime.getTime();//+" Description: "+description+" Location: "+location;
 	}
 }

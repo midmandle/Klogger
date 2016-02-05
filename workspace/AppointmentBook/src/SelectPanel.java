@@ -40,13 +40,14 @@ public class SelectPanel extends JPanel{
             public void actionPerformed(ActionEvent e) {
             	//Open CalendarPane for selected AppointmentBook
             	JTabbedPane jtp = (JTabbedPane) getParent().getParent().getParent();
+            	if(bookSelectorCombo.getSelectedIndex() == -1)
+            		return;
             	CalendarPane calPane = new CalendarPane(booksList.get(bookSelectorCombo.getSelectedIndex()));
             	jtp.addTab((String) bookSelectorCombo.getSelectedItem(), calPane);
             	
             }
         });
 		
-		//Damn errors...
 		add(pleaseChoose);
 		add(bookSelectorCombo);
 		add(buttonOpenBook);
@@ -57,9 +58,10 @@ public class SelectPanel extends JPanel{
 		bookSelectorCombo.removeAllItems();
 		for(int i = 0; i < booksList.size(); i++)
 		{
-			//System.out.println(booksList.get(i).appointmentBookName);
+			System.out.println(booksList.get(i).appointmentBookName);
 			bookSelectorCombo.addItem(booksList.get(i).appointmentBookName);
 		}
+		bookSelectorCombo.revalidate();
 	}
 
 }

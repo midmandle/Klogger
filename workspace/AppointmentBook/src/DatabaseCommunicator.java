@@ -91,7 +91,7 @@ public class DatabaseCommunicator {
 		String eventTitle = appointment.getEventTitle();
 		String description = appointment.getEventDescription();
 		String location = appointment.getEventLocation();
-		String query = String.format("INSERT INTO "+tableName+" (dateTimeFrom, dateTimeTo, eventTitle, description, location) VALUES (\"%s\", \"%s\", \"%s\", \"%s\", \"%s\");", startDate, endDate, eventTitle, description, location);
+		String query = String.format("INSERT INTO \""+tableName+"\" (dateTimeFrom, dateTimeTo, eventTitle, description, location) VALUES (\"%s\", \"%s\", \"%s\", \"%s\", \"%s\");", startDate, endDate, eventTitle, description, location);
 		
 		MakeRequest(query);
 		

@@ -52,14 +52,15 @@ public class MainFrame extends JFrame {
 	{
 		JMenuBar menu = new JMenuBar();
 		JMenu file = new JMenu("File");
-		JMenuItem save = new JMenuItem("Save as .CSV");
-		JMenuItem load = new JMenuItem("Load from .CSV");
+		JMenuItem saveToCSV = new JMenuItem("Save as .CSV");
+		JMenuItem loadFromCSV = new JMenuItem("Load from .CSV");
+		JMenuItem forceSaveToDB = new JMenuItem("FORCE Save to DB");
 		
 		WelcomePanel welcomeP = (WelcomePanel) jtp.getComponent(0);
     	JPanel cardsP = (JPanel) welcomeP.getComponent(2);
     	final SelectPanel selectP = (SelectPanel) cardsP.getComponent(0);
 		
-		save.addActionListener(new ActionListener(){
+		saveToCSV.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
             	JFileChooser fileChooser = new JFileChooser();
@@ -78,15 +79,39 @@ public class MainFrame extends JFrame {
             }
         });
 	
-		load.addActionListener(new ActionListener(){
+		loadFromCSV.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+            	JFileChooser fileChooser = new JFileChooser();
+            	FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("CSV FILES", "csv");
+            	fileChooser.setFileFilter(fileFilter);
             	
+            	int retVal = fileChooser.showOpenDialog(selectP);
+            	
+	           	if (retVal == JFileChooser.APPROVE_OPTION) {
+	                   File file = fileChooser.getSelectedFile();
+	                   int confirm = JOptionPane.showConfirmDialog(selectP, "Loading "+ selectP.bookSelectorCombo.getSelectedItem()+" from "+file.getAbsolutePath());
+	                   if(confirm == JOptionPane.OK_OPTION)
+	                   {
+	                	   HelperMethods.FetchBooksFromCSV(file.getAbsolutePath(), booksList);
+	                	   selectP.populateCombo();
+	                   }
+	                   else
+	                	   return;
+	           	}
             }
         });
 		
-		file.add(save);
-		file.add(load);
+		forceSaveToDB.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	HelperMethods.ForceSaveToDB(booksList.get(selectP.bookSelectorCombo.getSelectedIndex()));
+            }
+        });
+		
+		file.add(saveToCSV);
+		file.add(loadFromCSV);
+		file.add(forceSaveToDB);
 		menu.add(file);
 		setJMenuBar(menu);
 	}

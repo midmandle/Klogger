@@ -21,6 +21,7 @@ public class WelcomePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JButton buttonSelect;
 	private JButton buttonCreateNew;
+	private JButton buttonDeleteBook;
 	private JLabel welcomeInstructionsLabel;
 	private JPanel buttonPanel;
 	
@@ -36,11 +37,10 @@ public class WelcomePanel extends JPanel {
 		
 		buttonSelect = new JButton("Select");
 		buttonCreateNew = new JButton("Create");
+		buttonDeleteBook = new JButton("Delete");
 		
 		buttonPanel = new JPanel(new FlowLayout());
 		buttonPanel.setAlignmentX(CENTER_ALIGNMENT);
-
-		
 		
 		
 		final JPanel cardsPanel = new JPanel();
@@ -59,6 +59,7 @@ public class WelcomePanel extends JPanel {
 		cardsPanel.add(createPanel, "Create Panel");
 		
 		buttonPanel.add(buttonSelect);
+		buttonPanel.add(buttonDeleteBook);
 		buttonPanel.add(buttonCreateNew);
 		
 		buttonSelect.addActionListener(new ActionListener(){
@@ -73,8 +74,22 @@ public class WelcomePanel extends JPanel {
 		buttonCreateNew.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-            	CardLayout cl = (CardLayout)cardsPanel.getLayout();
+            	CardLayout cl = (CardLayout)cardsPanel.getLayout(); 
             	cl.show(cardsPanel, "Create Panel");
+            }
+        });
+		
+		buttonDeleteBook.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	final SelectPanel selectP = (SelectPanel) cardsPanel.getComponent(0);
+            	
+            	if(selectP.bookSelectorCombo.getSelectedIndex() == -1)
+            		return;
+            	
+            	DatabaseCommunicator.RemoveAppointmentBookFromDatabase(booksList.get(selectP.bookSelectorCombo.getSelectedIndex()).appointmentBookName);
+            	booksList.remove(selectP.bookSelectorCombo.getSelectedIndex());
+            	selectP.populateCombo();
             }
         });
 		
