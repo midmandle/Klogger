@@ -99,7 +99,7 @@ public class DatabaseCommunicator {
 	
 	public static void RemoveAppointmentFromDatabase(String tableName, Appointment appointment)
 	{
-		String query = "DELETE FROM Book1 WHERE eventTitle == \""+appointment.getEventTitle()+"\";";
+		String query = "DELETE FROM "+tableName+" WHERE eventTitle == \""+appointment.getEventTitle()+"\";";
 		
 		MakeRequest(query);
 		

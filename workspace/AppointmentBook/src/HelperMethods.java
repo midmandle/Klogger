@@ -1,9 +1,13 @@
+import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.SocketException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +15,26 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
+
+import net.fortuna.ical4j.data.CalendarBuilder;
+import net.fortuna.ical4j.data.CalendarOutputter;
+import net.fortuna.ical4j.data.ParserException;
+import net.fortuna.ical4j.model.ComponentList;
+import net.fortuna.ical4j.model.DateTime;
+import net.fortuna.ical4j.model.Property;
+import net.fortuna.ical4j.model.PropertyList;
+import net.fortuna.ical4j.model.TimeZone;
+import net.fortuna.ical4j.model.TimeZoneRegistry;
+import net.fortuna.ical4j.model.TimeZoneRegistryFactory;
+import net.fortuna.ical4j.model.ValidationException;
+import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.model.component.VTimeZone;
+import net.fortuna.ical4j.model.property.CalScale;
+import net.fortuna.ical4j.model.property.ProdId;
+import net.fortuna.ical4j.model.property.Uid;
+import net.fortuna.ical4j.model.property.Version;
+import net.fortuna.ical4j.util.UidGenerator;
 
 
 public class HelperMethods {
@@ -157,5 +181,150 @@ public class HelperMethods {
 		DatabaseCommunicator.RemoveAppointmentBookFromDatabase(book.appointmentBookName);
 		DatabaseCommunicator.SetupNewAppointmentBookForDatabase(book.appointmentBookName);
 		book.saveAppointmentsToDatabase();
+	}
+	
+	public static void ExportAsICS(AppointmentBook book, String location)
+	{
+		net.fortuna.ical4j.model.Calendar calendar = new net.fortuna.ical4j.model.Calendar();
+		calendar.getProperties().add(new ProdId("-//Ben Fortuna//iCal4j 1.0//EN"));
+		calendar.getProperties().add(Version.VERSION_2_0);
+		calendar.getProperties().add(CalScale.GREGORIAN);
+		
+		TimeZoneRegistry registry = TimeZoneRegistryFactory.getInstance().createRegistry();
+		TimeZone timezone = registry.getTimeZone("Europe/London");
+		VTimeZone tz = timezone.getVTimeZone();
+		
+		for(int i = 0; i < book.appointmentList.size(); i++)
+		{
+			DateTime start = new DateTime(book.appointmentList.get(i).getStartDateTime().getTime());
+			DateTime end = new DateTime(book.appointmentList.get(i).getEndDateTime().getTime());
+			VEvent appointment = new VEvent(start, end, book.appointmentList.get(i).getEventTitle());
+			
+			appointment.getProperties().add(tz.getTimeZoneId());
+			try {
+				UidGenerator ug = new UidGenerator("UidGen");
+				Uid uid = ug.generateUid();
+				appointment.getProperties().add(uid);
+			} catch (SocketException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			calendar.getComponents().add(appointment);
+		}
+		FileOutputStream fout;
+		try {
+			fout = new FileOutputStream(location);
+			CalendarOutputter outputter = new CalendarOutputter();
+			outputter.output(calendar, fout);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ValidationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void ImportAsICS(ArrayList<AppointmentBook> booksList, String location)
+	{
+		String filename;
+		int i = location.lastIndexOf("/");
+		
+		filename = location.substring(i+1, location.length());
+		
+		System.out.println(filename);
+		
+		AppointmentBook appointmentBook = new AppointmentBook(filename);
+		booksList.add(appointmentBook);
+		
+		FileInputStream fin;
+		try {
+			fin = new FileInputStream(location);
+			CalendarBuilder builder = new CalendarBuilder();
+			net.fortuna.ical4j.model.Calendar calendar = builder.build(fin);
+			
+			DateTime startTime = null;
+			DateTime endTime = null;
+			String eventTitle = null;
+			if(calendar != null)
+			{
+				for (Iterator j = (Iterator) calendar.getComponents().iterator(); j.hasNext();) {
+					net.fortuna.ical4j.model.Component component = (net.fortuna.ical4j.model.Component) j.next();
+				      System.out.println("Component [" + component.getName() + "]");
+
+				      for (Iterator k = ((net.fortuna.ical4j.model.Component) component).getProperties().iterator(); k.hasNext();) {
+				          Property property = (Property) k.next();
+				          System.out.println("Property [" + property.getName() + ", " + property.getValue() + "]");
+				          switch(property.getName())
+				          {
+				          	case "DTSTART":
+				          	{
+				          		try {
+									startTime = new DateTime(property.getValue());
+									
+								} catch (ParseException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+				          		break;
+				          	}
+				          	case "DTEND":
+				          	{
+				          		try {
+									endTime = new DateTime(property.getValue());
+									
+								} catch (ParseException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+				          		break;
+				          	}
+				          	case "SUMMARY":
+				          	{
+								eventTitle = property.getValue();
+								
+								break;
+				          	}
+				          }
+				      }
+				      if(startTime == null || endTime == null || eventTitle == null)
+			        	  continue;
+			          else
+			          {
+			        	  GregorianCalendar startGreg = new GregorianCalendar();
+			        	  startGreg.setTime(startTime);
+			        	  
+			        	  GregorianCalendar endGreg = new GregorianCalendar();
+			        	  endGreg.setTime(endTime);
+			        	  
+			        	  Appointment tempAppointment = new Appointment(startGreg, endGreg, eventTitle);
+			        	  
+			        	  System.out.println(tempAppointment.toString());
+			        	  
+			        	  appointmentBook.add(tempAppointment);
+			        	  
+			          }
+				  }//for;
+				
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+
+		
 	}
 }

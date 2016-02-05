@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -78,7 +79,7 @@ public class AddEditAppointmentPanel extends JPanel{
 		
 		final JComboBox<String> jcb = new JComboBox<String>();
 		jcb.setAlignmentX(CENTER_ALIGNMENT);
-		updateAppointmentsJlb(jcb);
+		updateAppointmentsJcb(jcb);
 		
 		//AppointmentDetailsPanel START
 		JLabel appointmentTitleLabel = new JLabel("Appointment Title:");
@@ -92,18 +93,19 @@ public class AddEditAppointmentPanel extends JPanel{
 		startDateTimeLabel.setAlignmentX(LEFT_ALIGNMENT);
 		
 		final JSpinner startTimeSpinner = new JSpinner( new SpinnerDateModel());
-		//System.out.println(selectedDate);
 		startTimeSpinner.setValue(selectedDate);
 		startTimeSpinner.setMaximumSize(new Dimension(150, 20));
 		startTimeSpinner.setAlignmentX(LEFT_ALIGNMENT);
+		startTimeSpinner.setValue(selectedDate);
 		
 		JLabel endDateTimeLabel = new JLabel("End:");
 		endDateTimeLabel.setAlignmentX(LEFT_ALIGNMENT);
 		
 		final JSpinner endTimeSpinner = new JSpinner( new SpinnerDateModel() );
-		endTimeSpinner.setEditor(new JSpinner.DateEditor(endTimeSpinner, "HH.mm"));
+		endTimeSpinner.setValue(selectedDate);
 		endTimeSpinner.setMaximumSize(new Dimension(150, 20));
 		endTimeSpinner.setAlignmentX(LEFT_ALIGNMENT);
+		endTimeSpinner.setValue(selectedDate);
 		
 		JLabel appointmentDescriptionLabel = new JLabel("Description:");
 		appointmentDescriptionLabel.setAlignmentX(LEFT_ALIGNMENT);
@@ -148,9 +150,16 @@ public class AddEditAppointmentPanel extends JPanel{
         		{
         			//System.out.println(tmpEnd.getTime());
         			System.out.println("Cant end before it began!");
+        			JOptionPane.showMessageDialog(getParent(), "Cant end before it began!");
         			return;
         		}
   
+        		if(tmpStart.equals(tmpEnd))
+        		{
+        			System.out.println("Cant start and end at the same time!");
+        			JOptionPane.showMessageDialog(getParent(), "Cant start and end at the same time!");
+        			return;
+        		}
         		Appointment tempAppointment = new Appointment((GregorianCalendar)tmpStart, (GregorianCalendar) tmpEnd, eventTitle);
         		if(eventDescription != null)
         			tempAppointment.setEventDescription(eventDescription);
@@ -163,12 +172,12 @@ public class AddEditAppointmentPanel extends JPanel{
         			if(ret == 1)
         			{
         				System.out.println("ALREADY EXISTS");
-        				//DO popup indicating item already exists.
+        				JOptionPane.showMessageDialog(getParent(), "Appointment already exists with this name at these times.");
         			}
         			else if(ret == -1)
         			{
         				System.out.println("TIME_CLASH");
-        				//Do popup indicating time clash.
+        				JOptionPane.showMessageDialog(getParent(), "An appointment clashes with this.");
         			}
         			else
         				System.out.println("OTHER??");
@@ -176,7 +185,7 @@ public class AddEditAppointmentPanel extends JPanel{
         		}
         		else
         		{
-        			updateAppointmentsJlb(jcb);
+        			updateAppointmentsJcb(jcb);
         		}
             }
         });
@@ -204,7 +213,7 @@ public class AddEditAppointmentPanel extends JPanel{
 		viewEditAppointmentPanel.setAlignmentX(RIGHT_ALIGNMENT);
 		
 		
-		JButton editAppointment = new JButton("Edit");
+		final JButton editAppointment = new JButton("Edit");
 		editAppointment.setAlignmentX(CENTER_ALIGNMENT);
 		editAppointment.addActionListener(new ActionListener(){
             @Override
@@ -226,30 +235,18 @@ public class AddEditAppointmentPanel extends JPanel{
         			tempAppointment.setEventDescription(eventDescription);
         		if(eventLocation != null)
         			tempAppointment.setEventLocation(eventLocation);
-        		//System.out.println(tmpGreg.get(Calendar.HOUR_OF_DAY)+":"+tmpGreg.get(Calendar.MINUTE));
-        		int ret = thisBook.add(tempAppointment);
-        		if(ret != 0)
+        		if(tmpStart.after(tmpEnd))
         		{
-        			if(ret == 1)
-        			{
-        				System.out.println("ALREADY EXISTS");
-        				//DO popup indicating item already exists are you sure you want to edit.
-        			}
-        			else if(ret == -1)
-        			{
-        				System.out.println("TIME_CLASH");
-        				//Popup time clash with another item.
-        			}
-        			else
-        				System.out.println("OTHER??");
-        			
-        		}
-        		else
-        		{
-	        		thisBook.remove(thisBook.appointmentList.get(jcb.getSelectedIndex()));
-	        		updateAppointmentsJlb(jcb);
+        			//System.out.println(tmpEnd.getTime());
+        			System.out.println("Cant end before it began!");
+        			JOptionPane.showMessageDialog(getParent(), "Cant end before it began!");
+        			return;
         		}
         		
+        		Appointment appointmentToRemove = thisBook.findAndReturn((String) (jcb.getSelectedItem()));
+        		thisBook.remove(appointmentToRemove);
+        		thisBook.add(tempAppointment);
+        		updateAppointmentsJcb(jcb);
         		
             }
         });
@@ -270,7 +267,7 @@ public class AddEditAppointmentPanel extends JPanel{
             		return; //Invalid appointment name. SHOULDNT HAPPEN
             	}
             	thisBook.remove(tmpAppointment);
-        		updateAppointmentsJlb(jcb);
+        		updateAppointmentsJcb(jcb);
         		
             }
         });
@@ -295,7 +292,7 @@ public class AddEditAppointmentPanel extends JPanel{
 		add(returnToCalendarViewButton);
 	}
 	
-	private void updateAppointmentsJlb(JComboBox<String> jcb)
+	private void updateAppointmentsJcb(JComboBox<String> jcb)
 	{	
 		jcb.removeAllItems();
 		

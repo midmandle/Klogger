@@ -141,11 +141,9 @@ public class AppointmentBook {
 			GregorianCalendar toCheckStart = appointmentToCheck.getStartDateTime();
 			GregorianCalendar toCheckEnds = appointmentToCheck.getEndDateTime();
 			
-			boolean startsOnOrAfterOriginal = (toCheckStart.compareTo(originalStart) == 0) || (toCheckStart.after(originalStart));
-			boolean startsBeforeOriginalEnds = (toCheckStart.before(originalEnds));
-			boolean originalInMiddle = ((originalStart.compareTo(toCheckStart) == 0) || (originalStart.after(toCheckStart))) && (originalStart.before(toCheckEnds));
+			boolean startsDuringMeeting = ((toCheckStart.after(originalStart))||(toCheckStart.equals(originalStart)) && (toCheckStart.before(originalEnds))); 
 			
-			if((startsOnOrAfterOriginal && startsBeforeOriginalEnds) || originalInMiddle)
+			if(startsDuringMeeting)
 				return TIME_CLASH;
 		}
 		return NO_TIME_CLASH;
