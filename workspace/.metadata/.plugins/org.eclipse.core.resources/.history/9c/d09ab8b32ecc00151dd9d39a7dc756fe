@@ -112,7 +112,6 @@ public class MonthViewPanel extends JPanel{
 	 */
 	public void updateCalendar()
 	{
-		System.out.println("DING");
 		removeAll();
 		calT = new CalendarTable(month, year, thisBook, parent);
 		add(new JScrollPane(calT.jtbl));

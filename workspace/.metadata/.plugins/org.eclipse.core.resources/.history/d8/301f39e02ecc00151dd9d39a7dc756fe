@@ -74,7 +74,7 @@ public class AddEditAppointmentPanel extends JPanel{
             	MonthViewPanel mvp = (MonthViewPanel) outerContainer.getComponent(0);
                 mvp.updateCalendar();
             	CardLayout cl = (CardLayout)getParent().getLayout();
-		    	  cl.show(getParent(), "MonthView");	
+		    	  cl.show(getParent(), "Calendar View");	
             }
         });
 		

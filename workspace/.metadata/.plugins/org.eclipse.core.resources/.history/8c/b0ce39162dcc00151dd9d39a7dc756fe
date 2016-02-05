@@ -37,7 +37,7 @@ public class AddEditAppointmentPanel extends JPanel{
   	final AppointmentBook thisBook;
   	
   	/**
-  	 * Constructor sets up basic attributes of the class and defines the layout.
+  	 * Constructor sets up basic attributes of teh class and defines the layout.
   	 * @param thisBook the relevant AppointmentBook
   	 * @param parent the parent of this object. Facilitates manipulation of components not elsewhere in the component tree. Inefficient. Needs revision.
   	 */
@@ -74,7 +74,7 @@ public class AddEditAppointmentPanel extends JPanel{
             	MonthViewPanel mvp = (MonthViewPanel) outerContainer.getComponent(0);
                 mvp.updateCalendar();
             	CardLayout cl = (CardLayout)getParent().getLayout();
-		    	  cl.show(getParent(), "MonthView");	
+		    	  cl.show(getParent(), "Calendar View");
             }
         });
 		
