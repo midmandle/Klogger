@@ -56,6 +56,45 @@
 	<section name="ClasspathContainerSelectionPage">
 		<item value="0" key="index"/>
 	</section>
+	<section name="javadoc">
+		<item value="false" key="nodeprecatedlist"/>
+		<item value="false" key="notree"/>
+		<item value="true" key="splitindex"/>
+		<item value="/usr/lib/jvm/java-7-openjdk-amd64/bin/javadoc" key="javadoc_command_history"/>
+		<item value="true" key="use"/>
+		<item value="false" key="nonavbar"/>
+		<item value="public" key="access"/>
+		<item value="true" key="version"/>
+		<item value="false" key="nodeprecated"/>
+		<item value="/home/midmandle/Work/workspace/AppointmentBook/doc" key="destdir"/>
+		<item value="true" key="author"/>
+		<item value="" key="docletname"/>
+		<item value="1.7" key="source"/>
+		<item value="false" key="openinbrowser"/>
+		<item value="false" key="noindex"/>
+		<item value="" key="docletpath"/>
+		<item value="/home/midmandle/Work/workspace/AppointmentBook/javadoc.xml" key="antpath"/>
+		<item value="true" key="fromStandard"/>
+		<section name="projects">
+			<section name="AppointmentBook">
+				<item value="/home/midmandle/Work/workspace/AppointmentBook/doc" key="destdir"/>
+				<item value="" key="href"/>
+				<item value="/home/midmandle/Work/workspace/AppointmentBook/javadoc.xml" key="antpath"/>
+			</section>
+			<section name="RemoteSystemsTempFiles">
+				<item value="/home/midmandle/Work/workspace/RemoteSystemsTempFiles/doc" key="destdir"/>
+				<item value="" key="href"/>
+				<item value="/home/midmandle/Work/workspace/RemoteSystemsTempFiles/javadoc.xml" key="antpath"/>
+			</section>
+		</section>
+	</section>
+	<section name="JavadocWizardDialog">
+		<item value="700" key="DIALOG_WIDTH"/>
+		<item value="204" key="DIALOG_Y_ORIGIN"/>
+		<item value="490" key="DIALOG_X_ORIGIN"/>
+		<item value="614" key="DIALOG_HEIGHT"/>
+		<item value="1|Hack|9.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+	</section>
 	<section name="org.eclipse.jdt.internal.ui.typehierarchy.QuickHierarchy">
 		<item value="400" key="org.eclipse.jdt.internal.ui.typehierarchy.HierarchyInformationControlDIALOG_WIDTH"/>
 		<item value="false" key="org.eclipse.jdt.internal.ui.typehierarchy.HierarchyInformationControlDIALOG_USE_PERSISTED_LOCATION"/>
