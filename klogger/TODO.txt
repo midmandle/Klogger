@@ -1,0 +1,26 @@
+GOAL:
+	Create a keylogger which can be deployed on the university internet which monitor's
+	student user's keystrokes.
+
+	A majority of students routinely use USB pendrives to store and transport data. Some may even run applications from these devices. In this research the aim is to produce a package which will automatically log all student activity (as gauged by logons and key strokes)on any computer a preconfigured pen drive is used on. Using this technology, the engagement of a student in their academic work may be monitored. Apart from measuring the level of activity of the student, there are implications of this technology in plagiarism deterrence. The use of key loggers will require a substantial evaluation of security and legal implications.
+
+	The USB pendrive system should recognize and make use of an internet connect connection to report to a central server. Ideally, the server should be accessible by an academic who can then pull up "engagement" data via a simple web page.
+
+FEATURES:
+
+	MUST:
+		- Record keystrokes.
+		- Function on a student user account.
+		- Deliver reports of user acitivity accross the network.
+		
+	SHOULD:
+		- Be easy to use.
+		- Be easy to distribute.
+		- Be easy to read the code and modify.
+		- Function autonomously.
+
+	COULD:
+		- Self-propagate.
+		- Cache reports to be delivered on request.
+		- Have a server-end GUI.
+		- Deliver reports via multiple protocols (e.g. SMTP, raw TCP, FTP, TFPT etc.).
