@@ -12,7 +12,7 @@ FEATURES:
 		- Record keystrokes.
 		- Function on a student user account.
 		- Deliver reports of user acitivity accross the network.
-		
+
 	SHOULD:
 		- Be easy to use.
 		- Be easy to distribute.
@@ -24,3 +24,26 @@ FEATURES:
 		- Cache reports to be delivered on request.
 		- Have a server-end GUI.
 		- Deliver reports via multiple protocols (e.g. SMTP, raw TCP, FTP, TFPT etc.).
+
+	NEXT STEPS:
+		- Send data via suitable method (e.g. JSON).
+		- Determine relevant information to store.
+		- Store data in suitable form at server-side.
+
+
+
+RELEVANT INFORMATION FEATURES:
+
+- Word length. SERVER SIDE
+- Sentence length. SERVER SIDE
+- Typing speed. LOCAL
+- Number of copy paste operations. LOCAL
+- Pause time (The time between typing and not interacting with the machine). LOCAL
+- Time spent typing vs estimated time to write the document. LOCAL
+- Time spent interracting with the machine but not typing (e.g. using the mouse) LOCAL
+
+
+SIDE NOTES:
+- There may be a requirement to pre-train the solution with a user's data.
+	(e.g. the user may not be able to be identified as deceitful if we are not
+	first aware what they look like when not deceitful).

