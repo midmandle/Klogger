@@ -25,7 +25,7 @@ def kbevent (event):
     finally:
         server.quit()
 
-    if event.Ascii == 32:
+    if event.Ascii == 65:
         global running
         running = False
 
