@@ -19,7 +19,7 @@ endTime = 0
 def sendData(cache):
     stringData = PackageData.PackageData(cache, startTime, endTime).packageData_JSON()
     payload = {"cache" : stringData}
-    r = requests.get("http://127.0.0.1:8000", params=payload)
+    r = requests.get("http://127.0.0.1:8080/sendInfo", params=payload)
     global startTime
     global endTime
 
