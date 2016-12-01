@@ -19,9 +19,8 @@ endTime = 0
 
 def sendData(cache):
     stringData = PackageData.PackageData(cache, startTime, endTime).packageData_JSON()
-    payload = {"cache" : stringData}
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-    r = requests.post("http://127.0.0.1:8080/", data=json.dumps(payload), headers=headers)
+    r = requests.post("http://127.0.0.1:8080/", data=json.dumps(stringData), headers=headers)
     global startTime
     global endTime
 
