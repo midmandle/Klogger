@@ -50,7 +50,7 @@ class Perceptron(object):
 
         for _ in range(self.n_iter):
             errors = 0
-            for xi, tarrget in zip(X,Y):
+            for xi, target in zip(X,Y):
                 update = self.eta * (target - self.predict(xi))
                 self.w_[1:] += update * xi
                 self.w_[0:] += update
