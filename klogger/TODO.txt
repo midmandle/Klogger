@@ -30,6 +30,8 @@ FEATURES:
 		- Determine relevant information to store.
 		- Store data in suitable form at server-side.
 
+		IMPORTANT: Need to move controller to flask app on AppEngine. Send and recieve to BigTable need to be on the controll in order to know what data is being send and recieved. 
+
 
 
 RELEVANT INFORMATION FEATURES:
