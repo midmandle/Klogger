@@ -2,8 +2,8 @@ import json
 
 class PackageData:
 
-    def __init__(self, characters, start, end):
-        self.values = characters
+    def __init__(self, events, start, end):
+        self.values = events
         self.start = start
         self.end = end
 

