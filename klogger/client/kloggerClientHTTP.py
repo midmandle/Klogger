@@ -27,7 +27,6 @@ def sendData(cache):
     stringData = PackageData.PackageData(cache, startTime, endTime).packageData_JSON()
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     r = requests.post("http://127.0.0.1:8080/recieveData", data=json.dumps(stringData), headers=headers)
-    print r
 
 def cacheData(event, time):
     #This should create a JSON object as a cache... TODO
