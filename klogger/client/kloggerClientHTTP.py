@@ -11,13 +11,27 @@ import parsingTool
 import PackageData
 import EventData
 import json
+import threading
+import SimpleHTTPServer
+import SocketServer
 
 running = False
 cache = []
 startTime = 0
 endTime = 0
+PORT = 1234
 
+class MyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        sendData(cache)
+        return SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
 
+def listenForRequest():
+    global PORT
+    Handler = MyRequestHandler
+    httpd = SocketServer.TCPServer(("", PORT), Handler)
+    print "Serving at port", PORT
+    httpd.serve_forever()
 
 def sendData(cache):
     stringData = PackageData.PackageData(cache, startTime, endTime)
@@ -70,8 +84,8 @@ def runHook():
 
     while running:
         if(time.time() > endTime):
-            sendData(cache)
-            cache[:] = [] #clear cache
+            #sendData(cache)
+            #cache[:] = [] #clear cache
             startTime = time.time() #reset timer
             endTime = startTime + 5
         time.sleep(0.1)
@@ -79,7 +93,10 @@ def runHook():
     hm.cancel()
 
 def main():
-    runHook()
+    hookThread = threading.Thread(target=runHook)
+    #listeningThread = threading.Thread(target=listenForRequest)
+    hookThread.start()
+    #listeningThread.start()
 
 
 if __name__ == '__main__':
