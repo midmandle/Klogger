@@ -12,62 +12,70 @@ import PackageData
 import EventData
 import json
 import threading
-import SimpleHTTPServer
+import SimpleHTTPServer, BaseHTTPServer, httplib
 import SocketServer
+
+class StoppableHTTPServer(BaseHTTPServer.HTTPServer):
+
+    def server_bind(self):
+        BaseHTTPServer.HTTPServer.server_bind(self)
+        self.socket.settimeout(1)
+        self.run = True
+
+    def get_request(self):
+        while self.run:
+            try:
+                sock, addr = self.socket.accept()
+                sock.settimeout(None)
+                return (sock, addr)
+            except socket.timeout:
+                pass
+
+    def stop(self):
+        self.run = False
+
+    def serve(self):
+        while self.run:
+            self.handle_request()
+
+class MyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        print "PING"
+        sendData(cache)
+        return 200
 
 running = False
 cache = []
 startTime = 0
 endTime = 0
 PORT = 1234
-
-class MyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
-    def do_GET(self):
-        sendData(cache)
-        return SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
+Handler = MyRequestHandler
+httpd = StoppableHTTPServer(("localhost", PORT), Handler)
 
 def listenForRequest():
     global PORT
-    Handler = MyRequestHandler
-    httpd = SocketServer.TCPServer(("", PORT), Handler)
     print "Serving at port", PORT
-    httpd.serve_forever()
+    httpd.serve()
 
 def sendData(cache):
     stringData = PackageData.PackageData(cache, startTime, endTime)
-    #writeToBigtable(btinf1, stringData)
-
     # Sending Data via JSON below:
     stringData = PackageData.PackageData(cache, startTime, endTime).packageData_JSON()
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     r = requests.post("http://127.0.0.1:8080/recieveData", data=json.dumps(stringData), headers=headers)
 
 def cacheData(event, time):
-    #This should create a JSON object as a cache... TODO
-    #Only relevent data should be cached and stored. Need a filter... TODO
     #Cache data for certain period.
     global cache
     cache.append(EventData.EventData(event, time).getObject())
 
 def kbevent (event):
-    #print event
-    #print event
-    # Cache the data.
     cacheData(event, time.time())
-    #Send data to server after given period.
-    #print cache
-
-    global startTime
-    global endTime
-
-    #print startTime
-    #print endTime
-
-    #Kill logging if given code is hit.
     if event.Ascii == 65:
         global running
         running = False
         sendData(cache)
+        httpd.stop()
 
 def runHook():
     hm = pyxhook.HookManager()
@@ -94,9 +102,9 @@ def runHook():
 
 def main():
     hookThread = threading.Thread(target=runHook)
-    #listeningThread = threading.Thread(target=listenForRequest)
+    listeningThread = threading.Thread(target=listenForRequest)
     hookThread.start()
-    #listeningThread.start()
+    listeningThread.start()
 
 
 if __name__ == '__main__':
