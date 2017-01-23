@@ -58,28 +58,39 @@ def listenForRequest():
     httpd.serve()
 
 def sendData(cache):
-    stringData = PackageData.PackageData(cache, startTime, endTime)
+    #stringData = PackageData.PackageData(cache, startTime, endTime)
     # Sending Data via JSON below:
-    stringData = PackageData.PackageData(cache, startTime, endTime).packageData_JSON()
+    stringData = PackageData.PackageData(cache, startTime, endTime, 1).packageData_JSON()
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     r = requests.post("http://127.0.0.1:8080/recieveData", data=json.dumps(stringData), headers=headers)
 
-def cacheData(event, time):
-    #Cache data for certain period.
+def cacheData(type, event, time):
     global cache
-    cache.append(EventData.EventData(event, time).getObject())
+    cache.append(EventData.EventData(type, event, time).getObject())
 
+#Record Mouse actions.
+def moevent (event):
+    cacheData("mo", event, time.time())
+    print event
+
+#Record Keyboard actions.
 def kbevent (event):
-    cacheData(event, time.time())
     if event.Ascii == 65:
         global running
         running = False
+        global endTime;
+        endTime = time.time()
         sendData(cache)
         httpd.stop()
+
+    cacheData("kb", event, time.time())
+
 
 def runHook():
     hm = pyxhook.HookManager()
     hm.KeyDown = kbevent
+    hm.MouseAllButtonsDown = moevent
+    hm.HookMouse()
     hm.HookKeyboard()
     hm.start()
 
@@ -91,11 +102,6 @@ def runHook():
     startTime = time.time()
 
     while running:
-        if(time.time() > endTime):
-            #sendData(cache)
-            #cache[:] = [] #clear cache
-            startTime = time.time() #reset timer
-            endTime = startTime + 5
         time.sleep(0.1)
 
     hm.cancel()
