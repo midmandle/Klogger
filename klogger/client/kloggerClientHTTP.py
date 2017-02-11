@@ -60,7 +60,7 @@ def listenForRequest():
 def sendData(cache):
     #stringData = PackageData.PackageData(cache, startTime, endTime)
     # Sending Data via JSON below:
-    stringData = PackageData.PackageData(cache, startTime, endTime, 1).packageData_JSON()
+    stringData = PackageData.PackageData(cache, startTime, endTime, 3).packageData_JSON()
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     r = requests.post("http://127.0.0.1:8080/recieveData", data=json.dumps(stringData), headers=headers)
 
