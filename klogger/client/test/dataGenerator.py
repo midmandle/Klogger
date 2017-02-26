@@ -7,7 +7,7 @@ import pylab as pl
 def getOutside3std(data, std, mean):
     values = []
     for i, item in enumerate(data):
-        if item < (mean - std*2) or item > (mean+std*2) :
+        if item < (mean - std) or item > (mean+std) :
             values.append(item)
 
     return values

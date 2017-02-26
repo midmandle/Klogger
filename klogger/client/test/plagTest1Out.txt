@@ -1,0 +1,22 @@
+Tester:     weka.experiment.PairedCorrectedTTester
+Analysing:  Percent_correct
+Datasets:   1
+Resultsets: 4
+Confidence: 0.05 (two tailed)
+Sorted by:  -
+Date:       17/02/17 12:16
+
+
+Dataset                   (1) rules.Ze | (2) rules (3) lazy. (4) trees
+----------------------------------------------------------------------
+'AT: testData-weka.filter(100)   50.00 |   65.58 v   99.84 v   96.12 v
+----------------------------------------------------------------------
+                               (v/ /*) |   (1/0/0)   (1/0/0)   (1/0/0)
+
+
+Key:
+(1) rules.ZeroR '' 48055541465867954
+(2) rules.OneR '-B 6' -3459427003147861443
+(3) lazy.IBk '-K 1 -W 0 -A \"weka.core.neighboursearch.LinearNNSearch -A \\\"weka.core.EuclideanDistance -R first-last\\\"\"' -3080186098777067172
+(4) trees.J48 '-C 0.25 -M 2' -217733168393644444
+

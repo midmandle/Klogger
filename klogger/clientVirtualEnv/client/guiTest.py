@@ -9,7 +9,6 @@ p = None
 def press(btn):
     global app
     if btn == "Start":
-        print app.getNumericEntry("userid")
         global p
         p = Process(target=runHook, args=(child_conn, app.getEntry("userid")))
         p.start()
@@ -18,6 +17,10 @@ def press(btn):
         global parent_conn
         parent_conn.send(False)
         app.removeLabel("recording")
+        status = parent_conn.recv();
+        while(status.text != "DONE"):
+             status = parent_conn.recv()
+        print "Closing"
         app.stop()
 
 def main():
