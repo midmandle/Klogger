@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename method &apos;DatabaseCommunicator.GetSecificAppointmentFromDatabase(...)&apos; to &apos;GetSpecificAppointmentFromDatabase&apos;&#x0A;- Original project: &apos;AppointmentBook&apos;&#x0A;- Original element: &apos;DatabaseCommunicator.GetSecificAppointmentFromDatabase(...)&apos;&#x0A;- Renamed element: &apos;DatabaseCommunicator.GetSpecificAppointmentFromDatabase(...)&apos;&#x0A;- Update references to refactored element" delegate="false" deprecate="true" description="Rename method &apos;GetSecificAppointmentFromDatabase&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;{DatabaseCommunicator.java[DatabaseCommunicator~GetSecificAppointmentFromDatabase~QString;~QAppointment;" name="GetSpecificAppointmentFromDatabase" references="true" stamp="1453483506498" version="1.0"/>
-</session>
