@@ -1,4 +1,0 @@
-python-targets: [2, 3]
-
-mccabe:
-  run: false
