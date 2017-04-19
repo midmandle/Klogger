@@ -7,26 +7,16 @@ sys.path.append(os.path.abspath("pyxhook-master/")) #To allow for the pyxhook li
 
 import pyxhook
 import time
-import parsingTool
 import PackageData
 import EventData
 import json
 import threading
-from random import randint
-import math
 
 running = False
 cache = []
 startTime = 0
 endTime = 0
 userID = 0
-
-def garbleKeyData(event):#Breaks with special chars e.g. space, minus, questionmark...
-    shifter = randint(0, pow(2,100000))
-    event.Ascii =  (event.Ascii+shifter)%256
-    event.Key = chr((ord(event.Key)+shifter)%26)
-    event.ScanCode = 0;
-    print event
 
 def sendData(cache):
     #stringData = PackageData.PackageData(cache, startTime, endTime)

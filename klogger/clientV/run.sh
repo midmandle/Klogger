@@ -1,3 +1,3 @@
 source bin/activate
-python client/guiTest.py
+python client/gui.py
 deactivate
