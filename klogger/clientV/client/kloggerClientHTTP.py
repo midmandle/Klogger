@@ -23,7 +23,7 @@ def sendData(cache):
     # Sending Data via JSON below:
     stringData = PackageData.PackageData(cache, startTime, endTime, int(userID)).packageData_JSON()
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-    r = requests.post("https://flaskbackend.appspot.com/recieveData", data=json.dumps(stringData), headers=headers)
+    r = requests.post("http://localhost:8080/recieveData", data=json.dumps(stringData), headers=headers)
     return r
 
 def cacheData(type, event, time):
